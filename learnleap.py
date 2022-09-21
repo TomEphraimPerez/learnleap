@@ -11,6 +11,8 @@ from dwave.system import LeapHybridCQMSampler         #o
     # Submit for solution
     # answer = sampler.sample_qubo(Q)
 
+# Python 3.9.2
+# Python 3.9.2
 print('\nHello quantum world.')
 print('\nThis is the diet optimization prob w taste v cost goal, gvn several ')
 print('constraints.')
@@ -93,8 +95,40 @@ accommodate even very large problems.
 Ocean software’s dwave-system LeapHybridCQMSampler class enables you to easily incorporate Leap’s hybrid
 CQM solvers into your application:
 '''
+# Make certain ur in (ocean) venv
 sampler = LeapHybridCQMSampler()
 
+'''
+Submit the CQM to the selected solver. For one particular execution, the CQM hybrid sampler returned 
+49 samples, out of which 25 were solutions that met all the constraints.
+CQM) solver on a simple mixed-integer linear-programming (MILP) type of optimization problem.
+'''
+sampleset = sampler.sample_cqm(cqm)
+feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)
+
+print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
+def print_diet(sample):
+    diet = {food: round(quantity, 1) for food, quantity in sample.items()}
+    print(f"\nDiet: {diet}")
+    taste_total = sum(foods[food]["Taste"] * amount for food, amount in sample.items())
+    cost_total = sum(foods[food]["Cost"] * amount for food, amount in sample.items())
+    print(f"Total taste of {round(taste_total, 2)} at cost {round(cost_total, 2)}")
+    for constraint in cqm.iter_constraint_data(sample):
+        print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
+
+# The best solution found in this current execution was a diet of bread and bananas, with
+# avocado completing the required fiber and fat portions
+best = feasible_sampleset.first.sample
+print_diet(best)
+''' >>>  a la:
+Diet: {'avocado': 1.0, 'banana': 6.0, 'bread': 4.1, 'lentils': 0.3, 'rice': 0.0, 'tofu': 0.0}
+Total taste of 86.56 at cost 9.46
+Calories (nominal: 2000): 2000
+Protein (nominal: 50): 50
+Fat (nominal: 30): 42
+Carbs (nominal: 130): 372
+Fiber (nominal: 30): 46
+'''
 
 
 
