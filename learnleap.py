@@ -1,4 +1,4 @@
-# Diet optimization -
+                        # DIET PLANNING  optimization -
  # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-diet-reals ††
 # imports
 import dimod as dimod       # thx red lightbulb
@@ -80,9 +80,9 @@ for nutrient, amount in min_nutrients.items():
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys())
 # list(cqm.constraints.keys())        #o # ['Calories', 'Protein', 'Fat', 'Carbs', 'Fiber']
 print('\nConstraints Dict w labels as keys: ', constraintsDictLabelsAsKeys)
-print('\nCal constraints (as polystr):', cqm.constraints['Calories'].to_polystring())
+print('Cal constraints (as polystr):', cqm.constraints['Calories'].to_polystring())
     # 100*rice + 140*tofu + 90*banana + 150*lentils + 270*bread + 300*avocado <= 200
-print('\nPt constraints (as polystr):', cqm.constraints['Protein'].to_polystring())
+print('Pt constraints (as polystr):', cqm.constraints['Protein'].to_polystring())
     # 3*rice + 17*tofu + banana + 9*lentils + 9*bread + 4*avocado >= 50
 
 '''
@@ -109,7 +109,7 @@ feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)
 print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
 def print_diet(sample):
     diet = {food: round(quantity, 1) for food, quantity in sample.items()}
-    print(f"\nDiet: {diet}")
+    print(f"Diet: {diet}")
     taste_total = sum(foods[food]["Taste"] * amount for food, amount in sample.items())
     cost_total = sum(foods[food]["Cost"] * amount for food, amount in sample.items())
     print(f"Total taste of {round(taste_total, 2)} at cost {round(cost_total, 2)}")
@@ -119,6 +119,7 @@ def print_diet(sample):
 # The best solution found in this current execution was a diet of bread and bananas, with
 # avocado completing the required fiber and fat portions
 best = feasible_sampleset.first.sample
+print('\nprint_DIET(BEST): ')
 print_diet(best)
 ''' >>>  a la:
 Diet: {'avocado': 1.0, 'banana': 6.0, 'bread': 4.1, 'lentils': 0.3, 'rice': 0.0, 'tofu': 0.0}
@@ -128,8 +129,87 @@ Protein (nominal: 50): 50
 Fat (nominal: 30): 42
 Carbs (nominal: 130): 372
 Fiber (nominal: 30): 46
+>>>
+The result is the same : )
+'''
+
+'''
+# TUNING THE SOLUTION
+	# # TUNING THE SOLUTION !
+# RECALL - The objective function must maximize taste of the diet’s foods while minimizing purchase cost.
+	# So re min cost, COST_min  = min SUMMA|_i (quantity_i * cost_i)
+	#	        TASTE_max = max SUMMA|_i (quantity_i * taste_i)
+	# To optimize two different objectives, taste and cost, requires weighing one against the other. 
+ 	# A simple way to do this, is to set priority weights; for example,
+        #	OBJective = alpha(obj_1) + beta(obj_1). eg alpha can = 2, beta can = 1,
+	    #	ie you double the priority of the first objective compared to the second.
+'''
+
+#Consider sampling each part of the combined objective on its own (alpha=0, beta=1 and vv)
+	# and comparing the best solutions. 
+	# Start with TASTE: ------------------------------------------------------------------||
+cqm.set_objective(-total_mix(quantities, "Taste"))
+sampleset_taste = sampler.sample_cqm(cqm)
+feasible_sampleset_taste = sampleset_taste.filter(lambda row: row.is_feasible)
+best_taste = feasible_sampleset_taste.first
+print('best_taste.ENERGY: ', round(best_taste.energy))
+# >>> a la -177
+
+print('\nbest_taste.SAMPLE: ')
+print_diet(best_taste.sample)
+# >>> a la;
+'''
+ Diet: {'avocado': 0.0, 'banana': 17.0, 'bread': 0.0, 'lentils': 0.0, 'rice': 0.0, 'tofu': 3.3}
+ Total taste of 176.93 at cost 30.41
+ Calories (nominal: 2000): 2000
+ Protein (nominal: 50): 74
+ Fat (nominal: 30): 30
+ Carbs (nominal: 130): 402
+ Fiber (nominal: 30): 58
 '''
 
 
+    # NOW with COST:  ----------------------------------------------------------------
+cqm.set_objective(total_mix(quantities, "Cost"))
+sampleset_cost = sampler.sample_cqm(cqm)
+feasible_sampleset_cost = sampleset_cost.filter(lambda row: row.is_feasible)
+best_cost = feasible_sampleset_cost.first
+print(round(best_cost.energy))
+	# >>> 3
 
+print('\nbest_cost.SAMPLE: ')
+print_diet(best_cost.sample)
+'''>>> a la
+  Diet: {'avocado': 1.0, 'banana': 0.0, 'bread': 5.3, 'lentils': 0.0, 'rice': 0.0, 'tofu': 0.0}
+  Total taste of 31.67 at cost 3.33
+  Calories (nominal: 2000): 1740
+  Protein (nominal: 50): 52
+  Fat (nominal: 30): 46
+  Carbs (nominal: 130): 287
+  Fiber (nominal: 30): 30
+'''
+'''
+This diet is ranked as less tasty than the previous but much cheaper. 
+It relies mainly on bread and uses avocado to add fat and fiber.
+'''
+'''
+Because of the differences in energy scale between the two parts of the combined objective,
+177 >> 3,  if you do not multiply the part representing cost by some positive factor, optimal 
+solutions will maximize taste and neglect cost. That is, if in 
+obj - alpha(obj1 + beta(obj2)), you set alpha=1=beta.
+solutions will likely be 
+  close or 
+  identical 
+to those found when optimizing for taste alone.
+'''
+
+''' SEE GRAPH with y-axis=Energy, x-axis=Multiplier, variables are taste, cost and total. 
+https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-diet-reals
+https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-diet-reals
+'''
+
+'''
+ ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize taste, Taste is 
+          multiplied by -1 and minimized.)
+'''
 
