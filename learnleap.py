@@ -1,4 +1,5 @@
                         # DIET PLANNING  optimization -
+# A CQM solver prob on a simple mixed-integer linear-programming, MILP, type of optimization problem.
  # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-diet-reals ††
 # imports
 import dimod as dimod       # thx red lightbulb
@@ -17,7 +18,8 @@ print('\nHello quantum world.')
 print('\nThis is the diet optimization prob w taste v cost goal, gvn several ')
 print('constraints.')
 
-# food dict
+# foods dict of "food". MACROnutriens are cals, Pts, fat(s), carbs...
+                    #   MICROnutirnet are vitamins and minerals, C, D, iron...
 foods = {'rice': {'Calories': 100, 'Protein': 3, 'Fat': 1, 'Carbs': 22,
                     'Fiber': 2, 'Taste': 7, 'Cost': 2.5, 'Units': 'continuous'},
         'tofu': {'Calories': 140, 'Protein': 17, 'Fat': 9, 'Carbs': 3,
@@ -32,44 +34,47 @@ foods = {'rice': {'Calories': 100, 'Protein': 3, 'Fat': 1, 'Carbs': 22,
                     'Taste': 5, 'Cost': 2.0, 'Units': 'discrete'}}
 
 min_nutrients = {"Protein": 50, "Fat": 30, "Carbs": 130, "Fiber": 30}
-max_calories = 2000                 # for setting up bounds
+max_calories = 2000                 # for setting up bounds. See 12 lines below.
 
-# quantities list
+# quantities list | dimod is a shared API for samplers and provides classes for eg., BQM mdls
+  # inc higher-order non-quadratic models.
 quantities = [dimod.Real(f"{food}") if foods[food]["Units"] == "continuous"
     else dimod.Integer(f"{food}")
-    for food in foods.keys()]		# dimod error?
+    for food in foods.keys()]       # key = eg cals : value = 20
 
+print("\nSimply showing ex of a lin bias. ")
 print(quantities[0])                # simple linear bias
+print("Now showing an ex of a dbl bias. ")
 print(2*quantities[0])              # Now dbl lin bias
 #print(quantities[0] * quantities[1]) #Now a quadratic bias. # ValueError: REAL variables
                                                             # (e.g. 'rice') cannot have interactions
 for ind, food in enumerate(foods.keys()):
-    ub = max_calories / foods[food]["Calories"]  # upper bnd is 20 portions, (2000/100)
+    ub = max_calories / foods[food]["Calories"] # upper bnd is 20 portions, 2000/100 for rice below
     quantities[ind].set_upper_bound(food, ub)
 
-qub = quantities[0].upper_bound("rice")			# check
-print('\nquantities[0].ub is: ', qub)                                      # -> 20.0
+qub = quantities[0].upper_bound("rice")			# quantity ub fro rice
+print('\nquantities[0].ub is: ', qub)           # -> 20.0
 
-# setup the OBJective Fn w a UTILity Fn
+# setup the OBJective Fn w a UTILity Fn         # OBJECTIVE Fn     <<<
 cqm = dimod.ConstrainedQuadraticModel()			# NOT arbitrarily set alpha=2 beta=1;
 
 # UTILity Fn
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
   # such as calories;
 def total_mix(quantity, category):
-    return sum(q * c for q, c in zip(quantity, (foods[food][category] for food in foods.keys())))
-    ## ZIP https://www.w3schools.com/python/ref_func_zip.asp
+    return sum(q * c for q, c in zip(quantity, (foods[food][category] for food in foods.keys()) ) )
+    # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
 
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize taste, Taste
    # is multiplied by -1 and minimized.
-cqm.set_objective(-total_mix(quantities, "Taste") + 6*total_mix(quantities, "Cost"))
+cqm.set_objective(-total_mix(quantities, "Taste") + 6 * total_mix(quantities, "Cost"))
 
 # TUNING/Constraints
-# Constrain the diet’s calorie intake to the required daily MAXIMUM.
+# Constrain the diet’s   MAXIMUM cal intake required daily.
 cqm.add_constraint(total_mix(quantities, "Calories") <= max_calories, label="Calories") # rtn 'Calories'
 
 # Require that the daily MINIMUM of each nutrient is met or exceeded.
-for nutrient, amount in min_nutrients.items():
+for nutrient, amount in min_nutrients.items():      # Items is a BI
     cqm.add_constraint(total_mix(quantities, nutrient) >= amount, label=nutrient)
 'Protein'
 'Carbs'
@@ -77,13 +82,13 @@ for nutrient, amount in min_nutrients.items():
 'Fiber'
 
 # You can access these constraints as a dict with the labels as keys:
-constraintsDictLabelsAsKeys = list(cqm.constraints.keys())
+constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
 # list(cqm.constraints.keys())        #o # ['Calories', 'Protein', 'Fat', 'Carbs', 'Fiber']
-print('\nConstraints Dict w labels as keys: ', constraintsDictLabelsAsKeys)
+print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
 print('Cal constraints (as polystr):', cqm.constraints['Calories'].to_polystring())
-    # 100*rice + 140*tofu + 90*banana + 150*lentils + 270*bread + 300*avocado <= 200
+    # 100*rice + 140*tofu + 90*banana + 150*lentils + 270*bread + 300*avocado <= 2000, what is gvn abv
 print('Pt constraints (as polystr):', cqm.constraints['Protein'].to_polystring())
-    # 3*rice + 17*tofu + banana + 9*lentils + 9*bread + 4*avocado >= 50
+    # 3*rice + 17*tofu + banana + 9*lentils + 9*bread + 4*avocado >= 50              , what is gvn abv
 
 '''
 Solve the Problem by Sampling
@@ -103,8 +108,11 @@ Submit the CQM to the selected solver. For one particular execution, the CQM hyb
 49 samples, out of which 25 were solutions that met all the constraints.
 CQM) solver on a simple mixed-integer linear-programming (MILP) type of optimization problem.
 '''
-sampleset = sampler.sample_cqm(cqm)
-feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)
+sampleset = sampler.sample_cqm(cqm)             # SUBMIT THE PROBLEM to solver.
+feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)  # 'filter' is a dimod API/class.
+    # 'filter' rtns a new sampleset with rows filtered by the given predicate. From dimod.
+    # 'pred', a Fn th accepts a named tuple as returned by :meth:'.data', and rtns a :class:'bool'
+    # lambda creates anonymous Fns -> function obj.
 
 print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
 def print_diet(sample):
