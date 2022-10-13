@@ -36,9 +36,10 @@ foods = {'rice': {'Calories': 100, 'Protein': 3, 'Fat': 1, 'Carbs': 22,
 min_nutrients = {"Protein": 50, "Fat": 30, "Carbs": 130, "Fiber": 30}
 max_calories = 2000                 # for setting up bounds. See 12 lines below.
 
-# quantities list | dimod is a shared API for samplers and provides classes for eg., BQM mdls
+# quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
   # inc higher-order non-quadratic models.
-quantities = [dimod.Real(f"{food}") if foods[food]["Units"] == "continuous"
+quantities = [dimod.Real(f"{food}") if foods[food]["Units"] == "continuous" # an f-string. '{food}'
+                                                # will be replaced by a value.
     else dimod.Integer(f"{food}")
     for food in foods.keys()]       # key = eg cals : value = 20
 
@@ -109,21 +110,21 @@ Submit the CQM to the selected solver. For one particular execution, the CQM hyb
 CQM) solver on a simple mixed-integer linear-programming (MILP) type of optimization problem.
 '''
 sampleset = sampler.sample_cqm(cqm)             # SUBMIT THE PROBLEM to solver.
-feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)  # 'filter' is a dimod API/class.
+feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)# A num. 'Filter' is a dimod API/class.
     # 'filter' rtns a new sampleset with rows filtered by the given predicate. From dimod.
     # 'pred', a Fn th accepts a named tuple as returned by :meth:'.data', and rtns a :class:'bool'
     # lambda creates anonymous Fns -> function obj.
 
 print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
 def print_diet(sample):
-    diet = {food: round(quantity, 1) for food, quantity in sample.items()}
-    print(f"Diet: {diet}")
+    diet = {food: round(quantity, 1) for food, quantity in sample.items()} # 'food:' has 1 dec place?
+    print(f"Diet----->: {diet}")
     taste_total = sum(foods[food]["Taste"] * amount for food, amount in sample.items())
-    cost_total = sum(foods[food]["Cost"] * amount for food, amount in sample.items())
-    print(f"Total taste of {round(taste_total, 2)} at cost {round(cost_total, 2)}")
+    cost_total =  sum(foods[food]["Cost"]  * amount for food, amount in sample.items())
+    print(f"Total taste of {round(taste_total, 2)} at cost {round(cost_total, 2)}") # 2 dec places?
     for constraint in cqm.iter_constraint_data(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
-
+                                                        # rhs_energy is a dimod float attribute
 # The best solution found in this current execution was a diet of bread and bananas, with
 # avocado completing the required fiber and fat portions
 best = feasible_sampleset.first.sample
@@ -145,19 +146,23 @@ The result is the same : )
 # TUNING THE SOLUTION
 	# # TUNING THE SOLUTION !
 # RECALL - The objective function must maximize taste of the diet’s foods while minimizing purchase cost.
-	# So re min cost, COST_min  = min SUMMA|_i (quantity_i * cost_i)
-	#	        TASTE_max = max SUMMA|_i (quantity_i * taste_i)
-	# To optimize two different objectives, taste and cost, requires weighing one against the other. 
+	# So re min cost, COST_min  = min SUMMA_i (qty_i * cost_i)
+	#	            TASTE_max  = max SUMMA_i (qty_i * taste_i)
+	
+	# To optimize two different objectives, TASTE and COST, requires weighing one AGAINST the other.
+	 
  	# A simple way to do this, is to set priority weights; for example,
         #	OBJective = alpha(obj_1) + beta(obj_1). eg alpha can = 2, beta can = 1,
 	    #	ie you double the priority of the first objective compared to the second.
 '''
 
-#Consider sampling each part of the combined objective on its own (alpha=0, beta=1 and vv)
+
+
+#Consider sampling each part of the combined objective ON ITS OWN (alpha=0, beta=1 and vv)
 	# and comparing the best solutions. 
-	# Start with TASTE: ------------------------------------------------------------------||
-cqm.set_objective(-total_mix(quantities, "Taste"))
-sampleset_taste = sampler.sample_cqm(cqm)
+	# Start with TASTE: -----------------------------------------------------------------------||
+cqm.set_objective(-total_mix(quantities, "Taste"))      # NOTE THE MINUS
+sampleset_taste = sampler.sample_cqm(cqm)               # RHS SAME AS line that's 21 lines down.
 feasible_sampleset_taste = sampleset_taste.filter(lambda row: row.is_feasible)
 best_taste = feasible_sampleset_taste.first
 print('best_taste.ENERGY: ', round(best_taste.energy))
@@ -177,9 +182,10 @@ print_diet(best_taste.sample)
 '''
 
 
-    # NOW with COST:  ----------------------------------------------------------------
+
+    # NOW with COST:  --------------------------------------------------------------------------||
 cqm.set_objective(total_mix(quantities, "Cost"))
-sampleset_cost = sampler.sample_cqm(cqm)
+sampleset_cost = sampler.sample_cqm(cqm)                # RHS SAME AS line that's 21 lines up.
 feasible_sampleset_cost = sampleset_cost.filter(lambda row: row.is_feasible)
 best_cost = feasible_sampleset_cost.first
 print(round(best_cost.energy))
