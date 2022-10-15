@@ -18,7 +18,7 @@ print('\nHello quantum world.')
 print('\nThis is the diet optimization prob w taste v cost goal, gvn several ')
 print('constraints.')
 
-# foods dict of "food". MACROnutriens are cals, Pts, fat(s), carbs...
+# Pt dict of "food". MACROnutriens are cals, Pts, fat(s), carbs...
                     #   MICROnutirnet are vitamins and minerals, C, D, iron...
 foods = {'rice': {'Calories': 100, 'Protein': 3, 'Fat': 1, 'Carbs': 22,
                     'Fiber': 2, 'Taste': 7, 'Cost': 2.5, 'Units': 'continuous'},
@@ -34,30 +34,30 @@ foods = {'rice': {'Calories': 100, 'Protein': 3, 'Fat': 1, 'Carbs': 22,
                     'Taste': 5, 'Cost': 2.0, 'Units': 'discrete'}}
 
 min_nutrients = {"Protein": 50, "Fat": 30, "Carbs": 130, "Fiber": 30}
-max_calories = 2000                 # for setting up bounds. See 12 lines below.
+max_calories = 2000                                     # for setting up bounds. See 12 lines below.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
   # inc higher-order non-quadratic models.
 quantities = [dimod.Real(f"{food}") if foods[food]["Units"] == "continuous" # an f-string. '{food}'
-                                                # will be replaced by a value.
+                                                        # will be replaced by a value.
     else dimod.Integer(f"{food}")
-    for food in foods.keys()]       # key = eg cals : value = 20
+    for food in foods.keys()]                           # key = eg cals : value = 20
 
 print("\nSimply showing ex of a lin bias. ")
 print(quantities[0])                # simple linear bias
 print("Now showing an ex of a dbl bias. ")
 print(2*quantities[0])              # Now dbl lin bias
 #print(quantities[0] * quantities[1]) #Now a quadratic bias. # ValueError: REAL variables
-                                                            # (e.g. 'rice') cannot have interactions
+                                                        # (e.g. 'rice') cannot have interactions
 for ind, food in enumerate(foods.keys()):
-    ub = max_calories / foods[food]["Calories"] # upper bnd is 20 portions, 2000/100 for rice below
+    ub = max_calories / foods[food]["Calories"]         # upper bnd is 20 portions, 2000/100 for rice below
     quantities[ind].set_upper_bound(food, ub)
 
-qub = quantities[0].upper_bound("rice")			# quantity ub fro rice
-print('\nquantities[0].ub is: ', qub)           # -> 20.0
+qub = quantities[0].upper_bound("rice")			        # quantity ub fro rice
+print('\nquantities[0].ub is: ', qub)                   # -> 20.0
 
-# setup the OBJective Fn w a UTILity Fn         # OBJECTIVE Fn     <<<
-cqm = dimod.ConstrainedQuadraticModel()			# NOT arbitrarily set alpha=2 beta=1;
+# setup the OBJective Fn w a UTILity Fn                 # OBJECTIVE Fn     <<<
+cqm = dimod.ConstrainedQuadraticModel()			        # NOT arbitrarily set alpha=2 beta=1;
 
 # UTILity Fn
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
@@ -75,7 +75,7 @@ cqm.set_objective(-total_mix(quantities, "Taste") + 6 * total_mix(quantities, "C
 cqm.add_constraint(total_mix(quantities, "Calories") <= max_calories, label="Calories") # rtn 'Calories'
 
 # Require that the daily MINIMUM of each nutrient is met or exceeded.
-for nutrient, amount in min_nutrients.items():      # Items is a BI
+for nutrient, amount in min_nutrients.items():          # Items is a BI
     cqm.add_constraint(total_mix(quantities, nutrient) >= amount, label=nutrient)
 'Protein'
 'Carbs'
@@ -109,7 +109,7 @@ Submit the CQM to the selected solver. For one particular execution, the CQM hyb
 49 samples, out of which 25 were solutions that met all the constraints.
 CQM) solver on a simple mixed-integer linear-programming (MILP) type of optimization problem.
 '''
-sampleset = sampler.sample_cqm(cqm)             # SUBMIT THE PROBLEM to solver.
+sampleset = sampler.sample_cqm(cqm)                     # SUBMIT THE PROBLEM to solver.
 feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)# A num. 'Filter' is a dimod API/class.
     # 'filter' rtns a new sampleset with rows filtered by the given predicate. From dimod.
     # 'pred', a Fn th accepts a named tuple as returned by :meth:'.data', and rtns a :class:'bool'
@@ -144,13 +144,13 @@ The result is the same : )
 
 '''
 # TUNING THE SOLUTION
-	# # TUNING THE SOLUTION !
-# RECALL - The objective function must maximize taste of the diet’s foods while minimizing purchase cost.
+	# TUNING THE SOLUTION !
+# RECALL - The objective function must maximize taste of the diet’s Pt while minimizing purchase cost.
 	# So re min cost, COST_min  = min SUMMA_i (qty_i * cost_i)
-	#	            TASTE_max  = max SUMMA_i (qty_i * taste_i)
-	
-	# To optimize two different objectives, TASTE and COST, requires weighing one AGAINST the other.
-	 
+	#	             TASTE_max  = max SUMMA_i (qty_i * taste_i)
+
+	# To optimize two different objectives, TASTE and COST, requires weighing ONE AGAINST the other.
+
  	# A simple way to do this, is to set priority weights; for example,
         #	OBJective = alpha(obj_1) + beta(obj_1). eg alpha can = 2, beta can = 1,
 	    #	ie you double the priority of the first objective compared to the second.
@@ -185,7 +185,7 @@ print_diet(best_taste.sample)
 
     # NOW with COST:  --------------------------------------------------------------------------||
 cqm.set_objective(total_mix(quantities, "Cost"))
-sampleset_cost = sampler.sample_cqm(cqm)                # RHS SAME AS line that's 21 lines up.
+sampleset_cost = sampler.sample_cqm(cqm)                    # RHS SAME AS line that's 21 lines up.
 feasible_sampleset_cost = sampleset_cost.filter(lambda row: row.is_feasible)
 best_cost = feasible_sampleset_cost.first
 print(round(best_cost.energy))
