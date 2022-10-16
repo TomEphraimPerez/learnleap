@@ -1,5 +1,6 @@
                         # PLASTICITY of CD4+T to "THE BIG-8"  optimization -
                             # 8 = Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
+                            # attributes to the BIG-8: AED + plasticity, current, expression.
                             
 # A CQM solver prob on a simple mixed-integer linear-programming, MILP, type of optimization problem.
  # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-diet-reals ††
