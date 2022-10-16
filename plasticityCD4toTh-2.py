@@ -3,8 +3,9 @@
                             # attributes to the BIG-8: AED + plasticity, current, expression.
                             
 # A CQM solver prob on a simple mixed-integer linear-programming, MILP, type of optimization problem.
- # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
-# imports
+ # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_riet.html#example-cqm-Thelp-reals ††
+                                                            # XXXXXXXXXXXXX
+
 import dimod as dimod       # thx red lightbulb
 from dwave.system import LeapHybridCQMSampler         #o
  # solver is an option. [See the solve-by sampling section toward the end ††]
@@ -77,12 +78,12 @@ def total_mix(quantity, category):
 cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 6 * total_mix(quantities, "Plasticity"))
 
 # TUNING/Constraints
-# Constrain the Thelp’s   MAXIMUM cal intake required daily.
+# Constrain the Thelp’s MAXIMUM current i.
 cqm.add_constraint(total_mix(quantities, "Plasticity") <= max_attoamps, label="Plasticity") # rtn 'Plastiticty'
 
-# Require that the daily MINIMUM of each nutrient is met or exceeded.
-for nutrient, amount in min_attributes.items():          # Items is a BI
-    cqm.add_constraint(total_mix(quantities, nutrient) >= amount, label=nutrient)
+# Require that the daily MINIMUM of each Th attribute is met or exceeded.
+for attribute, amount in min_attributes.items(): # Items is a BI
+    cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'attoamps'
     'ACTivation'
     'EXPansion'
@@ -90,7 +91,7 @@ for nutrient, amount in min_attributes.items():          # Items is a BI
 
 # You can access these constraints as a dict with the labels as keys:
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
-# list(cqm.constraints.keys())        #o # ['ACTivation', 'attoamps', 'leaveACTivation', 'EXPansion', 'DIFFerentiation']
+# list(cqm.constraints.keys())                  # ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
 print('Cal constraints (as polystr):', cqm.constraints['ACTivation'].to_polystring())
     # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
@@ -124,26 +125,26 @@ feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)# A num. 'Filt
     # lambda creates anonymous Fns -> function obj.
 
 print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
-def print_diet(sample):
+def print_Thelpers(sample):
     Thelp = {Pt: round(quantity, 1) for Pt, quantity in sample.items()} # 'Pt:' has 1 dec place?
     print(f"Thelp----->: {Thelp}")
-    taste_total = sum(Pts[Pt]["DIFFerentiation"] * amount for Pt, amount in sample.items())
-    cost_total =  sum(Pts[Pt]["Plasticity"] * amount for Pt, amount in sample.items())
-    print(f"Total DIFFerentiation of {round(taste_total, 2)} at Plasticity {round(cost_total, 2)}") # 2 dec places?
+    DIFFerentiation_total = sum(Pts[Pt]["DIFFerentiation"] * amount for Pt, amount in sample.items())
+    Plasticity_total =  sum(Pts[Pt]["Plasticity"] * amount for Pt, amount in sample.items())
+    print(f"Total DIFFerentiation of {round(DIFFerentiation_total, 2)} at Plasticity {round(Plasticity_total, 2)}") # 2 dec places
     for constraint in cqm.iter_constraint_data(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
                                                         # rhs_energy is a dimod float attribute
 # The best solution found in this current execution was a Thelp of Tr1 and bananas, with
-# Th22 completing the required DIFFerentiation and leaveACTivation portions
+# Th22 completing the required DIFFerentiation and ACTivation portions
 best = feasible_sampleset.first.sample
-print('\nprint_DIET(BEST): ')
-print_diet(best)
+print('\nprint_T-HELPERS <- CD4T+ (differentiated or via plasticity) (BEST): ')
+print_Thelpers(best)
 ''' >>>  a la:
 Thelp: {'Th22': 1.0, 'Th2': 6.0, 'Tr1': 4.1, 'iTreg': 0.3, 'Tfh': 0.0, 'Th9': 0.0}
 Total DIFFerentiation of 86.56 at Plasticity 9.46
 ACTivation (nominal: 2000): 2000
 attoamps (nominal: 50): 50
-leaveACTivation (nominal: 30): 42
+ACTivation (nominal: 30): 42
 EXPansion (nominal: 130): 372
 DIFFerentiation (nominal: 30): 46
 >>>
@@ -154,8 +155,8 @@ The result is the same : )
 # TUNING THE SOLUTION
 	# # TUNING THE SOLUTION !
 # RECALL - The objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing purchase Plasticity.
-	# So re min Plasticity, COST_min  = min SUMMA_i (qty_i * cost_i)
-	#	            TASTE_max  = max SUMMA_i (qty_i * taste_i)
+	# So re min Plasticity, Plasticity_min  = min SUMMA_i (qty_i * Plasticity_i)
+	#	            DIFFerentiation_max  = max SUMMA_i (qty_i * DIFFerentiation_i)
 	
 	# To optimize two different objectives, DIFFerentiation and Plasticity, requires weighing one AGAINST the other.
 	 
@@ -170,21 +171,21 @@ The result is the same : )
 	# and comparing the best solutions.
 	# Start with DIFFerentiation: -----------------------------------------------------------------------||
 cqm.set_objective(-total_mix(quantities, "DIFFerentiation"))      # NOTE THE MINUS
-sampleset_taste = sampler.sample_cqm(cqm)               # RHS SAME AS line that's 21 lines down.
-feasible_sampleset_taste = sampleset_taste.filter(lambda row: row.is_feasible)
-best_taste = feasible_sampleset_taste.first
-print('best_taste.ENERGY: ', round(best_taste.energy))
+sampleset_DIFFerentiation = sampler.sample_cqm(cqm)               # RHS SAME AS line that's 21 lines down.
+feasible_sampleset_DIFFerentiation = sampleset_DIFFerentiation.filter(lambda row: row.is_feasible)
+best_DIFFerentiation = feasible_sampleset_DIFFerentiation.first
+print('best_DIFFerentiation.ENERGY: ', round(best_DIFFerentiation.energy))
 # >>> a la -177
 
-print('\nbest_taste.SAMPLE: ')
-print_diet(best_taste.sample)
+print('\nbest_DIFFerentiation.SAMPLE: ')
+print_Thelpers(best_DIFFerentiation.sample)
 # >>> a la;
 '''
  Thelp: {'Th22': 0.0, 'Th2': 17.0, 'Tr1': 0.0, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 3.3}
  Total DIFFerentiation of 176.93 at Plasticity 30.41
  ACTivation (nominal: 2000): 2000
  attoamps (nominal: 50): 74
- leaveACTivation (nominal: 30): 30
+ ACTivation (nominal: 30): 30
  EXPansion (nominal: 130): 402
  DIFFerentiation (nominal: 30): 58
 '''
@@ -193,20 +194,20 @@ print_diet(best_taste.sample)
 
     # NOW with Plasticity:  --------------------------------------------------------------------------||
 cqm.set_objective(total_mix(quantities, "Plasticity"))
-sampleset_cost = sampler.sample_cqm(cqm)                # RHS SAME AS line that's 21 lines up.
-feasible_sampleset_cost = sampleset_cost.filter(lambda row: row.is_feasible)
-best_cost = feasible_sampleset_cost.first
-print(round(best_cost.energy))
+sampleset_Plasticity = sampler.sample_cqm(cqm)                # RHS SAME AS line that's 21 lines up.
+feasible_sampleset_Plasticity = sampleset_Plasticity.filter(lambda row: row.is_feasible)
+best_DIFFerentiation = feasible_sampleset_Plasticity.first
+print(round(best_DIFFerentiation.energy))
 	# >>> 3
 
-print('\nbest_cost.SAMPLE: ')
-print_diet(best_cost.sample)
+print('\nbest_DIFFerentiation.SAMPLE: ')
+print_Thelpers(best_DIFFerentiation.sample)
 '''>>> a la
   Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
   Total DIFFerentiation of 31.67 at Plasticity 3.33
   ACTivation (nominal: 2000): 1740
   attoamps (nominal: 50): 52
-  leaveACTivation (nominal: 30): 46
+  ACTivation (nominal: 30): 46
   EXPansion (nominal: 130): 287
   DIFFerentiation (nominal: 30): 30
 '''
@@ -226,8 +227,8 @@ to those found when optimizing for DIFFerentiation alone.
 '''
 
 ''' SEE GRAPH with y-axis=Energy, x-axis=Multiplier, variables are DIFFerentiation, Plasticity and total. 
-https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals
-https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals
+https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_riet.html#example-cqm-Thelp-reals
+                                                        XXXXXXXXXXXXXXXXX
 '''
 
 '''
