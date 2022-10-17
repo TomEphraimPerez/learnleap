@@ -2,10 +2,9 @@
                             # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
                             # attributes to the BIG-8: AED + plasticity, current, expression.
                             
-# A CQM solver prob on a simple mixed-integer linear-programming, (MILP) type of optimization prob.
-# <dWave mach-code> initially based from:
- # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_riet.html#example-cqm-Thelp-reals ††
-                                                            # XXXXXXXXXXXXX
+# This app'is a CQM solver problem on a simple mixed-integer linear-programming, (MILP) type of optimization.
+# This quantum application is an adaptation from DWaveSys quantum code from:
+ # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
 
 import dimod as dimod       # thx red lightbulb
 from dwave.system import LeapHybridCQMSampler         #o
@@ -18,23 +17,32 @@ from dwave.system import LeapHybridCQMSampler         #o
 
 # Python 3.9.2
 
-print('\nThis is a flexible user i/p T-help optimization prob that can hopefully with some sound\
-logic and accuracy, at least initially, since it\'s somewhat of a nascent application. Hopefully\
-some GitHub forkers can contribute. The goal is to optimize CD4+ T-cell subsets as per Carbo et al,\
-derived from the following attributes:\
-attomaps (non-Carbo), ACTivation, EXPansion, DIFFerentiation, Expression, and Plasticity.\
-Not all these have to be included in the user input. \'attoamps\', (10^-18 a) is a theory, I declare,\
-with the aid of citations, to be a valid and necessary attribute. \
-The subsets that may or may not be differentiated from the CD4+ T-cell, are the following:\
-Tfh, Th9, Th2, iTreg, Tr1, Tr22, Tr17 and Th1.\
-All these T-helper cells are what I\'ll refer to as \'The Big-8\', since these 8 were discussed\
-by Carbo et al. This of course is cited, and is the primary source of inspiration for this thesis.\
-Of course the thesis will explain in detail.')
+print('This is DWaveSys quantum computing CQM solver prob on a simple mixed-integer linear-programming,')
+print('MILP) type of optimization prob.')
+print('\nThis is a flexible user i/p T-help optimization problem that can hopefully with some sound')
+print('logic and accuracy initially, be a useful application since it\'s somewhat of a nascent application.')
+print('Hopefully some GitHub forkers can contribute. The goal is to optimize CD4+ T-cell subsets as per')
+print('Carbo et al, derived from the following attributes of each heterogeneous subset of the CD4+ T-cell:')
+
+print('\n† attomaps, ACTivation, EXPansion, DIFFerentiation, Expression, and Plasticity.')
+print('Not all these have to be included in the user input. \'Attoamps\', (10^-18 a) is a theory.')
+print('Ie., I declare, with the aid of citations, a little experience, logic and heuristics, to be a valid')
+print('and necessary attribute. The candidate subsets are:')
+
+print('\nTfh, Th9, Th2, iTreg, Tr1, Tr22, Tr17 and Th1.')
+print('All these T-helper cells (via heterogeneity) are what I\'ll refer to as \'The big-8\', since these 8')
+print('were discussed by Carbo et al. This of course is cited, and is the primary source of inspiration')
+print('for this thesis. Of course the thesis will explain in detail.')
+
+print('\n\n\t\tOSTENSIBLY - this application MUST BE BACKED UP BY LABORATORY verification and validation through')
+print('\n\n\t\tdocumented experimentation and results. This author is wide to suggestions, comments and critique.')
+
+
 
 print('Select a T-helper cell of interest:')
-print('Select attribute(s) to be input to the T-helper just selected:')
+print('Select attributes to be input to the T-helper just selected:')
 
-# THE ABOVE WILL BE PARSED INTO SEPARATE PRINT() LINES ASAP for easy reading in the CLI.
+
 
 # Pts dict of Pts' Pts.
 # attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, attoamps = 10^-18a.
@@ -71,7 +79,7 @@ print(quantities[0])                                    # simple linear bias
 print("Now showing an ex of a dbl bias. ")
 print(2*quantities[0])                                  # Now dbl lin bias
 #print(quantities[0] * quantities[1]) #Now a quadratic bias. # ValueError: REAL variables
-                                                            # (e.g. 'Tfh') cannot have interactions
+                                                        # (e.g. 'Tfh') cannot have interactions
 for ind, Pt in enumerate(Pts.keys()):
     ub = max_attoamps / Pts[Pt]["ACTivation"] # upper bnd is 20 portions, 2000/100 for Tfh below
     quantities[ind].set_upper_bound(Pt, ub)
@@ -97,13 +105,19 @@ cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 6 * total_mix(quan
 # Constrain the Thelp’s MAXIMUM current i.
 cqm.add_constraint(total_mix(quantities, "Plasticity") <= max_attoamps, label="Plasticity") # rtn 'Plastiticty'
 
-# Require that the daily MINIMUM of each Th attribute is met or exceeded.
+
+
+
+# Require that the nominal MINIMUM of each Th attribute is met or exceeded.
+# THIS SHOULD BE USER DEFINED AS WELL.
 for attribute, amount in min_attributes.items(): # Items is a BI
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'attoamps'
     'ACTivation'
     'EXPansion'
     'Expression'
+
+
 
 # You can access these constraints as a dict with the labels as keys:
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
@@ -150,7 +164,7 @@ def print_Thelpers(sample):
     for constraint in cqm.iter_constraint_data(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
                                                         # rhs_energy is a dimod float attribute
-# The best solution found in this current execution was a Thelp of Tr1 and bananas, with
+# The best solution found in this current execution was a T-help of Tr1 and bananas, with
 # Th22 completing the required DIFFerentiation and ACTivation portions
 best = feasible_sampleset.first.sample
 print('\nprint_T-HELPERS <- CD4T+ (differentiated or via plasticity) (BEST): ')
@@ -158,7 +172,7 @@ print_Thelpers(best)
 ''' >>>  a la:
 Thelp: {'Th22': 1.0, 'Th2': 6.0, 'Tr1': 4.1, 'iTreg': 0.3, 'Tfh': 0.0, 'Th9': 0.0}
 Total DIFFerentiation of 86.56 at Plasticity 9.46
-ACTivation (nominal: 2000): 2000
+ACTivation (nominal: 2000): 5
 attoamps (nominal: 50): 50
 ACTivation (nominal: 30): 42
 EXPansion (nominal: 130): 372
@@ -197,13 +211,13 @@ print('\nbest_DIFFerentiation.SAMPLE: ')
 print_Thelpers(best_DIFFerentiation.sample)
 # >>> a la;
 '''
- Thelp: {'Th22': 0.0, 'Th2': 17.0, 'Tr1': 0.0, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 3.3}
- Total DIFFerentiation of 176.93 at Plasticity 30.41
- ACTivation (nominal: 2000): 2000
- attoamps (nominal: 50): 74
- ACTivation (nominal: 30): 30
- EXPansion (nominal: 130): 402
- DIFFerentiation (nominal: 30): 58
+Thelp: {'Th22': 0.0, 'Th2': 17.0, 'Tr1': 0.0, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 3.3}
+Total DIFFerentiation of 6 at Plasticity 3.1 rounded off:
+    ACTivation (nominal: 4): 2
+    attoamps (nominal: 2): 0.1
+    ACTivation (nominal: 6): 3
+    EXPansion (nominal: 3): 2
+    DIFFerentiation (nominal: 5): 2
 '''
 
 
@@ -219,13 +233,13 @@ print(round(best_DIFFerentiation.energy))
 print('\nbest_DIFFerentiation.SAMPLE: ')
 print_Thelpers(best_DIFFerentiation.sample)
 '''>>> a la
-  Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
-  Total DIFFerentiation of 31.67 at Plasticity 3.33
-  ACTivation (nominal: 2000): 1740
-  attoamps (nominal: 50): 52
-  ACTivation (nominal: 30): 46
-  EXPansion (nominal: 130): 287
-  DIFFerentiation (nominal: 30): 30
+Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
+Total DIFFerentiation of 7 at Plasticity 3.3
+    ACTivation (nominal: 4): 3
+    attoamps (nominal: 2): 0.2
+    ACTivation (nominal: 6): 4
+    EXPansion (nominal: 3): 1
+    DIFFerentiation (nominal: 5): 3
 '''
 '''
 This Thelp is ranked as less tasty than the previous but much cheaper. 
@@ -243,8 +257,8 @@ to those found when optimizing for DIFFerentiation alone.
 '''
 
 ''' SEE GRAPH with y-axis=Energy, x-axis=Multiplier, variables are DIFFerentiation, Plasticity and total. 
-https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_riet.html#example-cqm-Thelp-reals
-                                                        XXXXXXXXXXXXXXXXX
+# This quantum application is an adaptation from DWaveSys quantum code from:
+https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals                                            
 '''
 
 '''
