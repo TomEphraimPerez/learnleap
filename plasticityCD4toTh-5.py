@@ -60,7 +60,7 @@ Pts = {'Tfh': {'attoamps': 0.39, 'ACTivation': 1.1, 'EXPansion': 22.3, 'DIFFeren
                     'Expression': 5.7, 'Plasticity': 2.0, 'Units': 'continuous'},
         'Th1': {'attoamps': 0.52, 'ACTivation': 5.7, 'EXPansion': 12.2, 'DIFFerentiation': 15.9,
                     'Expression': 6.8, 'Plasticity': 3.7, 'Units': 'continuous'}}
-
+# temo aliases
 a = 'attoamps'
 b = 'ACTivation'
 c = 'EXPansion'
