@@ -54,7 +54,7 @@ while flag:
         flag = False
 number = float(attr1)
 print("\tThe input number is:", number)
-print('\n\n')
+print('\n\n\n')
 
 
 
