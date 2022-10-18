@@ -21,7 +21,7 @@ print('\nThis is the Thelp optimization prob w Expression v Plasticity goal, gvn
 print('constraints.')
 
 # Pts dict of Pts' Pts.
-# attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, attoamps = 10^-18a.
+# attoamps -> picoamp = 10^-12a -> femtoamps =10^-15a -> attoamps = 10^-18a.
 Pts = {'Tfh': {'attoamps': 0.39, 'ACTivation': 1, 'EXPansion': 22, 'DIFFerentiation': 2,
                     'Expression': 7, 'Plasticity': 2.5, 'Units': 'continuous'},
         'Th9': {'attoamps': 0.17, 'ACTivation': 5, 'EXPansion': 3, 'DIFFerentiation': 2,
@@ -38,7 +38,6 @@ Pts = {'Tfh': {'attoamps': 0.39, 'ACTivation': 1, 'EXPansion': 22, 'DIFFerentiat
                     'Expression': 5, 'Plasticity': 2.0, 'Units': 'continuous'},
         'Th1': {'attoamps': 0.52, 'ACTivation': 5, 'EXPansion': 12, 'DIFFerentiation': 15,
                     'Expression': 6, 'Plasticity': 3.0, 'Units': 'continuous'}}
-
 
 min_attributes = {"attoamps": 0.1, "ACTivation": 1, "EXPansion": 1, "DIFFerentiation": 1}
 max_attoamps = 0.99                                     # for setting up bounds. See 12 lines below.
