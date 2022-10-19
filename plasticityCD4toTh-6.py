@@ -80,6 +80,17 @@ for ind, value in enumerate(Pts):
     if(n == 6):
         break
 
+# Proof-of-life for user attribute inputs:
+print('\n\tTo confirm, your inputs are: ')
+for ndx, value in enumerate(Pts):
+    if(ndx == 6):
+        break
+    else:
+        print('\t>>> ' + attribute[ndx])
+
+
+
+
 
 print('\n\n\n')
 min_attributes = {"attoamps": 0.1, "ACTivation": 0.1, "EXPansion": 0.1, "DIFFerentiation": 0.1}
@@ -138,8 +149,6 @@ for attribute, amount in min_attributes.items(): # Items() is a BI
     'EXPansion'
     'Expression'
 
-
-
 # You can access these constraints as a dict with the labels as keys:
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
 # list(cqm.constraints.keys())                  # ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
@@ -181,7 +190,7 @@ def print_Thelpers(sample):
     print(f"Thelp----->: {Thelp}")
     DIFFerentiation_total = sum(Pts[Pt]["DIFFerentiation"] * amount for Pt, amount in sample.items())
     Plasticity_total =  sum(Pts[Pt]["Plasticity"] * amount for Pt, amount in sample.items())
-    print(f"Total DIFFerentiation of {round(DIFFerentiation_total, 2)} at Plasticity {round(Plasticity_total, 2)}") # 2 dec places
+    print(f"Total DIFFerentiation of {round(DIFFerentiation_total, 2)} at Plasticity {round(Plasticity_total, 2)}")
     for constraint in cqm.iter_constraint_data(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
                                                         # rhs_energy is a dimod float attribute
@@ -205,7 +214,7 @@ The result is the same : )
 '''
 # TUNING THE SOLUTION
 	# # TUNING THE SOLUTION !
-# RECALL - The objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing purchase Plasticity.
+# RECALL; Objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing purchase Plasticity.
 	# So re min Plasticity, Plasticity_min  = min SUMMA_i (qty_i * Plasticity_i)
 	#	            DIFFerentiation_max  = max SUMMA_i (qty_i * DIFFerentiation_i)
 	
