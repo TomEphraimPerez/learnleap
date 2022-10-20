@@ -40,27 +40,65 @@ print('\n\tOSTENSIBLY - this application MUST BE BACKED UP BY LABORATORY verific
 print('\tdocumented experimentation and results. This author is OPEN to suggestions amd comments.')
 print('\n\n')
 
-attribute = ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
+# attribute = ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
 # Pts dict of Pts' Pts.
 # attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, attoamps = 10^-18a.
                                                         # INITIALIZE >>>
-Pts = {'Tfh': {'attoamps': 0.39, 'ACTivation': 1.1, 'EXPansion': 22.3, 'DIFFerentiation': 2.1,
-                    'Expression': 7.7, 'Plasticity': 2.5, 'Units': 'continuous'},
-        'Th9': {'attoamps': 0.17, 'ACTivation': 5.0, 'EXPansion': 3.1, 'DIFFerentiation': 2.2,
-                    'Expression': 2, 'Plasticity': 4.0, 'Units': 'continuous'},
-        'Th2': {'attoamps': 0.11, 'ACTivation': 2.3, 'EXPansion': 23.5, 'DIFFerentiation': 3.6,
-                    'Expression': 10.1, 'Plasticity': 1.0, 'Units': 'continuous'},
-        'iTreg': {'attoamps': 0.91, 'ACTivation': 4.1, 'EXPansion': 25.6, 'DIFFerentiation': 4.9,
-                    'Expression': 3.5, 'Plasticity': 1.0, 'Units': 'continuous'},
-        'Tr1': {'attoamps': 0.83, 'ACTivation': 3.8, 'EXPansion': 50.5, 'DIFFerentiation': 3.1,
-                    'Expression': 5.4, 'Plasticity': 0.25, 'Units': 'continuous'},
-        'Th22': {'attoamps': 0.44, 'ACTivation': 1.2, 'EXPansion': 20.7, 'DIFFerentiation': 14.5,
-                    'Expression': 5.6, 'Plasticity': 2.0, 'Units': 'continuous'},
-        'Th17': {'attoamps': 0.36, 'ACTivation': 4.3, 'EXPansion': 28.8, 'DIFFerentiation': 14.6,
-                    'Expression': 5.7, 'Plasticity': 2.0, 'Units': 'continuous'},
-        'Th1': {'attoamps': 0.52, 'ACTivation': 5.7, 'EXPansion': 12.2, 'DIFFerentiation': 15.9,
-                    'Expression': 6.8, 'Plasticity': 3.7, 'Units': 'continuous'}}
+Pts = {'Tfh': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
+        'Th9': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
+        'Th2': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.1, 'Plasticity': 0.0, 'Units': 'continuous'},
+        'iTreg': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
+        'Tr1': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
+        'Th22': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
+        'Th17': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
+        'Th1': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
+                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'}}
 
+
+print('\n--- For attribute --- Tfh')
+strattoamps = input('Enter value for attomaps: ')
+Pts['Tfh']['attoamps'] = strattoamps
+print(Pts['Tfh'])
+
+strACTivation = input('Enter value for ACTivation: ')
+Pts['Tfh']['ACTivation'] = strACTivation
+print(Pts['Tfh'])
+# PLEASE CONTINUE TO USE THIS METHODOLOGY =======================
+
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['Tfh']['EXPansion'] = strEXPansion
+print(Pts['Tfh'])
+
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['Tfh']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['Tfh'])
+
+strExpression = input('Enter value for Expression: ')
+Pts['Tfh']['Expression'] = strExpression
+print(Pts['Tfh'])
+
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['Tfh']['Plasticity'] = strPlasticity
+print(Pts['Tfh'])
+
+
+
+
+
+for p_id, p_info in Pts.items():                # O # OK
+    print("\nNEW VALUES: ", p_id)
+    for key in p_info:
+        print(key + ':', p_info[key])
+
+
+'''
 n = 0
 for ind, value in enumerate(Pts):
     print('\n\tFor ' + attribute[0 + n])
@@ -79,26 +117,21 @@ for ind, value in enumerate(Pts):
     n += 1
     if(n == 6):
         break
-
-# Proof-of-life for user attribute inputs:
-print('\n\tTo confirm, your inputs are: ')
-for ndx, value in enumerate(Pts):
-    if(ndx == 6):
-        break
-    else:
-        print('\t>>> ' + attribute[ndx])
+'''
 
 
 
 
 
-print('\n\n\n')
-min_attributes = {"attoamps": 0.1, "ACTivation": 0.1, "EXPansion": 0.1, "DIFFerentiation": 0.1}
-max_attoamps = 0.99                                     # for setting up bounds. See 12 lines below.
+
+
+print('\n\n')
+min_attributes = {'attoamps': 0.3, 'ACTivation': 0.5, 'EXPansion': 0.5, 'DIFFerentiation': 0.5}
+max_attoamps = 1.0                                     # for setting up bounds. See 12 lines below.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
   # inc higher-order non-quadratic models.
-quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous" # an f-string. '{Pt}'
+quantities = [dimod.Real(f"{Pt}") if Pts[Pt]['Units'] == 'continuous' # an f-string. '{Pt}'
                                                         # will be replaced by a value.
     else dimod.Integer(f"{Pt}")
               for Pt in Pts.keys()]                     # key = eg cals : value = 20
@@ -112,6 +145,8 @@ print(2*quantities[0])                                  # Now dbl lin bias
                                                         # (e.g. 'Tfh') cannot have interactions
 '''
 
+print('\n\n')
+
 for ind, Pt in enumerate(Pts.keys()):
     ub = max_attoamps / Pts[Pt]["ACTivation"]
     quantities[ind].set_upper_bound(Pt, ub)
@@ -119,8 +154,9 @@ for ind, Pt in enumerate(Pts.keys()):
 qub = quantities[0].upper_bound("Tfh")			    # quantity ub fro Tfh
 print('\nquantities[0].ub (upper bound) is: ', qub)                   # -> 20.0
 
-# setup the OBJective Fn w a UTILity Fn                 # OBJECTIVE Fn     <<<
-cqm = dimod.ConstrainedQuadraticModel()			        # NOT arbitrarily set alpha=2 beta=1;
+
+# setup the OBJective Fn w a UTILity Fn             # OBJECTIVE Fn     <<<
+cqm = dimod.ConstrainedQuadraticModel()			    # NOT arbitrarily set alpha=2 beta=1;
 
 # UTILity Fn
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
@@ -292,7 +328,7 @@ to those found when optimizing for DIFFerentiation alone.
 
 ''' SEE GRAPH with y-axis=Energy, x-axis=Multiplier, variables are DIFFerentiation, Plasticity and total. 
 # This quantum application is an adaptation from DWaveSys quantum code from:
-https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals                                            
+https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals
 '''
 
 '''
