@@ -70,7 +70,6 @@ print(Pts['Tfh'])
 strACTivation = input('Enter value for ACTivation: ')
 Pts['Tfh']['ACTivation'] = strACTivation
 print(Pts['Tfh'])
-# PLEASE CONTINUE TO USE THIS METHODOLOGY =======================
 
 strEXPansion = input('Enter value for EXPansion: ')
 Pts['Tfh']['EXPansion'] = strEXPansion
@@ -88,6 +87,34 @@ strPlasticity = input('Enter value for Plasticity: ')
 Pts['Tfh']['Plasticity'] = strPlasticity
 print(Pts['Tfh'])
 
+#====================================================================|
+
+print('\n--- For attribute --- Th9')
+strattoamps = input('Enter value for attomaps: ')
+Pts['Th9']['attoamps'] = strattoamps
+print(Pts['Tfh'])
+
+strACTivation = input('Enter value for ACTivation: ')
+Pts['Th9']['ACTivation'] = strACTivation
+print(Pts['Tfh'])
+
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['Th9']['EXPansion'] = strEXPansion
+print(Pts['Tfh'])
+
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['Th9']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['Tfh'])
+
+strExpression = input('Enter value for Expression: ')
+Pts['Th9']['Expression'] = strExpression
+print(Pts['Tfh'])
+
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['Th9']['Plasticity'] = strPlasticity
+print(Pts['Tfh'])
+
+#====================================================================|
 
 
 
