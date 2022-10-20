@@ -61,61 +61,189 @@ Pts = {'Tfh': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerenti
         'Th1': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
                     'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'}}
 
-
+# SUBSET 1
 print('\n--- For attribute --- Tfh')
 strattoamps = input('Enter value for attomaps: ')
 Pts['Tfh']['attoamps'] = strattoamps
-print(Pts['Tfh'])
-
+print(Pts['Tfh'])                   #===========================|
 strACTivation = input('Enter value for ACTivation: ')
 Pts['Tfh']['ACTivation'] = strACTivation
-print(Pts['Tfh'])
-
+print(Pts['Tfh'])                   #===========================|
 strEXPansion = input('Enter value for EXPansion: ')
 Pts['Tfh']['EXPansion'] = strEXPansion
-print(Pts['Tfh'])
-
+print(Pts['Tfh'])                   #===========================|
 strDIFFerentiation = input('Enter value for DIFFerentiation: ')
 Pts['Tfh']['DIFFerentiation'] = strDIFFerentiation
-print(Pts['Tfh'])
-
+print(Pts['Tfh'])                   #===========================|
 strExpression = input('Enter value for Expression: ')
 Pts['Tfh']['Expression'] = strExpression
-print(Pts['Tfh'])
-
+print(Pts['Tfh'])                   #===========================|
 strPlasticity = input('Enter value for Plasticity: ')
 Pts['Tfh']['Plasticity'] = strPlasticity
-print(Pts['Tfh'])
+print(Pts['Tfh'])                   #===========================|
 
 #====================================================================|
 
+# SUBSET 2
 print('\n--- For attribute --- Th9')
 strattoamps = input('Enter value for attomaps: ')
 Pts['Th9']['attoamps'] = strattoamps
-print(Pts['Tfh'])
-
+print(Pts['Th9'])                   #===========================|
 strACTivation = input('Enter value for ACTivation: ')
 Pts['Th9']['ACTivation'] = strACTivation
-print(Pts['Tfh'])
-
+print(Pts['Th9'])                   #===========================|
 strEXPansion = input('Enter value for EXPansion: ')
 Pts['Th9']['EXPansion'] = strEXPansion
-print(Pts['Tfh'])
-
+print(Pts['Th9'])                   #===========================|
 strDIFFerentiation = input('Enter value for DIFFerentiation: ')
 Pts['Th9']['DIFFerentiation'] = strDIFFerentiation
-print(Pts['Tfh'])
-
+print(Pts['Th9'])                   #===========================|
 strExpression = input('Enter value for Expression: ')
 Pts['Th9']['Expression'] = strExpression
-print(Pts['Tfh'])
-
+print(Pts['Th9'])                   #===========================|
 strPlasticity = input('Enter value for Plasticity: ')
 Pts['Th9']['Plasticity'] = strPlasticity
-print(Pts['Tfh'])
+print(Pts['Th9'])                   #===========================|
 
 #====================================================================|
 
+# SUBSET 3
+print('\n--- For attribute --- Th2')
+strattoamps = input('Enter value for attomaps: ')
+Pts['Th2']['attoamps'] = strattoamps
+print(Pts['Th2'])                   #===========================|
+strACTivation = input('Enter value for ACTivation: ')
+Pts['Th2']['ACTivation'] = strACTivation
+print(Pts['Th2'])                   #===========================|
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['Th2']['EXPansion'] = strEXPansion
+print(Pts['Th2'])                   #===========================|
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['Th2']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['Th2'])                   #===========================|
+strExpression = input('Enter value for Expression: ')
+Pts['Th2']['Expression'] = strExpression
+print(Pts['Th2'])                   #===========================|
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['Th2']['Plasticity'] = strPlasticity
+print(Pts['Th2'])                   #===========================|
+
+#====================================================================|
+
+# SUBSET 4
+print('\n--- For attribute --- iTreg')
+strattoamps = input('Enter value for attomaps: ')
+Pts['iTreg']['attoamps'] = strattoamps
+print(Pts['iTreg'])                   #===========================|
+strACTivation = input('Enter value for ACTivation: ')
+Pts['iTreg']['ACTivation'] = strACTivation
+print(Pts['iTreg'])                   #===========================|
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['iTreg']['EXPansion'] = strEXPansion
+print(Pts['iTreg'])                   #===========================|
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['iTreg']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['iTreg'])                   #===========================|
+strExpression = input('Enter value for Expression: ')
+Pts['iTreg']['Expression'] = strExpression
+print(Pts['iTreg'])                   #===========================|
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['iTreg']['Plasticity'] = strPlasticity
+print(Pts['iTreg'])                   #===========================|
+
+#====================================================================|
+
+# SUBSET 5
+print('\n--- For attribute --- Tr1')
+strattoamps = input('Enter value for attomaps: ')
+Pts['Tr1']['attoamps'] = strattoamps
+print(Pts['Tr1'])                   #===========================|
+strACTivation = input('Enter value for ACTivation: ')
+Pts['Tr1']['ACTivation'] = strACTivation
+print(Pts['Tr1'])                   #===========================|
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['Tr1']['EXPansion'] = strEXPansion
+print(Pts['Tr1'])                   #===========================|
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['Tr1']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['Tr1'])                   #===========================|
+strExpression = input('Enter value for Expression: ')
+Pts['Tr1']['Expression'] = strExpression
+print(Pts['Tr1'])                   #===========================|
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['Tr1']['Plasticity'] = strPlasticity
+print(Pts['Tr1'])                   #===========================|
+
+#====================================================================|
+
+# SUBSET 6
+print('\n--- For attribute --- Th22')
+strattoamps = input('Enter value for attomaps: ')
+Pts['Th22']['attoamps'] = strattoamps
+print(Pts['Th22'])                   #===========================|
+strACTivation = input('Enter value for ACTivation: ')
+Pts['Th22']['ACTivation'] = strACTivation
+print(Pts['Th22'])                   #===========================|
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['Th22']['EXPansion'] = strEXPansion
+print(Pts['Th22'])                   #===========================|
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['Th22']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['Th22'])                   #===========================|
+strExpression = input('Enter value for Expression: ')
+Pts['Th22']['Expression'] = strExpression
+print(Pts['Th22'])                   #===========================|
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['Th22']['Plasticity'] = strPlasticity
+print(Pts['Th22'])                   #===========================|
+
+#====================================================================|
+
+# SUBSET 7
+print('\n--- For attribute --- Th17')
+strattoamps = input('Enter value for attomaps: ')
+Pts['Th17']['attoamps'] = strattoamps
+print(Pts['Th17'])                   #===========================|
+strACTivation = input('Enter value for ACTivation: ')
+Pts['Th17']['ACTivation'] = strACTivation
+print(Pts['Th17'])                   #===========================|
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['Th17']['EXPansion'] = strEXPansion
+print(Pts['Th17'])                   #===========================|
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['Th17']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['Th17'])                   #===========================|
+strExpression = input('Enter value for Expression: ')
+Pts['Th17']['Expression'] = strExpression
+print(Pts['Th17'])                   #===========================|
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['Th17']['Plasticity'] = strPlasticity
+print(Pts['Th17'])                   #===========================|
+
+#====================================================================|
+
+# SUBSET 8
+print('\n--- For attribute --- Th1')
+strattoamps = input('Enter value for attomaps: ')
+Pts['Th1']['attoamps'] = strattoamps
+print(Pts['Th1'])                   #===========================|
+strACTivation = input('Enter value for ACTivation: ')
+Pts['Th1']['ACTivation'] = strACTivation
+print(Pts['Th1'])                   #===========================|
+strEXPansion = input('Enter value for EXPansion: ')
+Pts['Th1']['EXPansion'] = strEXPansion
+print(Pts['Th1'])                   #===========================|
+strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+Pts['Th1']['DIFFerentiation'] = strDIFFerentiation
+print(Pts['Th1'])                   #===========================|
+strExpression = input('Enter value for Expression: ')
+Pts['Th1']['Expression'] = strExpression
+print(Pts['Th1'])                   #===========================|
+strPlasticity = input('Enter value for Plasticity: ')
+Pts['Th1']['Plasticity'] = strPlasticity
+print(Pts['Th1'])                   #===========================|
+
+#====================================================================|||
 
 
 
