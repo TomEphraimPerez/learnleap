@@ -61,189 +61,594 @@ Pts = {'Tfh': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerenti
         'Th1': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
                     'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'}}
 
+'''
 # SUBSET 1
 print('\n--- For attribute --- Tfh')
 strattoamps = input('Enter value for attomaps: ')
 Pts['Tfh']['attoamps'] = strattoamps
 print(Pts['Tfh'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+'''
+
+
+#====================================================================|||
+
+# SUBSET 1
+print('\n--- For attribute --- Tfh')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attoamps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
+Pts['Th1']['attoamps'] = strattoamps
+print(Pts['Th1'])                   #===========================|
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tfh']['ACTivation'] = strACTivation
 print(Pts['Tfh'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tfh']['EXPansion'] = strEXPansion
 print(Pts['Tfh'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tfh']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['Tfh'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tfh']['Expression'] = strExpression
 print(Pts['Tfh'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tfh']['Plasticity'] = strPlasticity
 print(Pts['Tfh'])                   #===========================|
 
 #====================================================================|
 
+
 # SUBSET 2
 print('\n--- For attribute --- Th9')
-strattoamps = input('Enter value for attomaps: ')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attoamps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th9']['attoamps'] = strattoamps
 print(Pts['Th9'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th9']['ACTivation'] = strACTivation
 print(Pts['Th9'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th9']['EXPansion'] = strEXPansion
 print(Pts['Th9'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th9']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['Th9'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th9']['Expression'] = strExpression
 print(Pts['Th9'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th9']['Plasticity'] = strPlasticity
 print(Pts['Th9'])                   #===========================|
 
 #====================================================================|
 
+
 # SUBSET 3
 print('\n--- For attribute --- Th2')
-strattoamps = input('Enter value for attomaps: ')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attomaps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th2']['attoamps'] = strattoamps
 print(Pts['Th2'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th2']['ACTivation'] = strACTivation
 print(Pts['Th2'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th2']['EXPansion'] = strEXPansion
 print(Pts['Th2'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th2']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['Th2'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th2']['Expression'] = strExpression
 print(Pts['Th2'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th2']['Plasticity'] = strPlasticity
 print(Pts['Th2'])                   #===========================|
 
 #====================================================================|
 
+
 # SUBSET 4
 print('\n--- For attribute --- iTreg')
-strattoamps = input('Enter value for attomaps: ')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attomaps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['iTreg']['attoamps'] = strattoamps
 print(Pts['iTreg'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['iTreg']['ACTivation'] = strACTivation
 print(Pts['iTreg'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['iTreg']['EXPansion'] = strEXPansion
 print(Pts['iTreg'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['iTreg']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['iTreg'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['iTreg']['Expression'] = strExpression
 print(Pts['iTreg'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['iTreg']['Plasticity'] = strPlasticity
 print(Pts['iTreg'])                   #===========================|
 
 #====================================================================|
 
+
 # SUBSET 5
 print('\n--- For attribute --- Tr1')
-strattoamps = input('Enter value for attomaps: ')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attomaps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tr1']['attoamps'] = strattoamps
 print(Pts['Tr1'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tr1']['ACTivation'] = strACTivation
 print(Pts['Tr1'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tr1']['EXPansion'] = strEXPansion
 print(Pts['Tr1'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tr1']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['Tr1'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tr1']['Expression'] = strExpression
 print(Pts['Tr1'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Tr1']['Plasticity'] = strPlasticity
 print(Pts['Tr1'])                   #===========================|
 
 #====================================================================|
 
+
 # SUBSET 6
 print('\n--- For attribute --- Th22')
-strattoamps = input('Enter value for attomaps: ')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attomaps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th22']['attoamps'] = strattoamps
 print(Pts['Th22'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
+        Pts['Tr1']['ACTivation'] = strACTivation
 Pts['Th22']['ACTivation'] = strACTivation
 print(Pts['Th22'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th22']['EXPansion'] = strEXPansion
 print(Pts['Th22'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th22']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['Th22'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th22']['Expression'] = strExpression
 print(Pts['Th22'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th22']['Plasticity'] = strPlasticity
 print(Pts['Th22'])                   #===========================|
 
 #====================================================================|
 
+
 # SUBSET 7
 print('\n--- For attribute --- Th17')
-strattoamps = input('Enter value for attomaps: ')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attomaps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th17']['attoamps'] = strattoamps
 print(Pts['Th17'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th17']['ACTivation'] = strACTivation
 print(Pts['Th17'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th17']['EXPansion'] = strEXPansion
 print(Pts['Th17'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th17']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['Th17'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th17']['Expression'] = strExpression
 print(Pts['Th17'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th17']['Plasticity'] = strPlasticity
 print(Pts['Th17'])                   #===========================|
 
 #====================================================================|
 
+
 # SUBSET 8
 print('\n--- For attribute --- Th1')
-strattoamps = input('Enter value for attomaps: ')
+
+flag = True
+while flag:
+    strattoamps = input('Enter value for attomaps: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th1']['attoamps'] = strattoamps
 print(Pts['Th1'])                   #===========================|
-strACTivation = input('Enter value for ACTivation: ')
+
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th1']['ACTivation'] = strACTivation
 print(Pts['Th1'])                   #===========================|
-strEXPansion = input('Enter value for EXPansion: ')
+
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th1']['EXPansion'] = strEXPansion
 print(Pts['Th1'])                   #===========================|
-strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th1']['DIFFerentiation'] = strDIFFerentiation
 print(Pts['Th1'])                   #===========================|
-strExpression = input('Enter value for Expression: ')
+
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th1']['Expression'] = strExpression
 print(Pts['Th1'])                   #===========================|
-strPlasticity = input('Enter value for Plasticity: ')
+
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 Pts['Th1']['Plasticity'] = strPlasticity
 print(Pts['Th1'])                   #===========================|
 
 #====================================================================|||
+
+
 
 
 
@@ -273,11 +678,6 @@ for ind, value in enumerate(Pts):
     if(n == 6):
         break
 '''
-
-
-
-
-
 
 
 print('\n\n')
