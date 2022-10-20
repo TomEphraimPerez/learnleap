@@ -61,19 +61,12 @@ Pts = {'Tfh': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerenti
         'Th1': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
                     'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'}}
 
-'''
-# SUBSET 1
-print('\n--- For attribute --- Tfh')
-strattoamps = input('Enter value for attomaps: ')
-Pts['Tfh']['attoamps'] = strattoamps
-print(Pts['Tfh'])                   #===========================|
-'''
 
 
 #====================================================================|||
 
 # SUBSET 1
-print('\n--- For attribute --- Tfh')
+print('\n--- Attributes for --- Tfh')
 
 flag = True
 while flag:
@@ -83,7 +76,7 @@ while flag:
         print("\n\t\tPlease enter a vAliD DecImal number.")
     else:
         flag = False
-Pts['Th1']['attoamps'] = strattoamps
+Pts['Tfh']['attoamps'] = strattoamps
 print(Pts['Th1'])                   #===========================|
 
 flag = True
@@ -145,7 +138,7 @@ print(Pts['Tfh'])                   #===========================|
 
 
 # SUBSET 2
-print('\n--- For attribute --- Th9')
+print('\n--- Attributes for --- Th9')
 
 flag = True
 while flag:
@@ -217,7 +210,7 @@ print(Pts['Th9'])                   #===========================|
 
 
 # SUBSET 3
-print('\n--- For attribute --- Th2')
+print('\n--- Attributes for --- Th2')
 
 flag = True
 while flag:
@@ -289,7 +282,7 @@ print(Pts['Th2'])                   #===========================|
 
 
 # SUBSET 4
-print('\n--- For attribute --- iTreg')
+print('\n--- Attributes for --- iTreg')
 
 flag = True
 while flag:
@@ -361,7 +354,7 @@ print(Pts['iTreg'])                   #===========================|
 
 
 # SUBSET 5
-print('\n--- For attribute --- Tr1')
+print('\n--- Attributes for --- Tr1')
 
 flag = True
 while flag:
@@ -433,7 +426,7 @@ print(Pts['Tr1'])                   #===========================|
 
 
 # SUBSET 6
-print('\n--- For attribute --- Th22')
+print('\n--- Attributes for --- Th22')
 
 flag = True
 while flag:
@@ -506,7 +499,7 @@ print(Pts['Th22'])                   #===========================|
 
 
 # SUBSET 7
-print('\n--- For attribute --- Th17')
+print('\n--- Attributes for --- Th17')
 
 flag = True
 while flag:
@@ -578,7 +571,7 @@ print(Pts['Th17'])                   #===========================|
 
 
 # SUBSET 8
-print('\n--- For attribute --- Th1')
+print('\n--- Attributes for --- Th1')
 
 flag = True
 while flag:
@@ -651,33 +644,10 @@ print(Pts['Th1'])                   #===========================|
 
 
 
-
-for p_id, p_info in Pts.items():                # O # OK
+for p_id, p_info in Pts.items():
     print("\nNEW VALUES: ", p_id)
     for key in p_info:
         print(key + ':', p_info[key])
-
-
-'''
-n = 0
-for ind, value in enumerate(Pts):
-    print('\n\tFor ' + attribute[0 + n])
-    # Ie., for attr_x = ('\tSelect attribute \'attr_x\' for [differentiated-CD4-subset].')
-    flag = True
-    attribute[0 + n] = None
-    while flag:
-        attribute[0 + n] = input("\tplease input a valid decimal number: ")
-        match_val = re.match("[-+]?\\d+([/.]\\d+)?$", attribute[0 + n])
-        if match_val is None:
-            print("\n\t\tPlease enter a vAliD DecImal number.")
-        else:
-            flag = False
-    number = float(attribute[0 + n])
-    print("\tThis protein now has an attribute of: ", number)
-    n += 1
-    if(n == 6):
-        break
-'''
 
 
 print('\n\n')
@@ -692,6 +662,7 @@ quantities = [dimod.Real(f"{Pt}") if Pts[Pt]['Units'] == 'continuous' # an f-str
               for Pt in Pts.keys()]                     # key = eg cals : value = 20
 
 '''
+# test8
 print("\n(Simply showing ex of a lin bias) ")
 print(quantities[0])                                    # simple linear bias
 print("(Now showing an ex of a dbl bias) ")
