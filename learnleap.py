@@ -86,7 +86,7 @@ for nutrient, amount in min_nutrients.items():          # Items is a BI
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
 # list(cqm.constraints.keys())        #o # ['Calories', 'Protein', 'Fat', 'Carbs', 'Fiber']
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
-print('Cal constraints (as polystr):', cqm.constraints['Calories'].to_polystring())
+print('Calories (has max) constraints (as polystr):', cqm.constraints['Calories'].to_polystring())
     # 100*rice + 140*tofu + 90*banana + 150*lentils + 270*bread + 300*avocado <= 2000, what is gvn abv
 print('Pt constraints (as polystr):', cqm.constraints['Protein'].to_polystring())
     # 3*rice + 17*tofu + banana + 9*lentils + 9*bread + 4*avocado >= 50              , what is gvn abv
