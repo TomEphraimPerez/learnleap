@@ -40,6 +40,7 @@ print('\n\tOSTENSIBLY - this application MUST BE BACKED UP BY LABORATORY verific
 print('\tdocumented experimentation and results. This author is OPEN to suggestions amd comments.')
 print('\n\n')
 
+# Self notes:
 # attribute = ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
 # Pts dict of Pts' Pts.
 # attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, attoamps = 10^-18a.
@@ -703,12 +704,12 @@ cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 6 * total_mix(quan
 
 # TUNING/Constraints
 # Constrain the Thelp’s MAXIMUM current i.
-cqm.add_constraint(total_mix(quantities, "Plasticity") <= max_attoamps, label="Plasticity") # rtn 'Plastiticty'
+cqm.add_constraint(total_mix(quantities, "attoamps") <= max_attoamps, label="attoamps") # rtn 'attoamps'
 
 
 # Require that the nominal MINIMUM of each Th attribute is met or exceeded.
 # THIS SHOULD BE USER DEFINED AS WELL.
-for attribute, amount in min_attributes.items():        # Items() is a BI
+for attribute, amount in min_attributes.items():        # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
     'ACTivation'
@@ -719,9 +720,9 @@ for attribute, amount in min_attributes.items():        # Items() is a BI
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
 # list(cqm.constraints.keys())              # ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
-print('ACTivation constraints (as polystr):', cqm.constraints['ACTivation'].to_polystring())
+print('attoamps(has max) constraints (as polystr):', cqm.constraints['attoamps'].to_polystring())# hates attoamps
     # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
-print('Attomaps constraints (as polystr):', cqm.constraints['ACTivation'].to_polystring()) # hates attoamps
+print('Expression constraints (as polystr):', cqm.constraints['Expression'].to_polystring())
     # 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv
 
 '''
