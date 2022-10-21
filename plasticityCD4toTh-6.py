@@ -64,8 +64,8 @@ Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation'
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
 
 
-
-#====================================================================|||
+'''
+#============================ USER INPUT =====================================|||
 
 # SUBSET 1
 print('\n--- Attributes for --- Tfh')
@@ -640,8 +640,8 @@ while flag:
 Pts['Th1']['Plasticity'] = strPlasticity
 print(Pts['Th1'])                   #===========================|
 
-#====================================================================|||
-
+#============================= END USER INPUT ==============================|||
+'''
 
 
 for p_id, p_info in Pts.items():
@@ -710,10 +710,10 @@ cqm.add_constraint(total_mix(quantities, "Plasticity") <= max_attoamps, label="P
 # THIS SHOULD BE USER DEFINED AS WELL.
 for attribute, amount in min_attributes.items():        # Items() is a BI
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
-'Expression'
-'ACTivation'
-'EXPansion'
-'DIFFerentiation'
+    'Expression'
+    'ACTivation'
+    'EXPansion'
+    'DIFFerentiation'
 
 # You can access these constraints as a dict with the labels as keys:
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
@@ -721,7 +721,7 @@ constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ ini
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
 print('ACTivation constraints (as polystr):', cqm.constraints['ACTivation'].to_polystring())
     # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
-print('Attomaps constraints (as polystr):', cqm.constraints['attoamps'].to_polystring())
+print('Attomaps constraints (as polystr):', cqm.constraints['ACTivation'].to_polystring()) # hates attoamps
     # 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv
 
 '''
