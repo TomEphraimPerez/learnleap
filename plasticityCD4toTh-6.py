@@ -43,23 +43,25 @@ print('\n\n')
 # attribute = ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
 # Pts dict of Pts' Pts.
 # attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, attoamps = 10^-18a.
+
+
                                                         # INITIALIZE >>>
-Pts = {'Tfh': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
-        'Th9': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
-        'Th2': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.1, 'Plasticity': 0.0, 'Units': 'continuous'},
-        'iTreg': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
-        'Tr1': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
-        'Th22': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
-        'Th17': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'},
-        'Th1': {'attoamps': 0.0, 'ACTivation': 0.0, 'EXPansion': 0.0, 'DIFFerentiation': 0.0,
-                    'Expression': 0.0, 'Plasticity': 0.0, 'Units': 'continuous'}}
+Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Th9': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Th2': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'iTreg': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Tr1': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Th22': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Th17': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Th1': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
 
 
 
@@ -447,7 +449,6 @@ while flag:
         print("\n\t\tPlease enter a vAliD DecImal number.")
     else:
         flag = False
-        Pts['Tr1']['ACTivation'] = strACTivation
 Pts['Th22']['ACTivation'] = strACTivation
 print(Pts['Th22'])                   #===========================|
 
@@ -643,7 +644,6 @@ print(Pts['Th1'])                   #===========================|
 
 
 
-
 for p_id, p_info in Pts.items():
     print("\nNEW VALUES: ", p_id)
     for key in p_info:
@@ -651,33 +651,39 @@ for p_id, p_info in Pts.items():
 
 
 print('\n\n')
-min_attributes = {'attoamps': 0.3, 'ACTivation': 0.5, 'EXPansion': 0.5, 'DIFFerentiation': 0.5}
-max_attoamps = 1.0                                     # for setting up bounds. See 12 lines below.
+# print('Pts ------------------- > > > ')
+# print(Pts)                                            # ok
+print('\n\n')
+
+min_attributes= {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4} # ARBITRARY ASMTs
+max_attoamps = 100                                     # for setting up bounds. See 12 lines below.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
   # inc higher-order non-quadratic models.
-quantities = [dimod.Real(f"{Pt}") if Pts[Pt]['Units'] == 'continuous' # an f-string. '{Pt}'
-                                                        # will be replaced by a value.
+quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"   # an f-string. '{Pt}'..
+                                                        # ..will be replaced by a value.
     else dimod.Integer(f"{Pt}")
-              for Pt in Pts.keys()]                     # key = eg cals : value = 20
+              for Pt in Pts.keys()]                     # key = eg amps : value = 2
 
 '''
-# test8
+# test
 print("\n(Simply showing ex of a lin bias) ")
 print(quantities[0])                                    # simple linear bias
 print("(Now showing an ex of a dbl bias) ")
 print(2*quantities[0])                                  # Now dbl lin bias
-#print(quantities[0] * quantities[1]) #Now a quadratic bias. # ValueError: REAL variables
+#print(quantities[0] * quantities[1])       #Now a quadratic bias. # ValueError: REAL variables
                                                         # (e.g. 'Tfh') cannot have interactions
 '''
 
-print('\n\n')
+print('\n')
 
 for ind, Pt in enumerate(Pts.keys()):
-    ub = max_attoamps / Pts[Pt]["ACTivation"]
+    # ub = max_attoamps / Pts[Pt]['attoamps']       # O
+    ub = max_attoamps / int(Pts[Pt]['attoamps'])    # ? cast <- stkover
+    # print('\n\t\t\tUB = ', ub)                    # --->>. 100 :)
     quantities[ind].set_upper_bound(Pt, ub)
 
-qub = quantities[0].upper_bound("Tfh")			    # quantity ub fro Tfh
+qub = quantities[0].upper_bound("Tfh")	# quantity ub fro Tfh=X, Th1=X, Th22=X, Th17=X,
 print('\nquantities[0].ub (upper bound) is: ', qub)                   # -> 20.0
 
 
@@ -700,26 +706,23 @@ cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 6 * total_mix(quan
 cqm.add_constraint(total_mix(quantities, "Plasticity") <= max_attoamps, label="Plasticity") # rtn 'Plastiticty'
 
 
-
-
 # Require that the nominal MINIMUM of each Th attribute is met or exceeded.
 # THIS SHOULD BE USER DEFINED AS WELL.
-for attribute, amount in min_attributes.items(): # Items() is a BI
+for attribute, amount in min_attributes.items():        # Items() is a BI
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
-    'attoamps'
-    'ACTivation'
-    'EXPansion'
-    'Expression'
+'Expression'
+'ACTivation'
+'EXPansion'
+'DIFFerentiation'
 
 # You can access these constraints as a dict with the labels as keys:
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys()) #@overld. __def__ init(self). @ is polymorph.
-# list(cqm.constraints.keys())                  # ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
+# list(cqm.constraints.keys())              # ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
 print('ACTivation constraints (as polystr):', cqm.constraints['ACTivation'].to_polystring())
     # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
 print('Attomaps constraints (as polystr):', cqm.constraints['attoamps'].to_polystring())
-    # 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50              , what is gvn abv
-
+    # 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv
 
 '''
 Solve the Problem by Sampling
@@ -791,9 +794,10 @@ The result is the same : )
 
 #Consider sampling each part of the combined objective ON ITS OWN (alpha=0, beta=1 and vv)
 	# and comparing the best solutions.
+
 	# Start with DIFFerentiation: -----------------------------------------------------------------------||
-cqm.set_objective(-total_mix(quantities, "DIFFerentiation"))      # NOTE THE MINUS
-sampleset_DIFFerentiation = sampler.sample_cqm(cqm)               # RHS SAME AS line that's 21 lines down.
+cqm.set_objective(-total_mix(quantities, "DIFFerentiation"))    # NOTE THE MINUS
+sampleset_DIFFerentiation = sampler.sample_cqm(cqm)             # RHS SAME AS line that's 21 lines down.
 feasible_sampleset_DIFFerentiation = sampleset_DIFFerentiation.filter(lambda row: row.is_feasible)
 best_DIFFerentiation = feasible_sampleset_DIFFerentiation.first
 print('best_DIFFerentiation.ENERGY: ', round(best_DIFFerentiation.energy))
@@ -816,7 +820,7 @@ Total DIFFerentiation of 6 at Plasticity 3.1 rounded off:
 
     # NOW with Plasticity:  --------------------------------------------------------------------------||
 cqm.set_objective(total_mix(quantities, "Plasticity"))
-sampleset_Plasticity = sampler.sample_cqm(cqm)                # RHS SAME AS line that's 21 lines up.
+sampleset_Plasticity = sampler.sample_cqm(cqm)          # RHS SAME AS line that's 21 lines up.
 feasible_sampleset_Plasticity = sampleset_Plasticity.filter(lambda row: row.is_feasible)
 best_DIFFerentiation = feasible_sampleset_Plasticity.first
 print(round(best_DIFFerentiation.energy))
