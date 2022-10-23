@@ -38,17 +38,19 @@ max_calories = 2000                                     # for setting up bounds.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
   # inc higher-order non-quadratic models.
-quantities = [dimod.Real(f"{food}") if foods[food]["Units"] == "continuous" # an f-string. '{food}'
+quantities = [dimod.Real(f"{food}") if foods[food]["Units"] == "continuous"     # an f-string. '{food}'
                                                         # will be replaced by a value.
     else dimod.Integer(f"{food}")
     for food in foods.keys()]                           # key = eg cals : value = 20
 
+'''
 print("\nSimply showing ex of a lin bias. ")
 print(quantities[0])                # simple linear bias
 print("Now showing an ex of a dbl bias. ")
 print(2*quantities[0])              # Now dbl lin bias
 #print(quantities[0] * quantities[1]) #Now a quadratic bias. # ValueError: REAL variables
-                                                        # (e.g. 'rice') cannot have interactions
+'''
+                        # (e.g. 'rice') cannot have interactions
 for ind, food in enumerate(foods.keys()):
     ub = max_calories / foods[food]["Calories"]         # upper bnd is 20 portions, 2000/100 for rice below
     quantities[ind].set_upper_bound(food, ub)
@@ -78,8 +80,8 @@ cqm.add_constraint(total_mix(quantities, "Calories") <= max_calories, label="Cal
 for nutrient, amount in min_nutrients.items():          # Items is a BI
     cqm.add_constraint(total_mix(quantities, nutrient) >= amount, label=nutrient)
 'Protein'
-'Carbs'
 'Fat'
+'Carbs'
 'Fiber'
 
 # You can access these constraints as a dict with the labels as keys:
