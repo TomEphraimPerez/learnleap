@@ -66,6 +66,7 @@ Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation'
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
 '''
 
+
                                                         # INITIALIZE >>>
 Pts = {'Tfh': {},
        'Th9': {},
@@ -76,11 +77,10 @@ Pts = {'Tfh': {},
        'Th17': {},
        'Th1': {}}
 
-#============================ USER INPUT =====================================|||
 
+#============================ USER INPUT =====================================|||
 # SUBSET 1
 print('\n--- Attributes for --- Tfh')
-
 
 flag = True                                             # O 
 while flag:
@@ -679,14 +679,10 @@ print(Pts['Th1'])
 #============================= END USER INPUT ==============================|||
 
 
-
-
-
 for p_id, p_info in Pts.items():
     print("\nNEW VALUES: ", p_id)
     for key in p_info:
         print(key + ':', p_info[key])
-
 
 print('\n')
 # print('Pts ------------------- > > > ')
