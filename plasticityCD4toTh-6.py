@@ -46,6 +46,7 @@ print('\n\n')
 # attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, attoamps = 10^-18a.
 
 
+'''
                                                         # INITIALIZE >>>
 Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
@@ -63,15 +64,25 @@ Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation'
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
         'Th1': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
-
-
 '''
+
+                                                        # INITIALIZE >>>
+Pts = {'Tfh': {},
+       'Th9': {},
+       'Th2': {},
+       'iTreg': {},
+       'Tr1': {},
+       'Th22': {},
+       'Th17': {},
+       'Th1': {}}
+
 #============================ USER INPUT =====================================|||
 
 # SUBSET 1
 print('\n--- Attributes for --- Tfh')
 
-flag = True
+
+flag = True                                             # O 
 while flag:
     strattoamps = input('Enter value for attoamps: ')
     match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
@@ -80,7 +91,7 @@ while flag:
     else:
         flag = False
 Pts['Tfh']['attoamps'] = strattoamps
-print(Pts['Th1'])                   #===========================|
+print(Pts['Tfh'])                   #===========================|
 
 flag = True
 while flag:
@@ -135,8 +146,11 @@ while flag:
     else:
         flag = False
 Pts['Tfh']['Plasticity'] = strPlasticity
-print(Pts['Tfh'])                   #===========================|
+# print(Pts['Tfh'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['Tfh']['Units'] = Units
+print(Pts['Tfh'])
 #====================================================================|
 
 
@@ -209,6 +223,9 @@ while flag:
 Pts['Th9']['Plasticity'] = strPlasticity
 print(Pts['Th9'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['Th9']['Units'] = Units
+print(Pts['Th9'])
 #====================================================================|
 
 
@@ -281,6 +298,9 @@ while flag:
 Pts['Th2']['Plasticity'] = strPlasticity
 print(Pts['Th2'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['Th2']['Units'] = Units
+print(Pts['Th2'])
 #====================================================================|
 
 
@@ -353,6 +373,9 @@ while flag:
 Pts['iTreg']['Plasticity'] = strPlasticity
 print(Pts['iTreg'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['iTreg']['Units'] = Units
+print(Pts['iTreg'])
 #====================================================================|
 
 
@@ -425,6 +448,9 @@ while flag:
 Pts['Tr1']['Plasticity'] = strPlasticity
 print(Pts['Tr1'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['Tr1']['Units'] = Units
+print(Pts['Tr1'])
 #====================================================================|
 
 
@@ -497,6 +523,9 @@ while flag:
 Pts['Th22']['Plasticity'] = strPlasticity
 print(Pts['Th22'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['Th22']['Units'] = Units
+print(Pts['Th22'])
 #====================================================================|
 
 
@@ -569,6 +598,9 @@ while flag:
 Pts['Th17']['Plasticity'] = strPlasticity
 print(Pts['Th17'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['Th17']['Units'] = Units
+print(Pts['Th17'])
 #====================================================================|
 
 
@@ -641,8 +673,13 @@ while flag:
 Pts['Th1']['Plasticity'] = strPlasticity
 print(Pts['Th1'])                   #===========================|
 
+Units = input('Enter \'continuous\' or \'disrete\' ')
+Pts['Th1']['Units'] = Units
+print(Pts['Th1'])
 #============================= END USER INPUT ==============================|||
-'''
+
+
+
 
 
 for p_id, p_info in Pts.items():
@@ -651,21 +688,23 @@ for p_id, p_info in Pts.items():
         print(key + ':', p_info[key])
 
 
-print('\n\n')
+print('\n')
 # print('Pts ------------------- > > > ')
 # print(Pts)                                            # ok
-print('\n\n')
+print('\n')
 
-min_attributes= {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4} # ARBITRARY ASMTs
+min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4} # ARBITRARY ASMTs
 max_attoamps = 100                                     # for setting up bounds. See 12 lines below.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
   # inc higher-order non-quadratic models.
-quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"   # an f-string. '{Pt}'..
+quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"               # an f-string. '{Pt}'..
                                                         # ..will be replaced by a value.
     else dimod.Integer(f"{Pt}")
-              for Pt in Pts.keys()]                     # key = eg amps : value = 2
+    for Pt in Pts.keys()]                     # key = eg amps : value = 2
 
+
+print('\n')
 '''
 # test
 print("\n(Simply showing ex of a lin bias) ")
@@ -675,8 +714,6 @@ print(2*quantities[0])                                  # Now dbl lin bias
 #print(quantities[0] * quantities[1])       #Now a quadratic bias. # ValueError: REAL variables
                                                         # (e.g. 'Tfh') cannot have interactions
 '''
-
-print('\n')
 
 for ind, Pt in enumerate(Pts.keys()):
     # ub = max_attoamps / Pts[Pt]['attoamps']       # O
