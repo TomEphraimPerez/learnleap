@@ -1,7 +1,15 @@
                         # PLASTICITY of CD4+T to "The Big-8"  Optimization -
                             # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
                             # attributes to the BIG-8: AED + plasticity, current, expression.
-                            
+
+
+'''
+TEST ONLY       TEST ONLY           TEST ONLY           TEST ONLY           TEST ONLY         TEST ONLY 
+ TEST ONLY       TEST ONLY           TEST ONLY           TEST ONLY           TEST ONLY         TEST ONLY 
+  TEST ONLY       TEST ONLY           TEST ONLY           TEST ONLY           TEST ONLY         TEST ONLY 
+'''
+
+
 # This app'is a CQM solver problem on a simple mixed-integer linear-programming, (MILP) type of optimization.
 # This quantum application is an adaptation from DWaveSys quantum code from:
  # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
@@ -66,7 +74,6 @@ Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation'
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
 '''
 
-
                                                         # INITIALIZE >>>
 Pts = {'Tfh': {},
        'Th9': {},
@@ -78,42 +85,43 @@ Pts = {'Tfh': {},
        'Th1': {}}
 
 
+
 #============================ USER INPUT =====================================|||
 # SUBSET 1
 print('\n--- Attributes for --- Tfh')
 
-flag = True                                             # O 
+flag = True                                             # O
 while flag:
-    strattoamps = input('Enter value for attoamps: ')
-    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strattoamps)
+    strattoamps = input('Enter a float for attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
     else:
         flag = False
-Pts['Tfh']['attoamps'] = strattoamps
-print(Pts['Tfh'])                   #===========================|
+strattoamps1 = float(strattoamps)
+print(strattoamps1)                   #===========================|
 
 flag = True
 while flag:
     strACTivation = input('Enter value for ACTivation: ')
-    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strACTivation)
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
     else:
         flag = False
-Pts['Tfh']['ACTivation'] = strACTivation
-print(Pts['Tfh'])                   #===========================|
+strACTivation1 = float(strACTivation)
+print(strACTivation1)                        #===========================|
 
 flag = True
 while flag:
     strEXPansion = input('Enter value for EXPansion: ')
-    match_val = re.match("[-+]?\\d+([/.]\\d+)?$", strEXPansion)
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
     else:
         flag = False
-Pts['Tfh']['EXPansion'] = strEXPansion
-print(Pts['Tfh'])                   #===========================|
+strEXPansion1 = float(strEXPansion)
+print(strEXPansion1)                   #===========================|
 
 flag = True
 while flag:
@@ -226,6 +234,7 @@ print(Pts['Th9'])                   #===========================|
 Units = input('Enter \'continuous\' or \'disrete\' ')
 Pts['Th9']['Units'] = Units
 print(Pts['Th9'])
+
 #====================================================================|
 
 
@@ -378,7 +387,7 @@ Pts['iTreg']['Units'] = Units
 print(Pts['iTreg'])
 #====================================================================|
 
-
+'''
 # SUBSET 5
 print('\n--- Attributes for --- Tr1')
 
@@ -676,6 +685,7 @@ print(Pts['Th1'])                   #===========================|
 Units = input('Enter \'continuous\' or \'disrete\' ')
 Pts['Th1']['Units'] = Units
 print(Pts['Th1'])
+'''
 #============================= END USER INPUT ==============================|||
 
 
@@ -698,6 +708,28 @@ quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"           
                                                         # ..will be replaced by a value.
     else dimod.Integer(f"{Pt}")
     for Pt in Pts.keys()]                     # key = eg amps : value = 2
+
+
+
+
+
+
+
+
+                                    # R/R values fr above quesies >>>
+Pts = {'Tfh': {'attoamps': strattoamps1, 'ACTivation': strACTivation, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Th9': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'Th2': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
+        'iTreg': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
+
+
+
+
+
 
 
 print('\n')
