@@ -52,7 +52,8 @@ print(2*quantities[0])              # Now dbl lin bias
 '''
                         # (e.g. 'rice') cannot have interactions
 for ind, food in enumerate(foods.keys()):
-    ub = max_calories / foods[food]["Calories"]         # upper bnd is 20 portions, 2000/100 for rice below
+    # ub = max_calories / int(foods[food]["Calories"])      # O. Both versions (this and line below) OK.
+    ub = max_calories / int(foods[food]["Calories"])         # upper bnd is 20 portions, 2000/100 for rice below
     quantities[ind].set_upper_bound(food, ub)
 
 qub = quantities[0].upper_bound("rice")			        # quantity ub fro rice
