@@ -47,7 +47,8 @@ print('\n\n')
 
 
 '''
-                                                        # INITIALIZE >>>
+                # INITIALIZE >>>   THIS WORKS !     USER I/P DOES  NOT WORK !!
+                
 Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
         'Th9': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
@@ -66,7 +67,7 @@ Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation'
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
 '''
 
-
+'''
                                                         # INITIALIZE >>>
 Pts = {'Tfh': {},
        'Th9': {},
@@ -76,6 +77,96 @@ Pts = {'Tfh': {},
        'Th22': {},
        'Th17': {},
        'Th1': {}}
+'''
+strattoamps1 = 0
+strACTivation1 = 0
+strEXPansion1 = 0
+strDIFFerentiation1 = 0
+strExpression1 = 0
+strPlasticity1 = 0
+Units1 = 'continuous'
+
+strattoamps2 = 0
+strACTivation2 = 0
+strEXPansion2 = 0
+strDIFFerentiation2 = 0
+strExpression2 = 0
+strPlasticity2 = 0
+Units2 = 'continuous'
+
+strattoamps3 = 0
+strACTivation3 = 0
+strEXPansion3 = 0
+strDIFFerentiation3 = 0
+strExpression3 = 0
+strPlasticity3 = 0
+Units3 = 'continuous'
+
+strattoamps4 = 0
+strACTivation4 = 0
+strEXPansion4 = 0
+strDIFFerentiation4 = 0
+strExpression4 = 0
+strPlasticity4 = 0
+Units4 = 'continuous'
+
+strattoamps5 = 0
+strACTivation5 = 0
+strEXPansion5 = 0
+strDIFFerentiation5 = 0
+strExpression5 = 0
+strPlasticity5 = 0
+Units5 = 'continuous'
+
+strattoamps6 = 0
+strACTivation6 = 0
+strEXPansion6 = 0
+strDIFFerentiation6 = 0
+strExpression6 = 0
+strPlasticity6 = 0
+Units6 = 'continuous'
+
+strattoamps7 = 0
+strACTivation7 = 0
+strEXPansion7 = 0
+strDIFFerentiation7 = 0
+strExpression7 = 0
+strPlasticity7 = 0
+Units7 = 'continuous'
+
+strattoamps8 = 0
+strACTivation8 = 0
+strEXPansion8 = 0
+strDIFFerentiation8 = 0
+strExpression8 = 0
+strPlasticity8 = 0
+Units8 = 'continuous'
+
+
+Pts = {'Tfh': {'attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1, 'DIFFerentiation': strDIFFerentiation1,
+                    'Expression': strExpression1, 'Plasticity': strPlasticity1, 'Units': Units1},
+
+        'Th9': {'attoamps': strattoamps2, 'ACTivation': strACTivation2, 'EXPansion': strEXPansion2, 'DIFFerentiation': strDIFFerentiation2,
+                    'Expression': strExpression2, 'Plasticity': strPlasticity2, 'Units': Units2},
+
+        'Th2': {'attoamps': strattoamps3, 'ACTivation': strACTivation3, 'EXPansion': strEXPansion3, 'DIFFerentiation': strDIFFerentiation3,
+                    'Expression': strExpression3, 'Plasticity': strPlasticity3, 'Units': Units3},
+
+        'iTreg': {'attoamps': strattoamps4, 'ACTivation': strACTivation4, 'EXPansion': strEXPansion4, 'DIFFerentiation': strDIFFerentiation4,
+                    'Expression': strExpression4, 'Plasticity': strPlasticity4, 'Units': Units4},
+
+        'Tr1': {'attoamps': strattoamps5, 'ACTivation': strACTivation5, 'EXPansion': strEXPansion5, 'DIFFerentiation': strDIFFerentiation5,
+                    'Expression': strExpression5, 'Plasticity': strPlasticity5, 'Units': Units5},
+
+        'Th22': {'attoamps': strattoamps6, 'ACTivation': strACTivation6, 'EXPansion': strEXPansion6, 'DIFFerentiation': strDIFFerentiation6,
+                    'Expression': strExpression6, 'Plasticity': strPlasticity6, 'Units': Units6},
+
+        'Th17': {'attoamps': strattoamps7, 'ACTivation': strACTivation7, 'EXPansion': strEXPansion7, 'DIFFerentiation': strDIFFerentiation7,
+                    'Expression': strExpression7, 'Plasticity': strPlasticity7, 'Units': Units7},
+
+        'Th1': {'attoamps': strattoamps8, 'ACTivation': strACTivation8, 'EXPansion': strEXPansion8, 'DIFFerentiation': strDIFFerentiation8,
+                    'Expression': strExpression8, 'Plasticity': strPlasticity8, 'Units': Units8}}
+
 
 
 #============================ USER INPUT =====================================|||
@@ -734,9 +825,9 @@ print(2*quantities[0])                                  # Now dbl lin bias
 '''
 
 for ind, Pt in enumerate(Pts.keys()):
-  # ub = max_attoamps / Pts[Pt]['attoamps']       # O
-    ub = max_attoamps / int(Pts[Pt]['attoamps'])    # ? cast <- stkover
-    # print('\n\t\t\tUB = ', ub)                    # --->>. 100 :)
+    ub = max_attoamps / Pts[Pt]['attoamps']       # O
+    # ub = max_attoamps / int(Pts[Pt]['attoamps'])    # ? cast <- stkover
+    print('\t\t\tUB = ', ub)                    # --->>. 100 :)
     quantities[ind].set_upper_bound(Pt, ub)
 
 qub = quantities[0].upper_bound("Tfh")	# quantity ub fro Tfh=X, Th1=X, Th22=X, Th17=X,
@@ -750,12 +841,12 @@ cqm = dimod.ConstrainedQuadraticModel()			    # NOT arbitrarily set alpha=2 beta
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
   # such as ACTivation;
 def total_mix(quantity, category):
-    return sum(q * c for q, c in zip(quantity, (foods[food][category] for food in foods.keys()) ) )
+    return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for food in Pts.keys()) ) )
     # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
 
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
    # is multiplied by -1 and minimized.
-cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 6 * total_mix(quantities, "Plasticity"))
+cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 6 * total_mix(quantities, "Plasticity"))#NEED '-tot'
 
 # TUNING/Constraints
 # Constrain the Thelp’s MAXIMUM current i.
@@ -790,8 +881,7 @@ accommodate even very large problems.
 Ocean software’s dwave-system LeapHybridCQMSampler class enables you to easily incorporate Leap’s hybrid
 CQM solvers into your application:
 '''
-# Make certain ur in (ocean) venv
-sampler = LeapHybridCQMSampler()
+# Make certain ur in (ocean) venv sampler = LeapHybridCQMSampler()
 
 
 '''
@@ -845,8 +935,6 @@ The result is the same : )
         #	OBJective = alpha(obj_1) + beta(obj_1). eg alpha can = 2, beta can = 1,
 	    #	ie you double the priority of the first objective compared to the second.
 '''
-
-
 
 #Consider sampling each part of the combined objective ON ITS OWN (alpha=0, beta=1 and vv)
 	# and comparing the best solutions.
