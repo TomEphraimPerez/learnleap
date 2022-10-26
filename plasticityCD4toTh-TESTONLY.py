@@ -8,7 +8,9 @@
 
 
 import dimod as dimod  # thx red lightbulb
-from dwave.system import LeapHybridCQMSampler  # o
+from dwave.system import LeapHybridCQMSampler         #o
+# from dimod.core import sampler
+# from dwave.system import LeapHybridCQMSampler         #o
 import re
 
 # solver has options. [See the solve-by sampling section toward the end ††]
@@ -48,7 +50,7 @@ print('\n\n')
 
 
 '''
-                # INITIALIZE >>>   THIS WORKS !         USER I/P DOES  NOT WORK !!
+                # INITIALIZE >>>   THIS WORKS !     USER I/P DOES  NOT WORK !!
 
 Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
@@ -68,6 +70,9 @@ Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation'
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
 '''
 
+
+
+
 '''
                                                         # INITIALIZE >>>
 Pts = {'Tfh': {},
@@ -79,6 +84,9 @@ Pts = {'Tfh': {},
        'Th17': {},
        'Th1': {}}
 '''
+
+
+
 
 strattoamps1 = 0
 strACTivation1 = 0
@@ -141,40 +149,33 @@ strACTivation8 = 0
 strEXPansion8 = 0
 strDIFFerentiation8 = 0
 strExpression8 = 0
-strPlasticity8 = 99
+strPlasticity8 = 0
 Units8 = 'continuous'
 
 Pts = {'Tfh': {'attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
-               'DIFFerentiation': strDIFFerentiation1,
-               'Expression': strExpression1, 'Plasticity': strPlasticity1, 'Units': Units1},
-
+               'DIFFerentiation': strDIFFerentiation1, 'Expression': strExpression1, 'Plasticity': strPlasticity1,
+               'Units': Units1},
        'Th9': {'attoamps': strattoamps2, 'ACTivation': strACTivation2, 'EXPansion': strEXPansion2,
-               'DIFFerentiation': strDIFFerentiation2,
-               'Expression': strExpression2, 'Plasticity': strPlasticity2, 'Units': Units2},
-
+               'DIFFerentiation': strDIFFerentiation2, 'Expression': strExpression2, 'Plasticity': strPlasticity2,
+               'Units': Units2},
        'Th2': {'attoamps': strattoamps3, 'ACTivation': strACTivation3, 'EXPansion': strEXPansion3,
-               'DIFFerentiation': strDIFFerentiation3,
-               'Expression': strExpression3, 'Plasticity': strPlasticity3, 'Units': Units3},
-
+               'DIFFerentiation': strDIFFerentiation3, 'Expression': strExpression3, 'Plasticity': strPlasticity3,
+               'Units': Units3},
        'iTreg': {'attoamps': strattoamps4, 'ACTivation': strACTivation4, 'EXPansion': strEXPansion4,
-                 'DIFFerentiation': strDIFFerentiation4,
-                 'Expression': strExpression4, 'Plasticity': strPlasticity4, 'Units': Units4},
-
+                 'DIFFerentiation': strDIFFerentiation4, 'Expression': strExpression4, 'Plasticity': strPlasticity4,
+                 'Units': Units4},
        'Tr1': {'attoamps': strattoamps5, 'ACTivation': strACTivation5, 'EXPansion': strEXPansion5,
-               'DIFFerentiation': strDIFFerentiation5,
-               'Expression': strExpression5, 'Plasticity': strPlasticity5, 'Units': Units5},
-
+               'DIFFerentiation': strDIFFerentiation5, 'Expression': strExpression5, 'Plasticity': strPlasticity5,
+               'Units': Units5},
        'Th22': {'attoamps': strattoamps6, 'ACTivation': strACTivation6, 'EXPansion': strEXPansion6,
-                'DIFFerentiation': strDIFFerentiation6,
-                'Expression': strExpression6, 'Plasticity': strPlasticity6, 'Units': Units6},
-
+                'DIFFerentiation': strDIFFerentiation6, 'Expression': strExpression6, 'Plasticity': strPlasticity6,
+                'Units': Units6},
        'Th17': {'attoamps': strattoamps7, 'ACTivation': strACTivation7, 'EXPansion': strEXPansion7,
-                'DIFFerentiation': strDIFFerentiation7,
-                'Expression': strExpression7, 'Plasticity': strPlasticity7, 'Units': Units7},
-
+                'DIFFerentiation': strDIFFerentiation7, 'Expression': strExpression7, 'Plasticity': strPlasticity7,
+                'Units': Units7},
        'Th1': {'attoamps': strattoamps8, 'ACTivation': strACTivation8, 'EXPansion': strEXPansion8,
-               'DIFFerentiation': strDIFFerentiation8,
-               'Expression': strExpression8, 'Plasticity': strPlasticity8, 'Units': Units8}}
+               'DIFFerentiation': strDIFFerentiation8, 'Expression': strExpression8, 'Plasticity': strPlasticity8,
+               'Units': Units8}}
 
 # ============================ USER INPUT =====================================|||
 # SUBSET 1
@@ -553,7 +554,7 @@ print('\n--- Attributes for --- Tr22')
 flag = True  # O
 while flag:
     strattoamps = input('Enter a float for attoamps: ')
-    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
     else:
@@ -770,36 +771,32 @@ print('You entered', Units8)  # ===========================|
 
 
 Pts = {'Tfh': {'attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
-               'DIFFerentiation': strDIFFerentiation1,
-               'Expression': strExpression1, 'Plasticity': strPlasticity1, 'Units': Units1},
-
+               'DIFFerentiation': strDIFFerentiation1, 'Expression': strExpression1, 'Plasticity': strPlasticity1,
+               'Units': Units1},
        'Th9': {'attoamps': strattoamps2, 'ACTivation': strACTivation2, 'EXPansion': strEXPansion2,
-               'DIFFerentiation': strDIFFerentiation2,
-               'Expression': strExpression2, 'Plasticity': strPlasticity2, 'Units': Units2},
-
+               'DIFFerentiation': strDIFFerentiation2, 'Expression': strExpression2, 'Plasticity': strPlasticity2,
+               'Units': Units2},
        'Th2': {'attoamps': strattoamps3, 'ACTivation': strACTivation3, 'EXPansion': strEXPansion3,
-               'DIFFerentiation': strDIFFerentiation3,
-               'Expression': strExpression3, 'Plasticity': strPlasticity3, 'Units': Units3},
-
+               'DIFFerentiation': strDIFFerentiation3, 'Expression': strExpression3, 'Plasticity': strPlasticity3,
+               'Units': Units3},
        'iTreg': {'attoamps': strattoamps4, 'ACTivation': strACTivation4, 'EXPansion': strEXPansion4,
-                 'DIFFerentiation': strDIFFerentiation4,
-                 'Expression': strExpression4, 'Plasticity': strPlasticity4, 'Units': Units4},
-
+                 'DIFFerentiation': strDIFFerentiation4, 'Expression': strExpression4, 'Plasticity': strPlasticity4,
+                 'Units': Units4},
        'Tr1': {'attoamps': strattoamps5, 'ACTivation': strACTivation5, 'EXPansion': strEXPansion5,
-               'DIFFerentiation': strDIFFerentiation5,
-               'Expression': strExpression5, 'Plasticity': strPlasticity5, 'Units': Units5},
-
+               'DIFFerentiation': strDIFFerentiation5, 'Expression': strExpression5, 'Plasticity': strPlasticity5,
+               'Units': Units5},
        'Th22': {'attoamps': strattoamps6, 'ACTivation': strACTivation6, 'EXPansion': strEXPansion6,
-                'DIFFerentiation': strDIFFerentiation6,
-                'Expression': strExpression6, 'Plasticity': strPlasticity6, 'Units': Units6},
-
+                'DIFFerentiation': strDIFFerentiation6, 'Expression': strExpression6, 'Plasticity': strPlasticity6,
+                'Units': Units6},
        'Th17': {'attoamps': strattoamps7, 'ACTivation': strACTivation7, 'EXPansion': strEXPansion7,
-                'DIFFerentiation': strDIFFerentiation7,
-                'Expression': strExpression7, 'Plasticity': strPlasticity7, 'Units': Units7},
-
+                'DIFFerentiation': strDIFFerentiation7, 'Expression': strExpression7, 'Plasticity': strPlasticity7,
+                'Units': Units7},
        'Th1': {'attoamps': strattoamps8, 'ACTivation': strACTivation8, 'EXPansion': strEXPansion8,
-               'DIFFerentiation': strDIFFerentiation8,
-               'Expression': strExpression8, 'Plasticity': strPlasticity8, 'Units': Units8}}
+               'DIFFerentiation': strDIFFerentiation8, 'Expression': strExpression8, 'Plasticity': strPlasticity8,
+               'Units': Units8}}
+
+
+
 
 for p_id, p_info in Pts.items():
     print("\nNEW VALUES: ", p_id)
@@ -809,6 +806,7 @@ for p_id, p_info in Pts.items():
 print('\n')
 print('Pts ------------------- > > > ')
 print(Pts)  # ok
+
 print('\n')
 
 min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY ASMTs
@@ -834,13 +832,13 @@ print(2*quantities[0])                                  # Now dbl lin bias
 '''
 
 for ind, Pt in enumerate(Pts.keys()):
-    ub = max_attoamps / Pts[Pt]['attoamps']  # O
-    # ub = max_attoamps / int(Pts[Pt]['attoamps'])    # ? cast <- stkover
-    print('\t\t\tUB = ', ub)  # --->>. 100 :)
+    ub = max_attoamps / Pts[Pt]['attoamps']         # O
+    # ub = max_attoamps / int(Pts[Pt]['attoamps']) #still TypeEr: unsupported operand type(s) for /: int & str
+    # print('\t\t\tUB = ', ub)  # --->>. 100 :)
     quantities[ind].set_upper_bound(Pt, ub)
 
 qub = quantities[0].upper_bound("Tfh")  # quantity ub fro Tfh=X, Th1=X, Th22=X, Th17=X,
-print('\nquantities[0].ub (upper bound) is: ', qub)  # -> 20.0
+print('\nquantities[0].ub (upper bound) is: ', qub)
 print('\n\n')
 
 # setup the OBJective Fn w a UTILity Fn             # OBJECTIVE Fn     <<<
@@ -892,7 +890,7 @@ Ocean software’s dwave-system LeapHybridCQMSampler class enables you to easily
 CQM solvers into your application:
 '''
 # Make certain ur in (ocean) venv sampler = LeapHybridCQMSampler()
-
+sampler = LeapHybridCQMSampler()
 
 '''
 Submit the CQM to the selected solver. For one particular execution, the CQM hybrid sampler returned 
@@ -938,16 +936,16 @@ The result is the same : )
 
 '''
 # TUNING THE SOLUTION
-    # # TUNING THE SOLUTION !
+	# # TUNING THE SOLUTION !
 # RECALL; Objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing purchase Plasticity.
-    # So re min Plasticity, Plasticity_min  = min SUMMA_i (qty_i * Plasticity_i)
-    #	            DIFFerentiation_max  = max SUMMA_i (qty_i * DIFFerentiation_i)
+	# So re min Plasticity, Plasticity_min  = min SUMMA_i (qty_i * Plasticity_i)
+	#	            DIFFerentiation_max  = max SUMMA_i (qty_i * DIFFerentiation_i)
 
-    # To optimize two different objectives, DIFFerentiation and Plasticity, requires weighing one AGAINST the other.
+	# To optimize two different objectives, DIFFerentiation and Plasticity, requires weighing one AGAINST the other.
 
-     # A simple way to do this, is to set priority weights; for example,
+ 	# A simple way to do this, is to set priority weights; for example,
         #	OBJective = alpha(obj_1) + beta(obj_1). eg alpha can = 2, beta can = 1,
-        #	ie you double the priority of the first objective compared to the second.
+	    #	ie you double the priority of the first objective compared to the second.
 '''
 
 # Consider sampling each part of the combined objective ON ITS OWN (alpha=0, beta=1 and vv)
