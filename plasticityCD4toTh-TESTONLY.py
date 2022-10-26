@@ -44,29 +44,29 @@ print('\tdocumented experimentation and results. This author is OPEN to suggesti
 print('\n\n')
 
 # Self notes:
-# attribute = ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
+# attribute = ['Attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
 # Pts dict of Pts' Pts.
-# attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, attoamps = 10^-18a.
+# Attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, Attoamps = 10^-18a.
 
 
 '''
                 # INITIALIZE >>>   THIS WORKS !     USER I/P DOES  NOT WORK !!
 
-Pts = {'Tfh': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+Pts = {'Tfh': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th9': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+        'Th9': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th2': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+        'Th2': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'iTreg': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+        'iTreg': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Tr1': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+        'Tr1': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th22': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+        'Th22': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th17': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+        'Th17': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th1': {'attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
+        'Th1': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
                     'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
 '''
 
@@ -152,28 +152,28 @@ strExpression8 = 0
 strPlasticity8 = 0
 Units8 = 'continuous'
 
-Pts = {'Tfh': {'attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
+Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
                'DIFFerentiation': strDIFFerentiation1, 'Expression': strExpression1, 'Plasticity': strPlasticity1,
                'Units': Units1},
-       'Th9': {'attoamps': strattoamps2, 'ACTivation': strACTivation2, 'EXPansion': strEXPansion2,
+       'Th9': {'Attoamps': strattoamps2, 'ACTivation': strACTivation2, 'EXPansion': strEXPansion2,
                'DIFFerentiation': strDIFFerentiation2, 'Expression': strExpression2, 'Plasticity': strPlasticity2,
                'Units': Units2},
-       'Th2': {'attoamps': strattoamps3, 'ACTivation': strACTivation3, 'EXPansion': strEXPansion3,
+       'Th2': {'Attoamps': strattoamps3, 'ACTivation': strACTivation3, 'EXPansion': strEXPansion3,
                'DIFFerentiation': strDIFFerentiation3, 'Expression': strExpression3, 'Plasticity': strPlasticity3,
                'Units': Units3},
-       'iTreg': {'attoamps': strattoamps4, 'ACTivation': strACTivation4, 'EXPansion': strEXPansion4,
+       'iTreg': {'Attoamps': strattoamps4, 'ACTivation': strACTivation4, 'EXPansion': strEXPansion4,
                  'DIFFerentiation': strDIFFerentiation4, 'Expression': strExpression4, 'Plasticity': strPlasticity4,
                  'Units': Units4},
-       'Tr1': {'attoamps': strattoamps5, 'ACTivation': strACTivation5, 'EXPansion': strEXPansion5,
+       'Tr1': {'Attoamps': strattoamps5, 'ACTivation': strACTivation5, 'EXPansion': strEXPansion5,
                'DIFFerentiation': strDIFFerentiation5, 'Expression': strExpression5, 'Plasticity': strPlasticity5,
                'Units': Units5},
-       'Th22': {'attoamps': strattoamps6, 'ACTivation': strACTivation6, 'EXPansion': strEXPansion6,
+       'Th22': {'Attoamps': strattoamps6, 'ACTivation': strACTivation6, 'EXPansion': strEXPansion6,
                 'DIFFerentiation': strDIFFerentiation6, 'Expression': strExpression6, 'Plasticity': strPlasticity6,
                 'Units': Units6},
-       'Th17': {'attoamps': strattoamps7, 'ACTivation': strACTivation7, 'EXPansion': strEXPansion7,
+       'Th17': {'Attoamps': strattoamps7, 'ACTivation': strACTivation7, 'EXPansion': strEXPansion7,
                 'DIFFerentiation': strDIFFerentiation7, 'Expression': strExpression7, 'Plasticity': strPlasticity7,
                 'Units': Units7},
-       'Th1': {'attoamps': strattoamps8, 'ACTivation': strACTivation8, 'EXPansion': strEXPansion8,
+       'Th1': {'Attoamps': strattoamps8, 'ACTivation': strACTivation8, 'EXPansion': strEXPansion8,
                'DIFFerentiation': strDIFFerentiation8, 'Expression': strExpression8, 'Plasticity': strPlasticity8,
                'Units': Units8}}
 
@@ -183,7 +183,7 @@ print('\n--- Attributes for --- Tfh')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -257,7 +257,7 @@ print('\n--- Attributes for --- Th9')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -331,7 +331,7 @@ print('\n--- Attributes for --- Th2')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -405,7 +405,7 @@ print('\n--- Attributes for --- iTreg')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -479,7 +479,7 @@ print('\n--- Attributes for --- Tr1')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -553,7 +553,7 @@ print('\n--- Attributes for --- Tr22')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -627,7 +627,7 @@ print('\n--- Attributes for --- Th17')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -701,7 +701,7 @@ print('\n--- Attributes for --- Th1')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a float for attoamps: ')
+    strattoamps = input('Enter a float for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None:
         print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -770,28 +770,28 @@ print('You entered', Units8)  # ===========================|
 # ============================= END USER INPUT ==============================|||
 
 
-Pts = {'Tfh': {'attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
+Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
                'DIFFerentiation': strDIFFerentiation1, 'Expression': strExpression1, 'Plasticity': strPlasticity1,
                'Units': Units1},
-       'Th9': {'attoamps': strattoamps2, 'ACTivation': strACTivation2, 'EXPansion': strEXPansion2,
+       'Th9': {'Attoamps': strattoamps2, 'ACTivation': strACTivation2, 'EXPansion': strEXPansion2,
                'DIFFerentiation': strDIFFerentiation2, 'Expression': strExpression2, 'Plasticity': strPlasticity2,
                'Units': Units2},
-       'Th2': {'attoamps': strattoamps3, 'ACTivation': strACTivation3, 'EXPansion': strEXPansion3,
+       'Th2': {'Attoamps': strattoamps3, 'ACTivation': strACTivation3, 'EXPansion': strEXPansion3,
                'DIFFerentiation': strDIFFerentiation3, 'Expression': strExpression3, 'Plasticity': strPlasticity3,
                'Units': Units3},
-       'iTreg': {'attoamps': strattoamps4, 'ACTivation': strACTivation4, 'EXPansion': strEXPansion4,
+       'iTreg': {'Attoamps': strattoamps4, 'ACTivation': strACTivation4, 'EXPansion': strEXPansion4,
                  'DIFFerentiation': strDIFFerentiation4, 'Expression': strExpression4, 'Plasticity': strPlasticity4,
                  'Units': Units4},
-       'Tr1': {'attoamps': strattoamps5, 'ACTivation': strACTivation5, 'EXPansion': strEXPansion5,
+       'Tr1': {'Attoamps': strattoamps5, 'ACTivation': strACTivation5, 'EXPansion': strEXPansion5,
                'DIFFerentiation': strDIFFerentiation5, 'Expression': strExpression5, 'Plasticity': strPlasticity5,
                'Units': Units5},
-       'Th22': {'attoamps': strattoamps6, 'ACTivation': strACTivation6, 'EXPansion': strEXPansion6,
+       'Th22': {'Attoamps': strattoamps6, 'ACTivation': strACTivation6, 'EXPansion': strEXPansion6,
                 'DIFFerentiation': strDIFFerentiation6, 'Expression': strExpression6, 'Plasticity': strPlasticity6,
                 'Units': Units6},
-       'Th17': {'attoamps': strattoamps7, 'ACTivation': strACTivation7, 'EXPansion': strEXPansion7,
+       'Th17': {'Attoamps': strattoamps7, 'ACTivation': strACTivation7, 'EXPansion': strEXPansion7,
                 'DIFFerentiation': strDIFFerentiation7, 'Expression': strExpression7, 'Plasticity': strPlasticity7,
                 'Units': Units7},
-       'Th1': {'attoamps': strattoamps8, 'ACTivation': strACTivation8, 'EXPansion': strEXPansion8,
+       'Th1': {'Attoamps': strattoamps8, 'ACTivation': strACTivation8, 'EXPansion': strEXPansion8,
                'DIFFerentiation': strDIFFerentiation8, 'Expression': strExpression8, 'Plasticity': strPlasticity8,
                'Units': Units8}}
 
@@ -832,8 +832,8 @@ print(2*quantities[0])                                  # Now dbl lin bias
 '''
 
 for ind, Pt in enumerate(Pts.keys()):
-    ub = max_attoamps / Pts[Pt]['attoamps']         # O
-    # ub = max_attoamps / int(Pts[Pt]['attoamps']) #still TypeEr: unsupported operand type(s) for /: int & str
+    ub = max_attoamps / Pts[Pt]['Attoamps']         # O
+    # ub = max_attoamps / int(Pts[Pt]['Attoamps']) #still TypeEr: unsupported operand type(s) for /: int & str
     # print('\t\t\tUB = ', ub)  # --->>. 100 :)
     quantities[ind].set_upper_bound(Pt, ub)
 
@@ -849,7 +849,7 @@ cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
 # such as ACTivation;
 def total_mix(quantity, category):
-    return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for food in Pts.keys())))
+    return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for Pt in Pts.keys())))
     # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
 
 
@@ -859,7 +859,7 @@ cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 6 * total_mix(quan
 
 # TUNING/Constraints
 # Constrain the Thelp’s MAXIMUM current i.
-cqm.add_constraint(total_mix(quantities, "attoamps") <= max_attoamps, label="attoamps")  # rtn 'attoamps'
+cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Attoamps")  # rtn 'Attoamps'
 
 # Require that the nominal MINIMUM of each Th attribute is met or exceeded.
 # THIS SHOULD BE USER DEFINED AS WELL.
@@ -872,9 +872,9 @@ for attribute, amount in min_attributes.items():  # Items() is a BI.  # Note: 'M
 
 # You can access these constraints as a dict with the labels as keys:
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys())  # @overld. __def__ init(self). @ is polymorph.
-# list(cqm.constraints.keys())              # ['attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
+# list(cqm.constraints.keys())              # ['Attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
-print('attoamps(has max) constraints (as polystr):', cqm.constraints['attoamps'].to_polystring())  # hates attoamps
+print('Attoamps(has max) constraints (as polystr):', cqm.constraints['Attoamps'].to_polystring())  # hates Attoamps
 # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
 print('Expression constraints (as polystr):', cqm.constraints['Expression'].to_polystring())
 # 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv
@@ -926,7 +926,7 @@ print_Thelpers(best)
 Thelp: {'Th22': 1.0, 'Th2': 6.0, 'Tr1': 4.1, 'iTreg': 0.3, 'Tfh': 0.0, 'Th9': 0.0}
 Total DIFFerentiation of 86.56 at Plasticity 9.46
 ACTivation (nominal: 2000): 5
-attoamps (nominal: 50): 50
+Attoamps (nominal: 50): 50
 ACTivation (nominal: 30): 42
 EXPansion (nominal: 130): 372
 DIFFerentiation (nominal: 30): 46
@@ -966,7 +966,7 @@ print_Thelpers(best_DIFFerentiation.sample)
 Thelp: {'Th22': 0.0, 'Th2': 17.0, 'Tr1': 0.0, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 3.3}
 Total DIFFerentiation of 6 at Plasticity 3.1 rounded off:
     ACTivation (nominal: 4): 2
-    attoamps (nominal: 2): 0.1
+    Attoamps (nominal: 2): 0.1
     ACTivation (nominal: 6): 3
     EXPansion (nominal: 3): 2
     DIFFerentiation (nominal: 5): 2
@@ -989,7 +989,7 @@ print('\n\n')
 Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
 Total DIFFerentiation of 7 at Plasticity 3.3
     ACTivation (nominal: 4): 3
-    attoamps (nominal: 2): 0.2
+    Attoamps (nominal: 2): 0.2
     ACTivation (nominal: 6): 4
     EXPansion (nominal: 3): 1
     DIFFerentiation (nominal: 5): 3

@@ -846,7 +846,7 @@ cqm = dimod.ConstrainedQuadraticModel()			    # NOT arbitrarily set alpha=2 beta
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
   # such as ACTivation;
 def total_mix(quantity, category):
-    return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for food in Pts.keys()) ) )
+    return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for Pt in Pts.keys()) ) )
     # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
 
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
