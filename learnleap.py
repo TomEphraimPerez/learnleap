@@ -66,7 +66,7 @@ cqm = dimod.ConstrainedQuadraticModel()			        # NOT arbitrarily set alpha=2 
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
   # such as calories;
 def total_mix(quantity, category):
-    return sum(q * c for q, c in zip(quantity, (foods[food][category] for food in foods.keys()) ) )
+    return sum(q * c for q, c in zip(quantity, (foods[food][category] for food in foods.keys() )) )
     # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
 
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize taste, Taste

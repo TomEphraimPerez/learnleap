@@ -1,11 +1,41 @@
-                            # PLASTICITY of CD4+T to "The Big-8"  Optimization -
-                            # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
-                            # attributes to the BIG-8: AED + plasticity, current, expression.
 
+                            # CD4+ T-help Cell Fate Optimization Using the D-WaveSys QPU
+
+
+                            # PLASTICITY of CD4+T to "The Big-8"  Optimization -
 # This app'is a CQM solver problem on a simple mixed-integer linear-programming, (MILP) type of optimization.
 # This quantum application is an adaptation from DWaveSys quantum code from:
 # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
+                            # https://github.com/TomEphraimPerez/learnleap
+                            # Inspiration:
+                            # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4207042/
+                            # ( https://github.com/orgs/dwave-examples/repositories?type=all )
+# Bloch † notation: https://medium.com/quantum-untangled/visualizing-quantum-logic-gates-part-1-515bb7b58916
+# Hamiltonian and Eigenspectrum https://docs.dwavesys.com/docs/latest/c_gs_2.html
+# Re: Signal Strength: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6497757/
+# Spin: https://www.st-andrews.ac.uk/physics/quvis/simulations_html5/sims/blochsphere/blochsphere.html
+# † Dirac: https://learn.microsoft.com/en-us/azure/quantum/concepts-dirac-notation
+# D-WaveSys SDK: https://github.com/dwavesystems/dwave-ocean-sdk/tree/master
+# LEAP hybrid Solvers: https://docs.dwavesys.com/docs/latest/doc_leap_hybrid.html
 
+
+# UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
+# UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
+
+# SELF NOTES:   -----------------------------------------------------------|
+# solver has options. [See the solve-by sampling section toward the end ††]
+# For charges - $$$
+# Select a solver
+# sampler = LeapHybridSampler()
+# Submit for solution
+# answer = sampler.sample_qubo(Q)
+# Python 3.9.2
+# $ dwave ping --client qpu
+# $ dwave solvers --list --all
+#-------- End self notes--------------------------------------------------|
+
+                            # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
+                            # attributes to the BIG-8: AED + plasticity, current, expression.
 
 import dimod as dimod
 from dwave.system import LeapHybridCQMSampler           #o
@@ -13,14 +43,7 @@ from dwave.system import LeapHybridCQMSampler           #o
 # from dwave.system import LeapHybridCQMSampler         #o
 import re
 
-# solver has options. [See the solve-by sampling section toward the end ††]
-# For charges - $$$
-# Select a solver
-# sampler = LeapHybridSampler()
-# Submit for solution
-# answer = sampler.sample_qubo(Q)
 
-# Python 3.9.2
 
 print('This is DWaveSys quantum computing CQM solver prob on a simple mixed-integer linear-programming,')
 print('MILP) type of optimization prob.')
@@ -72,7 +95,6 @@ Pts = {'Tfh': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation'
 
 
 
-
 '''
                                                         # RAW INITIALIZE >>>
 Pts = {'Tfh': {},
@@ -86,8 +108,7 @@ Pts = {'Tfh': {},
 '''
 
 
-
-#Declare 8 CD4+ T-help subset attributes for Proteins (Pts) nested dict on next block. There are 8 CD4+ T-help subsets
+#Declare 8 CD4+ T-help subset attributes for Proteins (Pts) nested dict for next Pts{:{::...}}
 strattoamps1 = 0
 strACTivation1 = 0
 strEXPansion1 = 0
@@ -177,10 +198,11 @@ Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansio
                'DIFFerentiation': strDIFFerentiation8, 'Expression': strExpression8, 'Plasticity': strPlasticity8,
                'Units': Units8}}
 
-# Red ball-flags means that those lines were indented LEFT from original code that included REs, regular expressions.
+# (Red ball-flags means that those lines were indented LEFT from original code that included REs, regular expressions)
 # ============================ USER INPUT =====================================|||
 # SUBSET 1
 print('\n--- Attributes for --- Tfh')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -255,6 +277,7 @@ print('You entered', Units1)  # ===========================|
 
 # SUBSET 2
 print('\n--- Attributes for --- Th9')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -329,6 +352,7 @@ print('You entered', Units2)  # ===========================|
 
 # SUBSET 3
 print('\n--- Attributes for --- Th2')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -403,6 +427,7 @@ print('You entered', Units3)  # ===========================|
 
 # SUBSET 4
 print('\n--- Attributes for --- iTreg')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -477,6 +502,7 @@ print('You entered', Units4)  # ===========================|
 
 # SUBSET 5
 print('\n--- Attributes for --- Tr1')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -551,6 +577,7 @@ print('You entered', Units5)  # ===========================|
 
 # SUBSET 6
 print('\n--- Attributes for --- Tr22')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -625,6 +652,7 @@ print('You entered', Units6)  # ===========================|
 
 # SUBSET 7
 print('\n--- Attributes for --- Th17')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -699,6 +727,7 @@ print('You entered', Units7)  # ===========================|
 
 # SUBSET 8
 print('\n--- Attributes for --- Th1')
+print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
@@ -771,73 +800,7 @@ print('You entered', Units8)  # ===========================|
 # ============================= END USER INPUT ==============================|||
 
 
-
-
-'''
-strattoamps1 = 1
-strACTivation1 = 1
-strEXPansion1 = 1
-strDIFFerentiation1 = 1
-strExpression1 = 1
-strPlasticity1 = 1
-Units1 = 'continuous'
-
-strattoamps2 = 1
-strACTivation2 = 1
-strEXPansion2 = 1
-strDIFFerentiation2 = 1
-strExpression2 = 1
-strPlasticity2 = 1
-Units2 = 'continuous'
-
-strattoamps3 = 1
-strACTivation3 = 1
-strEXPansion3 = 1
-strDIFFerentiation3 = 1
-strExpression3 = 1
-strPlasticity3 = 1
-Units3 = 'continuous'
-
-strattoamps4 = 1
-strACTivation4 = 1
-strEXPansion4 = 1
-strDIFFerentiation4 = 1
-strExpression4 = 1
-strPlasticity4 = 1
-Units4 = 'continuous'
-
-strattoamps5 = 1
-strACTivation5 = 1
-strEXPansion5 = 1
-strDIFFerentiation5 = 1
-strExpression5 = 1
-strPlasticity5 = 1
-Units5 = 'continuous'
-
-strattoamps6 = 1
-strACTivation6 = 1
-strEXPansion6 = 1
-strDIFFerentiation6 = 1
-strExpression6 = 1
-strPlasticity6 = 1
-Units6 = 'continuous'
-
-strattoamps7 = 1
-strACTivation7 = 1
-strEXPansion7 = 1
-strDIFFerentiation7 = 1
-strExpression7 = 1
-strPlasticity7 = 1
-Units7 = 'continuous'
-
-strattoamps8 = 1
-strACTivation8 = 1
-strEXPansion8 = 1
-strDIFFerentiation8 = 1
-strExpression8 = 1
-strPlasticity8 = 1
-Units8 = 'continuous'
-'''
+                                        # Updated CD4+ T-help subset attribute values.
 Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
                'DIFFerentiation': strDIFFerentiation1, 'Expression': strExpression1, 'Plasticity': strPlasticity1,
                'Units': Units1},
@@ -865,20 +828,19 @@ Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansio
 
 
 
-
 for p_id, p_info in Pts.items():
     print("\nNEW VALUES: ", p_id)
     for key in p_info:
         print(key + ':', p_info[key])
 
 print('\n')
-print('Pts ------------------- > > > ')
-print(Pts)  # ok
+print('Pts -- unformated --------- > > > ')
+print(Pts)
 
 print('\n')
 
-min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY ASMTs
-max_attoamps = 3  # for setting up bounds. See 12 lines below.
+min_attributes = {"Expression": 4, "ACTivation": 5, "EXPansion": 4, "DIFFerentiation": 5}  # ARBITRARY ASMTs
+max_attoamps = 5  # for setting up bounds. See 12 lines below.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
 # inc higher-order non-quadratic models.
@@ -889,6 +851,7 @@ quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"
               for Pt in Pts.keys()]  # key = eg amps : value = 2
 
 print('\n')
+
 '''
 # test
 print("\n(Simply showing ex of a lin bias) ")
@@ -900,18 +863,19 @@ print(2*quantities[0])                                  # Now dbl lin bias
 '''
 
 for ind, Pt in enumerate(Pts.keys()):
-    ub = max_attoamps / Pts[Pt]['Attoamps']         # O
+    ub = max_attoamps / Pts[Pt]['Attoamps']         # Denominator MUST NOT = 0       <<<<<<<<<
     quantities[ind].set_upper_bound(Pt, ub)
 
-qub = quantities[0].upper_bound("Tfh")  # quantity ub fro Tfh=X, Th1=X, Th22=X, Th17=X,
+qub = quantities[0].upper_bound("Tfh")              # quantity ub fro Tfh=X, Th1=X, Th22=X, Th17=X,
 print('\nquantities[0].ub (upper bound TESTONLY.py) is: ', qub)
 print('\n\n')
+
 
 # setup the OBJective Fn w a UTILity Fn             # OBJECTIVE Fn     <<<
 cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
 
 
-# UTILity Fn
+                                                    # UTILity Fn       <<<
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
 # such as ACTivation;
 def total_mix(quantity, category):
@@ -922,7 +886,7 @@ def total_mix(quantity, category):
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
 # is multiplied by -1 and minimized.
 cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 9 * total_mix(quantities, "Plasticity")) #'-'ok. 6 sb 9!
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXX was XXXXXXXXXXXXXXXXXXXXXXX  + 6 originally XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 
 # TUNING/Constraints
 # Constrain the Thelp’s MAXIMUM current i.
@@ -930,7 +894,7 @@ cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Att
 
 # Require that the nominal MINIMUM of each Th attribute is met or exceeded.
 # THIS SHOULD BE USER DEFINED AS WELL.
-for attribute, amount in min_attributes.items():  # Items() is a BI.  # Note: 'MIN-ATTRs'
+for attribute, amount in min_attributes.items():        # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
     'ACTivation'
@@ -939,7 +903,7 @@ for attribute, amount in min_attributes.items():  # Items() is a BI.  # Note: 'M
 
 # You can access these constraints as a dict with the labels as keys:
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys())  # @overld. __def__ init(self). @ is polymorph.
-# list(cqm.constraints.keys())              # ['Attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
+# list(cqm.constraints.keys())                          # ['Attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
 print('Attoamps(has max) constraints (as polystr):', cqm.constraints['Attoamps'].to_polystring())  # hates Attoamps
 # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
@@ -948,7 +912,7 @@ print('Expression constraints (as polystr):', cqm.constraints['Expression'].to_p
 
 '''
 Solve the Problem by Sampling
-Solve the Problem by Sampling
+    Solve the Problem by Sampling
 D-Wave’s quantum cloud service provides cloud-based hybrid solvers you can submit arbitrary QMs to.
 These solvers, which implement state-of-the-art classical algorithms together with intelligent allocation
 of the quantum processing unit (QPU) to parts of the problem where it benefits most, are designed to
@@ -1003,7 +967,7 @@ The result is the same : )
 
 '''
 # TUNING THE SOLUTION
-	# # TUNING THE SOLUTION !
+	# TUNING THE SOLUTION 
 # RECALL; Objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing purchase Plasticity.
 	# So re min Plasticity, Plasticity_min  = min SUMMA_i (qty_i * Plasticity_i)
 	#	            DIFFerentiation_max  = max SUMMA_i (qty_i * DIFFerentiation_i)
@@ -1019,7 +983,7 @@ The result is the same : )
 # and comparing the best solutions.
 
 # Start with DIFFerentiation: -----------------------------------------------------------------------||
-cqm.set_objective(-total_mix(quantities, "DIFFerentiation"))  # NOTE THE MINUS
+cqm.set_objective(-total_mix(quantities, "DIFFerentiation"))  # NOTE THE MINUS for least energy for eigenspectrum.
 sampleset_DIFFerentiation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
 feasible_sampleset_DIFFerentiation = sampleset_DIFFerentiation.filter(lambda row: row.is_feasible)
 best_DIFFerentiation = feasible_sampleset_DIFFerentiation.first
@@ -1083,5 +1047,8 @@ https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-
 '''
  ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize DIFFerentiation, 
     DIFFerentiation is multiplied by -1 and minimized.)
+    
+                                                /// END ///
 '''
+
 
