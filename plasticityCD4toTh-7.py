@@ -44,6 +44,8 @@
 
 # Charges apply of accessing the QPU over the free limit. 10ms is the free max time if you don't share to Github.
 # https://docs.dwavesys.com/docs/latest/c_qpu_timing.html#how-solver-usage-is-charged
+# To refresh time: https://cloud.dwavesys.com/leap/plans/#Custom
+
 
 
 # The UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
