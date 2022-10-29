@@ -1,10 +1,24 @@
-                            # PLASTICITY of CD4+T to "The Big-8"  Optimization -
+
+                            # PLASTICITY of CD4+T to "The Big-8"  Optimization - Using the D-WaveSys QPU.
+
+
+                            # It uses MILP, "mixed-integer linear linear-programming" for optimization.
                             # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
-                            # attributes to the BIG-8: AED + plasticity, current, expression.
+                            # The math is very simple. The optimization uses a linear objective and constraints.
+                            # The variables are "real-valued" and "integer" values. Eg.,
+                            # This relates to 8 subsets of the CD4 T-help cell, only, in which the "Units" will be
+                            # "continuous", (<-inf < 0 < inf).
+                            # The attributes, 6 of them imbedded into Pts{{..}} don't fall into these categories per se,
+                            # HOWEVER, attributes like ACTivation, DIFFerentiation, Expression, and possibly Plasticity,
+                            # can be expressed as ON vs OFF, (1 vs 0). If thw relative weights of the other attributes
+                            # make logical handling of the linear equation cumbersome or not very useful, On/OFF can
+                            # be expressed as OTHER THAN "1 vs 0".
+                            # Attributes to the BIG-8: AED + plasticity, current, expression. "Units" is a special
+                            # attribute, and is explained above, (re: the Big-8).
+                            # The paper explains the details of the application, including the quantum paradigm used,
+                            # as well as the process in simple and detailed form.
 
 # This app'is a CQM solver problem on a simple mixed-integer linear-programming, (MILP) type of optimization.
-# This quantum application is an adaptation from DWaveSys quantum code from:
-# https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
 
 
 import dimod as dimod
@@ -19,7 +33,6 @@ import re
 # sampler = LeapHybridSampler()
 # Submit for solution
 # answer = sampler.sample_qubo(Q)
-
 # Python 3.9.2
 
 print('This is DWaveSys quantum computing CQM solver prob on a simple mixed-integer linear-programming,')
@@ -1083,5 +1096,7 @@ https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-
 '''
  ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize DIFFerentiation, 
     DIFFerentiation is multiplied by -1 and minimized.)
+# This quantum application is an adaptation from DWaveSys quantum code from:
+# https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
 '''
 

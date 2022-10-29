@@ -2,14 +2,36 @@
                             # CD4+ T-help Cell Fate Optimization Using the D-WaveSys QPU
 
 
-                            # PLASTICITY of CD4+T to "The Big-8"  Optimization -
-# This app'is a CQM solver problem on a simple mixed-integer linear-programming, (MILP) type of optimization.
-# This quantum application is an adaptation from DWaveSys quantum code from:
-# https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
+# This appliocation is a CQM (constrained quadratic model) solver problem on a simple mixed-integer linear-programming,
+# (MILP) type of optimization.
+                            # It uses MILP, "mixed-integer linear linear-programming" for optimization.
+                            # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, and Th1 subsets.
+                            # attributes to the BIG-8: AED + plasticity, current, expression. "AED" is
+                            # 'ACTivation', '*EXPansion', 'DIFFerentiation'.
+                            # The math is very simple, and non-quadrtic here, though we can use the CQM.
+                            # The optimization uses a linear objective and constraints.
+
+                            # The variables are "real-valued" "Units"'and "integer" valued "Units".,
+                            # This relates to 8 subsets of the CD4 T-help cell, only, in which the "Units" will be
+                            # "continuous", (<-inf < 0 < inf).
+                            # The attributes, 6 of them imbedded into Pts{{..}} don't fall into these categories per se,
+                            # HOWEVER, attributes like *ACTivation, *DIFFerentiation, Expression, and maybe Plasticity,
+                            # can be expressed as ON vs OFF, (1 vs 0).
+
+                            # If thw relative weights of the other attributes
+                            # make logical handling of the linear equation cumbersome or not very useful, 'ON/OFF' can
+                            # be expressed AS OTHER THAN "1 vs 0".
+                            # Attributes to the BIG-8: *AED, plasticity, current, and expression.
+                            # "Units" is a special
+                            # attribute, and is explained above, (re: the Big-8).
+
+                            # The paper explains the details of the application, including the quantum paradigm used,
+                            # as well as the process in simple and detailed form.
                             # https://github.com/TomEphraimPerez/learnleap
                             # Inspiration:
                             # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4207042/
-                            # ( https://github.com/orgs/dwave-examples/repositories?type=all )
+                            # ( https://github.com/orgs/dwave-examples/repositories?type=all ) Moe citaitons in paper.
+# Quick referencing can be obtained in these next few lines:
 # Bloch † notation: https://medium.com/quantum-untangled/visualizing-quantum-logic-gates-part-1-515bb7b58916
 # Hamiltonian and Eigenspectrum https://docs.dwavesys.com/docs/latest/c_gs_2.html
 # Re: Signal Strength: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6497757/
@@ -17,10 +39,15 @@
 # † Dirac: https://learn.microsoft.com/en-us/azure/quantum/concepts-dirac-notation
 # D-WaveSys SDK: https://github.com/dwavesystems/dwave-ocean-sdk/tree/master
 # LEAP hybrid Solvers: https://docs.dwavesys.com/docs/latest/doc_leap_hybrid.html
+# LEAP https://www.dwavesys.com/solutions-and-products/cloud-platform/
+# A quantum mapping visualiser can depict what is happening in the QPU, graphically.
+
+# Charges apply of accessing the QPU over the free limit. 10ms is the free max time if you don't share to Github.
+# https://docs.dwavesys.com/docs/latest/c_qpu_timing.html#how-solver-usage-is-charged
 
 
-# UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
-# UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
+# The UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
+                # UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
 
 # SELF NOTES:   -----------------------------------------------------------|
 # solver has options. [See the solve-by sampling section toward the end ††]
@@ -30,12 +57,10 @@
 # Submit for solution
 # answer = sampler.sample_qubo(Q)
 # Python 3.9.2
-# $ dwave ping --client qpu
-# $ dwave solvers --list --all
+# $ dwave ping --client qpu         # <<< Charges apply for this
+# $ dwave solvers --list --all      # <<< Ditto
 #-------- End self notes--------------------------------------------------|
 
-                            # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
-                            # attributes to the BIG-8: AED + plasticity, current, expression.
 
 import dimod as dimod
 from dwave.system import LeapHybridCQMSampler           #o
@@ -206,7 +231,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -217,7 +242,7 @@ print('You entered ', strattoamps1)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
   #  match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
    # if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -228,7 +253,7 @@ print('You entered', strACTivation1)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
  #   match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
   #  if match_val is None:
    #     print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -239,7 +264,7 @@ print('You entered', strEXPansion1)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
   #  match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
    # if match_val is None:
     #    print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -250,7 +275,7 @@ print('You entered', strDIFFerentiation1)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -261,7 +286,7 @@ print('You entered', strExpression1)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -281,7 +306,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -292,7 +317,7 @@ print('You entered ', strattoamps2)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -303,7 +328,7 @@ print('You entered', strACTivation2)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -314,7 +339,7 @@ print('You entered', strEXPansion2)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -325,7 +350,7 @@ print('You entered', strDIFFerentiation2)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
       #  print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -336,7 +361,7 @@ print('You entered', strExpression2)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -356,7 +381,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -367,7 +392,7 @@ print('You entered ', strattoamps3)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -378,7 +403,7 @@ print('You entered', strACTivation3)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -389,7 +414,7 @@ print('You entered', strEXPansion3)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -400,7 +425,7 @@ print('You entered', strDIFFerentiation3)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -411,7 +436,7 @@ print('You entered', strExpression3)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -431,7 +456,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -442,7 +467,7 @@ print('You entered ', strattoamps4)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -453,7 +478,7 @@ print('You entered', strACTivation4)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -464,7 +489,7 @@ print('You entered', strEXPansion4)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -475,7 +500,7 @@ print('You entered', strDIFFerentiation4)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -486,7 +511,7 @@ print('You entered', strExpression4)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -506,7 +531,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -517,7 +542,7 @@ print('You entered ', strattoamps5)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -528,7 +553,7 @@ print('You entered', strACTivation5)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -539,7 +564,7 @@ print('You entered', strEXPansion5)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -550,7 +575,7 @@ print('You entered', strDIFFerentiation5)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -561,7 +586,7 @@ print('You entered', strExpression5)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -581,7 +606,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -592,7 +617,7 @@ print('You entered ', strattoamps6)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -603,7 +628,7 @@ print('You entered', strACTivation6)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -614,7 +639,7 @@ print('You entered', strEXPansion6)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -625,7 +650,7 @@ print('You entered', strDIFFerentiation6)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -636,7 +661,7 @@ print('You entered', strExpression6)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -656,7 +681,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter a an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -667,7 +692,7 @@ print('You entered ', strattoamps7)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -678,7 +703,7 @@ print('You entered', strACTivation7)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -689,7 +714,7 @@ print('You entered', strEXPansion7)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -700,7 +725,7 @@ print('You entered', strDIFFerentiation7)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -711,7 +736,7 @@ print('You entered', strExpression7)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -731,7 +756,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
+strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -742,7 +767,7 @@ print('You entered ', strattoamps8)  # ===========================|
 
 #flag = True
 #while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
+strACTivation = int(input('Enter an integer for ACTivation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -753,7 +778,7 @@ print('You entered', strACTivation8)  # ===========================|
 
 #flag = True
 #while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
+strEXPansion = int(input('Enter an integer for EXPansion: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -764,7 +789,7 @@ print('You entered', strEXPansion8)  # ===========================|
 
 #flag = True
 #while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
+strDIFFerentiation = int(input('Enter an integer for DIFFerentiation: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -775,7 +800,7 @@ print('You entered', strDIFFerentiation8)  # ===========================|
 
 #flag = True
 #while flag:
-strExpression = int(input('Enter value for Expression: '))
+strExpression = int(input('Enter an integer for Expression: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
@@ -786,7 +811,7 @@ print('You entered', strExpression8)  # ===========================|
 
 #flag = True
 #while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
+strPlasticity = int(input('Enter an integer for Plasticity: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
     #if match_val is None:
      #   print("\n\t\tPlease enter a vAliD DecImal number.")
