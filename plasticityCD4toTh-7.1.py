@@ -47,13 +47,14 @@
 # (1) Formulate the problem as an objective function in a supported form of quadratic model (QM) and
 # (2) Solve your QM with a D-Wave solver.
 
-
 # The UPPER BOUND for  ub (= max_attoamps / Pts[Pt]['Attoamps']) CAN NOT HAVE DENOMINATOR = 0.
     # UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
 # Re: ub FOR THE Pt, IT MAKES MORE SENSE TO RELATE AN ATTRIBUTE SOURCE, (here it's 'attoamps')
                 # TO ANOTHER LOGICAL ATTRIBUTE,
 # (eg., use 'Expression') TO MAKE A COUPLED SOURCE TO HAVE IT RELATE THEM MATHEMATICALlY TO THE UPPER BOUND.
 
+# Difference b/t plasticity andf DIFFerentiation :
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074550
 
 # SELF NOTES:   -----------------------------------------------------------|
 # (Charges apply of accessing the QPU over the free limit. 10ms is the free max time if you don't share to Github.
@@ -70,6 +71,7 @@
 # Python 3.9.2
 # $ dwave ping --client qpu         # <<< Charges apply for this
 # $ dwave solvers --list --all      # <<< Ditto
+
 #-------- End self notes--------------------------------------------------|
 
 
@@ -106,42 +108,6 @@ print('\n\n')
 # attribute = ['Attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
 # Pts dict of Pts' Pts.
 # Attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, Attoamps = 10^-18a.
-
-
-'''
-                # DECLARE Proteins nested Dict. THIS (Pts=) WORKS, but USER I/P with r.e. DOES NOT.
-
-Pts = {'Tfh': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th9': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th2': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'iTreg': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Tr1': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th22': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th17': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'},
-        'Th1': {'Attoamps': 1, 'ACTivation': 1, 'EXPansion': 1, 'DIFFerentiation': 1,
-                    'Expression': 1, 'Plasticity': 1, 'Units': 'continuous'}}
-'''
-
-
-
-'''
-                                                        # RAW INITIALIZE >>>
-Pts = {'Tfh': {},
-       'Th9': {},
-       'Th2': {},
-       'iTreg': {},
-       'Tr1': {},
-       'Th22': {},
-       'Th17': {},
-       'Th1': {}}
-'''
 
 
 #Declare 8 CD4+ T-help subset attributes for Proteins (Pts) nested dict for next Pts{:{::...}}
@@ -877,7 +843,7 @@ print(Pts)
 print('\n')
 
 min_attributes = {"Expression": 4, "ACTivation": 5, "EXPansion": 4, "DIFFerentiation": 5}  # ARBITRARY ASMTs
-max_attoamps = 3  # for setting up bounds. See 12 lines below.
+max_attoamps = 80  # for setting up bounds. See 12 lines below.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
 # inc higher-order non-quadratic models.
@@ -923,7 +889,7 @@ def total_mix(quantity, category):
 
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
 # is multiplied by -1 and minimized.
-cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 9 * total_mix(quantities, "Plasticity")) #'-'ok. 6 sb 9!
+cqm.set_objective(-total_mix(quantities, "ACTivation") + 9 * total_mix(quantities, "Plasticity")) #'-'ok. 6 sb 9!
 
 # TUNING/Constraints
 # Constrain the Thelp’s MAXIMUM current i.
@@ -934,7 +900,7 @@ cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Att
 for attribute, amount in min_attributes.items():        # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
-    'ACTivation'
+    # 'ACTivation'
     'EXPansion'
     'DIFFerentiation'
 
@@ -944,7 +910,7 @@ constraintsDictLabelsAsKeys = list(cqm.constraints.keys())  # @overld. __def__ i
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
 print('Attoamps(has max) constraints (as polystr):', cqm.constraints['Attoamps'].to_polystring())  # hates Attoamps
 # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
-print('Expression constraints (as polystr):', cqm.constraints['Expression'].to_polystring())
+print('cqm.constraints[Expression].to_polystring(): ', cqm.constraints['Expression'].to_polystring())
 # 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv
 
 '''
@@ -956,6 +922,8 @@ of the quantum processing unit (QPU) to parts of the problem where it benefits m
 accommodate even very large problems.
 Ocean software’s dwave-system LeapHybridCQMSampler class enables you to easily incorporate Leap’s hybrid
 CQM solvers into your application:
+In statistics, nominal data (also known as nominal scale) is a type of data that is used to label variables 
+    without providing any quantitative value. It is the simplest form of a scale of measure.
 '''
 # Make certain ur in (ocean) venv sampler = LeapHybridCQMSampler()
 sampler = LeapHybridCQMSampler()
@@ -976,9 +944,9 @@ print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampl
 def print_Thelpers(sample):
     Thelp = {Pt: round(quantity, 1) for Pt, quantity in sample.items()}  # 'Pt:' has 1 dec place?
     print(f"Thelp----->: {Thelp}")
-    DIFFerentiation_total = sum(Pts[Pt]["DIFFerentiation"] * amount for Pt, amount in sample.items())
+    ACTivation_total = sum(Pts[Pt]["ACTivation"] * amount for Pt, amount in sample.items())
     Plasticity_total = sum(Pts[Pt]["Plasticity"] * amount for Pt, amount in sample.items())
-    print(f"Total DIFFerentiation of {round(DIFFerentiation_total, 2)} at Plasticity {round(Plasticity_total, 2)}")
+    print(f"Total ACTIvation of {round(ACTivation_total, 2)} at Plasticity {round(Plasticity_total, 2)}")
     for constraint in cqm.iter_constraint_data(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
         # rhs_energy is a dimod float attribute
@@ -1018,22 +986,21 @@ The result is the same : )
 # and comparing the best solutions.
 
 # Start with DIFFerentiation: -----------------------------------------------------------------------||
-cqm.set_objective(-total_mix(quantities, "DIFFerentiation"))  # NOTE THE MINUS for least energy for eigenspectrum.
-sampleset_DIFFerentiation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
-feasible_sampleset_DIFFerentiation = sampleset_DIFFerentiation.filter(lambda row: row.is_feasible)
-best_DIFFerentiation = feasible_sampleset_DIFFerentiation.first
-print('best_DIFFerentiation.ENERGY: ', round(best_DIFFerentiation.energy))
+cqm.set_objective(- total_mix(quantities, "ACTivation"))  # NOTE THE MINUS for least energy for eigenspectrum.
+sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
+feasible_sampleset_ACTivation = sampleset_ACTivation.filter(lambda row: row.is_feasible)
+best_ACTivation = feasible_sampleset_ACTivation.first
+print('best_ACTivation.ENERGY: ', round(best_ACTivation.energy))
 # >>> a la -177
 
-print('\nbest_DIFFerentiation.SAMPLE: ')
-print_Thelpers(best_DIFFerentiation.sample)
+print('\nbest_ACTivation.SAMPLE: ')
+print_Thelpers(best_ACTivation.sample)
 # >>> a la;
 '''
 Thelp: {'Th22': 0.0, 'Th2': 17.0, 'Tr1': 0.0, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 3.3}
 Total DIFFerentiation of 6 at Plasticity 3.1 rounded off:
     ACTivation (nominal: 4): 2
     Attoamps (nominal: 2): 0.1
-    ACTivation (nominal: 6): 3
     EXPansion (nominal: 3): 2
     DIFFerentiation (nominal: 5): 2
 '''
@@ -1052,16 +1019,15 @@ print('\n\n\t\t\t\t\t\tEND')
 print('\n\n')
 '''>>> a la
 Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
-Total DIFFerentiation of 7 at Plasticity 3.3
-    ACTivation (nominal: 4): 3
+Total ACTivation of 7 at Plasticity 3.3
     Attoamps (nominal: 2): 0.2
     ACTivation (nominal: 6): 4
     EXPansion (nominal: 3): 1
     DIFFerentiation (nominal: 5): 3
 '''
 '''
-This Thelp is ranked as less tasty than the previous but much cheaper. 
-It relies mainly on Tr1 and uses Th22 to add leaveACTivation and DIFFerentiation.
+This combination is ranked as less ACTivated than the previous but more Plastic. 
+It relies mainly on Tr1 and uses Th22 to add ACTivation and DIFFerentiation.
 '''
 '''
 Because of the differences in energy scale between the two parts of the combined objective,
@@ -1086,4 +1052,12 @@ https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-
                                                 /// END ///
 '''
 
+'''
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074550/
+The fact that it is possible to reprogram cells by either perturbing their environment or changing their 
+genomic output artificially, indicates that that the 
+plasticity of the differentiated state may not be restricted 
+to simple animals, and that programs for differentiation may be more prevalent and much more broadly distributed 
+among all animals (including humans) than most care to contemplate at the present time.
+'''
 

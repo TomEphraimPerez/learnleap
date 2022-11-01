@@ -31,6 +31,7 @@
                             # Inspiration:
                             # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4207042/
                             # ( https://github.com/orgs/dwave-examples/repositories?type=all ) Moe citaitons in paper.
+
 # Quick referencing can be obtained in these next few lines:
 # Bloch † notation: https://medium.com/quantum-untangled/visualizing-quantum-logic-gates-part-1-515bb7b58916
 # Hamiltonian and Eigenspectrum https://docs.dwavesys.com/docs/latest/c_gs_2.html
@@ -42,16 +43,25 @@
 # LEAP https://www.dwavesys.com/solutions-and-products/cloud-platform/
 # A quantum mapping visualiser can depict what is happening in the QPU, graphically.
 
-# Charges apply of accessing the QPU over the free limit. 10ms is the free max time if you don't share to Github.
-# https://docs.dwavesys.com/docs/latest/c_qpu_timing.html#how-solver-usage-is-charged
-# To refresh time: https://cloud.dwavesys.com/leap/plans/#Custom
+# In brief, the complete application is divided into (1) and (2), ie:
+# (1) Formulate the problem as an objective function in a supported form of quadratic model (QM) and
+# (2) Solve your QM with a D-Wave solver.
 
+# The UPPER BOUND for  ub (= max_attoamps / Pts[Pt]['Attoamps']) CAN NOT HAVE DENOMINATOR = 0.
+    # UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
+# Re: ub FOR THE Pt, IT MAKES MORE SENSE TO RELATE AN ATTRIBUTE SOURCE, (here it's 'attoamps')
+                # TO ANOTHER LOGICAL ATTRIBUTE,
+# (eg., use 'Expression') TO MAKE A COUPLED SOURCE TO HAVE IT RELATE THEM MATHEMATICALlY TO THE UPPER BOUND.
 
-
-# The UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
-                # UPPER BOUND for ( ub = max_attoamps / Pts[Pt]['Attoamps'] ) CAN NOT HAVE DENOMINATOR = 0.
+# Difference b/t plasticity andf DIFFerentiation :
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074550
 
 # SELF NOTES:   -----------------------------------------------------------|
+# (Charges apply of accessing the QPU over the free limit. 10ms is the free max time if you don't share to Github.
+# https://docs.dwavesys.com/docs/latest/c_qpu_timing.html#how-solver-usage-is-charged  )
+# ( To refresh time: https://cloud.dwavesys.com/leap/plans/#Custom  )
+# ( https://cloud.dwavesys.com/leap/plans/#Custom  )
+
 # solver has options. [See the solve-by sampling section toward the end ††]
 # For charges - $$$
 # Select a solver
@@ -225,7 +235,7 @@ Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansio
                'DIFFerentiation': strDIFFerentiation8, 'Expression': strExpression8, 'Plasticity': strPlasticity8,
                'Units': Units8}}
 
-# (Red ball-flags means that those lines were indented LEFT from original code that included REs, regular expressions)
+
 # ============================ USER INPUT =====================================|||
 # SUBSET 1
 print('\n--- Attributes for --- Tfh')
@@ -233,6 +243,7 @@ print('\t\tWhat ever upper bound you choose, it must not be zero.')
 
 #flag = True  # O
 #while flag:
+# (Red ball-flag below means th those lines were indented LEFT from orig code that included R.E.s, regular expressions)
 strattoamps = int(input('Enter an integer for Attoamps: '))
     #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     #if match_val is None:
@@ -827,7 +838,7 @@ print('You entered', Units8)  # ===========================|
 # ============================= END USER INPUT ==============================|||
 
 
-                                        # Updated CD4+ T-help subset attribute values.
+                    # Updated re-assigned CD4+ T-help subset attribute values from user input.
 Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansion': strEXPansion1,
                'DIFFerentiation': strDIFFerentiation1, 'Expression': strExpression1, 'Plasticity': strPlasticity1,
                'Units': Units1},
@@ -861,13 +872,13 @@ for p_id, p_info in Pts.items():
         print(key + ':', p_info[key])
 
 print('\n')
-print('Pts -- unformated --------- > > > ')
+print('Pts -- raw unformated --------- > > > ')
 print(Pts)
 
 print('\n')
 
 min_attributes = {"Expression": 4, "ACTivation": 5, "EXPansion": 4, "DIFFerentiation": 5}  # ARBITRARY ASMTs
-max_attoamps = 5  # for setting up bounds. See 12 lines below.
+max_attoamps = 80  # for setting up bounds. See 12 lines below.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
 # inc higher-order non-quadratic models.
@@ -880,7 +891,7 @@ quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"
 print('\n')
 
 '''
-# test
+# Instructional self note:
 print("\n(Simply showing ex of a lin bias) ")
 print(quantities[0])                                    # simple linear bias
 print("(Now showing an ex of a dbl bias) ")
@@ -889,6 +900,8 @@ print(2*quantities[0])                                  # Now dbl lin bias
                                                         # (e.g. 'Tfh') cannot have interactions
 '''
 
+# FOR THE Pt, IT MAKES MORE SENSE TO RELATE AN ATTRIBUTE SOURCE, (here it's attoamps) TO ANOTHER LOGICAL ATTRIBUTE,
+# (eg., Expression) AS A COUPLED SOURCE, TO HAVE IT RELATE MATHEMATICALlY TO THE UPPER BOUND.
 for ind, Pt in enumerate(Pts.keys()):
     ub = max_attoamps / Pts[Pt]['Attoamps']         # Denominator MUST NOT = 0       <<<<<<<<<
     quantities[ind].set_upper_bound(Pt, ub)
@@ -899,7 +912,7 @@ print('\n\n')
 
 
 # setup the OBJective Fn w a UTILity Fn             # OBJECTIVE Fn     <<<
-cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
+cqm = dimod.ConstrainedQuadraticModel()             # NOT arbitrarily set alpha=2 beta=1;
 
 
                                                     # UTILity Fn       <<<
@@ -909,11 +922,9 @@ def total_mix(quantity, category):
     return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for Pt in Pts.keys() )) )
     # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
 
-
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
 # is multiplied by -1 and minimized.
-cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 9 * total_mix(quantities, "Plasticity")) #'-'ok. 6 sb 9!
-
+cqm.set_objective(-total_mix(quantities, "ACTivation") + 9 * total_mix(quantities, "Plasticity")) #'-'ok. 6 sb 9!
 
 # TUNING/Constraints
 # Constrain the Thelp’s MAXIMUM current i.
@@ -924,7 +935,7 @@ cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Att
 for attribute, amount in min_attributes.items():        # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
-    'ACTivation'
+    # 'ACTivation'
     'EXPansion'
     'DIFFerentiation'
 
@@ -934,7 +945,7 @@ constraintsDictLabelsAsKeys = list(cqm.constraints.keys())  # @overld. __def__ i
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
 print('Attoamps(has max) constraints (as polystr):', cqm.constraints['Attoamps'].to_polystring())  # hates Attoamps
 # 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
-print('Expression constraints (as polystr):', cqm.constraints['Expression'].to_polystring())
+print('cqm.constraints[Expression].to_polystring(): ', cqm.constraints['Expression'].to_polystring())
 # 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv
 
 '''
@@ -946,6 +957,8 @@ of the quantum processing unit (QPU) to parts of the problem where it benefits m
 accommodate even very large problems.
 Ocean software’s dwave-system LeapHybridCQMSampler class enables you to easily incorporate Leap’s hybrid
 CQM solvers into your application:
+In statistics, nominal data (also known as nominal scale) is a type of data that is used to label variables without 
+    providing any quantitative value. It is the simplest form of a scale of measure.
 '''
 # Make certain ur in (ocean) venv sampler = LeapHybridCQMSampler()
 sampler = LeapHybridCQMSampler()
@@ -963,17 +976,15 @@ feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)  # A num. 'Fi
 
 print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
 
-
 def print_Thelpers(sample):
     Thelp = {Pt: round(quantity, 1) for Pt, quantity in sample.items()}  # 'Pt:' has 1 dec place?
     print(f"Thelp----->: {Thelp}")
-    DIFFerentiation_total = sum(Pts[Pt]["DIFFerentiation"] * amount for Pt, amount in sample.items())
+    ACTivation_total = sum(Pts[Pt]["ACTivation"] * amount for Pt, amount in sample.items())
     Plasticity_total = sum(Pts[Pt]["Plasticity"] * amount for Pt, amount in sample.items())
-    print(f"Total DIFFerentiation of {round(DIFFerentiation_total, 2)} at Plasticity {round(Plasticity_total, 2)}")
+    print(f"Total ACTivation of {round(ACTivation_total, 2)} at Plasticity {round(Plasticity_total, 2)}")
     for constraint in cqm.iter_constraint_data(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
         # rhs_energy is a dimod float attribute
-
 
 # The best solution found in this current execution was a T-help of Tr1 and bananas, with
 # Th22 completing the required DIFFerentiation and ACTivation portions
@@ -1010,22 +1021,21 @@ The result is the same : )
 # and comparing the best solutions.
 
 # Start with DIFFerentiation: -----------------------------------------------------------------------||
-cqm.set_objective(-total_mix(quantities, "DIFFerentiation"))  # NOTE THE MINUS for least energy for eigenspectrum.
-sampleset_DIFFerentiation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
-feasible_sampleset_DIFFerentiation = sampleset_DIFFerentiation.filter(lambda row: row.is_feasible)
-best_DIFFerentiation = feasible_sampleset_DIFFerentiation.first
-print('best_DIFFerentiation.ENERGY: ', round(best_DIFFerentiation.energy))
+cqm.set_objective(- total_mix(quantities, "ACTivation"))  # NOTE THE MINUS for least energy for eigenspectrum.
+sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
+feasible_sampleset_ACTivation = sampleset_ACTivation.filter(lambda row: row.is_feasible)
+best_ACTivation = feasible_sampleset_ACTivation.first
+print('best_ACTivation.ENERGY: ', round(best_ACTivation.energy))
 # >>> a la -177
 
-print('\nbest_DIFFerentiation.SAMPLE: ')
-print_Thelpers(best_DIFFerentiation.sample)
+print('\nbest_ACTIvation.SAMPLE: ')
+print_Thelpers(best_ACTivation.sample)
 # >>> a la;
 '''
 Thelp: {'Th22': 0.0, 'Th2': 17.0, 'Tr1': 0.0, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 3.3}
-Total DIFFerentiation of 6 at Plasticity 3.1 rounded off:
+Total ACTivation of 6 at Plasticity 3.1 rounded off:
     ACTivation (nominal: 4): 2
     Attoamps (nominal: 2): 0.1
-    ACTivation (nominal: 6): 3
     EXPansion (nominal: 3): 2
     DIFFerentiation (nominal: 5): 2
 '''
@@ -1044,16 +1054,15 @@ print('\n\n\t\t\t\t\t\tEND')
 print('\n\n')
 '''>>> a la
 Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
-Total DIFFerentiation of 7 at Plasticity 3.3
-    ACTivation (nominal: 4): 3
+Total ACTivation of 7 at Plasticity 3.3
     Attoamps (nominal: 2): 0.2
     ACTivation (nominal: 6): 4
     EXPansion (nominal: 3): 1
     DIFFerentiation (nominal: 5): 3
 '''
 '''
-This Thelp is ranked as less tasty than the previous but much cheaper. 
-It relies mainly on Tr1 and uses Th22 to add leaveACTivation and DIFFerentiation.
+This combination is ranked as less ACTivated than the previous but more Plastic. 
+It relies mainly on Tr1 and uses Th22 to add ACTivation and DIFFerentiation.
 '''
 '''
 Because of the differences in energy scale between the two parts of the combined objective,
@@ -1067,7 +1076,7 @@ to those found when optimizing for DIFFerentiation alone.
 '''
 
 ''' SEE GRAPH with y-axis=Energy, x-axis=Multiplier, variables are DIFFerentiation, Plasticity and total. 
-# This quantum application is an adaptation from DWaveSys quantum code from:
+# This quantum application is an adaptation of a human CQM-with-constraints diet plan application from DWaveSys:
 https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals
 '''
 
@@ -1075,6 +1084,14 @@ https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-
  ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize DIFFerentiation, 
     DIFFerentiation is multiplied by -1 and minimized.)
     
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074550/
+The fact that it is possible to reprogram cells by either perturbing their environment or changing their 
+genomic output artificially, indicates that that the 
+plasticity of the differentiated state may not be restricted 
+to simple animals, and that programs for differentiation may be more prevalent and much more broadly distributed 
+among all animals (including humans) than most care to contemplate at the present time.
+
+
                                                 /// END ///
 '''
 
