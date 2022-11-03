@@ -157,69 +157,70 @@ Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansio
 # SUBSET 1
 print('\n--- Attributes for --- Tfh')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)
+    # match_val = re.match(r"[+,-]?[0-9]+", strattoamps)  # OK for letters and a la r4 but not 4r.
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps1 = int(strattoamps)
 print('You entered ', strattoamps1)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-  #  match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-   # if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation1 = int(strACTivation)
 print('You entered', strACTivation1)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
- #   match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-  #  if match_val is None:
-   #     print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion1 = int(strEXPansion)
 print('You entered', strEXPansion1)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-  #  match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-   # if match_val is None:
-    #    print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation1 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation1)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression1 = int(strExpression)
 print('You entered', strExpression1)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity1 = int(strPlasticity)
 print('You entered', strPlasticity1)  # ===========================|
 
@@ -231,69 +232,69 @@ print('You entered', Units1)  # ===========================|
 # SUBSET 2
 print('\n--- Attributes for --- Th9')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps2 = int(strattoamps)
 print('You entered ', strattoamps2)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation2 = int(strACTivation)
 print('You entered', strACTivation2)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion2 = int(strEXPansion)
 print('You entered', strEXPansion2)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation2 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation2)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-      #  print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression2 = int(strExpression)
 print('You entered', strExpression2)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity2 = int(strPlasticity)
 print('You entered', strPlasticity2)  # ===========================|
 
@@ -305,69 +306,69 @@ print('You entered', Units2)  # ===========================|
 # SUBSET 3
 print('\n--- Attributes for --- Th2')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps3 = int(strattoamps)
 print('You entered ', strattoamps3)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation3 = int(strACTivation)
 print('You entered', strACTivation3)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion3 = int(strEXPansion)
 print('You entered', strEXPansion3)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation3 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation3)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression3 = int(strExpression)
 print('You entered', strExpression3)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity3 = int(strPlasticity)
 print('You entered', strPlasticity3)  # ===========================|
 
@@ -379,69 +380,69 @@ print('You entered', Units3)  # ===========================|
 # SUBSET 4
 print('\n--- Attributes for --- iTreg')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps4 = int(strattoamps)
 print('You entered ', strattoamps4)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation4 = int(strACTivation)
 print('You entered', strACTivation4)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion4 = int(strEXPansion)
 print('You entered', strEXPansion4)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation4 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation4)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression4 = int(strExpression)
 print('You entered', strExpression4)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity4 = int(strPlasticity)
 print('You entered', strPlasticity4)  # ===========================|
 
@@ -453,69 +454,69 @@ print('You entered', Units4)  # ===========================|
 # SUBSET 5
 print('\n--- Attributes for --- Tr1')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps5 = int(strattoamps)
 print('You entered ', strattoamps5)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation5 = int(strACTivation)
 print('You entered', strACTivation5)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion5 = int(strEXPansion)
 print('You entered', strEXPansion5)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation5 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation5)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression5 = int(strExpression)
 print('You entered', strExpression5)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity5 = int(strPlasticity)
 print('You entered', strPlasticity5)  # ===========================|
 
@@ -527,69 +528,69 @@ print('You entered', Units5)  # ===========================|
 # SUBSET 6
 print('\n--- Attributes for --- Tr22')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps6 = int(strattoamps)
 print('You entered ', strattoamps6)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation6 = int(strACTivation)
 print('You entered', strACTivation6)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion6 = int(strEXPansion)
 print('You entered', strEXPansion6)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation6 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation6)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression6 = int(strExpression)
 print('You entered', strExpression6)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity6 = int(strPlasticity)
 print('You entered', strPlasticity6)  # ===========================|
 
@@ -601,69 +602,69 @@ print('You entered', Units6)  # ===========================|
 # SUBSET 7
 print('\n--- Attributes for --- Th17')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps7 = int(strattoamps)
 print('You entered ', strattoamps7)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation7 = int(strACTivation)
 print('You entered', strACTivation7)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion7 = int(strEXPansion)
 print('You entered', strEXPansion7)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation7 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation7)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression7 = int(strExpression)
 print('You entered', strExpression7)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity7 = int(strPlasticity)
 print('You entered', strPlasticity7)  # ===========================|
 
@@ -675,69 +676,69 @@ print('You entered', Units7)  # ===========================|
 # SUBSET 8
 print('\n--- Attributes for --- Th1')
 
-#flag = True  # O
-#while flag:
-strattoamps = int(input('Enter a float for Attoamps: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True  # O
+while flag:
+    strattoamps = input('Enter a float for Attoamps: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strattoamps8 = int(strattoamps)
 print('You entered ', strattoamps8)  # ===========================|
 
-#flag = True
-#while flag:
-strACTivation = int(input('Enter value for ACTivation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strACTivation = input('Enter value for ACTivation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strACTivation8 = int(strACTivation)
 print('You entered', strACTivation8)  # ===========================|
 
-#flag = True
-#while flag:
-strEXPansion = int(input('Enter value for EXPansion: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strEXPansion = input('Enter value for EXPansion: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strEXPansion8 = int(strEXPansion)
 print('You entered', strEXPansion8)  # ===========================|
 
-#flag = True
-#while flag:
-strDIFFerentiation = int(input('Enter value for DIFFerentiation: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strDIFFerentiation = input('Enter value for DIFFerentiation: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strDIFFerentiation8 = int(strDIFFerentiation)
 print('You entered', strDIFFerentiation8)  # ===========================|
 
-#flag = True
-#while flag:
-strExpression = int(input('Enter value for Expression: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strExpression = input('Enter value for Expression: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strExpression8 = int(strExpression)
 print('You entered', strExpression8)  # ===========================|
 
-#flag = True
-#while flag:
-strPlasticity = int(input('Enter value for Plasticity: '))
-    #match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    #if match_val is None:
-     #   print("\n\t\tPlease enter a vAliD DecImal number.")
-    #else:
-     #   flag = False
+flag = True
+while flag:
+    strPlasticity = input('Enter value for Plasticity: ')
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
+    if match_val is None:
+        print("\n\t\tPlease enter a vAliD DecImal number.")
+    else:
+        flag = False
 strPlasticity8 = int(strPlasticity)
 print('You entered', strPlasticity8)  # ===========================|
 
