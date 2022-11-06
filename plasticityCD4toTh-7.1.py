@@ -863,16 +863,17 @@ for ind, Pt in enumerate(Pts.keys()):
     ub = max_attoamps / Pts[Pt]['Attoamps']         # Denominator MUST NOT = 0       <<<<<<<<<
     quantities[ind].set_upper_bound(Pt, ub)
 
-qub = quantities[0].upper_bound("Tfh")              # quantity ub fro Tfh=X, Th1=X, Th22=X, Th17=X,
+qub = quantities[0].upper_bound("Tfh")              # quantity ub for Tfh=X, Th9, Th2, iTreg=X,...
 print('\nquantities[0].ub (upper bound TESTONLY.py) is: ', qub)
 print('\n\n')
 
 
-# setup the OBJective Fn w a UTILity Fn             # OBJECTIVE Fn     <<<
+
+# setup the OBJective Fn w a UTILity Fn             # OBJECTIVE Fn     <<<  # OBJECTIVE Fn     <<<
 cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
 
 
-                                                    # UTILity Fn       <<<
+                                                    # UTILity Fn       <<<  # UTILity Fn       <<<
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
 # such as ACTivation;
 def total_mix(quantity, category):
@@ -892,7 +893,7 @@ cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Att
 for attribute, amount in min_attributes.items():        # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
-    # 'ACTivation'
+    # 'ACTivation'                                      # Intentional for this 7.1 version
     'EXPansion'
     'DIFFerentiation'
 
@@ -923,7 +924,7 @@ sampler = LeapHybridCQMSampler()
 '''
 Submit the CQM to the selected solver. For one particular execution, the CQM hybrid sampler returned 
 49 samples, out of which 25 were solutions that met all the constraints.
-CQM) solver on a simple mixed-integer linear-programming (MILP) type of optimization problem.
+The CQM solver is on a simple mixed-integer linear-programming (MILP) type of optimization problem.
 '''
 sampleset = sampler.sample_cqm(cqm)  # SUBMIT THE PROBLEM to solver.
 feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)  # A num. 'Filter' is a dimod API/class.
@@ -1038,8 +1039,8 @@ https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-
 '''
 
 '''
- ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize DIFFerentiation, 
-    DIFFerentiation is multiplied by -1 and minimized.)
+ ††† Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize DIFFerentiation, or
+      ACTivation, etc, these need to be multiplied by -1 and minimized.
     
                                                 /// END ///
 '''
