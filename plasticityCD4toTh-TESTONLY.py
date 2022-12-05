@@ -1,24 +1,32 @@
 
+
                             # PLASTICITY of CD4+T to "The Big-8"  Optimization - Using the D-WaveSys QPU.
+                            # Thomas E. Perez       Chair: Professor K. Mkrtchyan
 
+'''
+                            This application is a mixed-integer linear-programming optimization app.
+                            It's a (constrained quadratic model CQM solver problem a simple mixed-integer
+                            linear-programming problem. The paper explains all the details. By the way,
+                            "Big-8" ::=  Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, and Th1. Like the paper
+                            explains, these may or may not evolve from the CD4+ t-cell, (heterogeneity).
 
-                            # It uses MILP, "mixed-integer linear linear-programming" for optimization.
-                            # Big-8 ::= Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1
-                            # The math is very simple. The optimization uses a linear objective and constraints.
-                            # The variables are "real-valued" and "integer" values. Eg.,
-                            # This relates to 8 subsets of the CD4 T-help cell, only, in which the "Units" will be
-                            # "continuous", (<-inf < 0 < inf).
-                            # The attributes, 6 of them imbedded into Pts{{..}} don't fall into these categories per se,
-                            # HOWEVER, attributes like ACTivation, DIFFerentiation, Expression, and possibly Plasticity,
-                            # can be expressed as ON vs OFF, (1 vs 0). If thw relative weights of the other attributes
-                            # make logical handling of the linear equation cumbersome or not very useful, On/OFF can
-                            # be expressed as OTHER THAN "1 vs 0".
-                            # Attributes to the BIG-8: AED + plasticity, current, expression. "Units" is a special
-                            # attribute, and is explained above, (re: the Big-8).
-                            # The paper explains the details of the application, including the quantum paradigm used,
-                            # as well as the process in simple and detailed form.
+                            The optimization uses a linear objective and constraints.
+                            The variables (cctually, objects) are "real-valued" and "integer" values. Eg.,
+                            this relates to the Big-8 proteins (Pts), ie., the subsets of the CD4 T-help
+                            cell in which the "Units" will be;
+                            "continuous", (0 < inf in this app). These are AKA:
+                            "REAL-VALUED" variables.
 
-# This app'is a CQM solver problem on a simple mixed-integer linear-programming, (MILP) type of optimization.
+                            "Discrete" units (eg., ACTivation, DIFFerentiation, and Expression, can be cnstrued
+                             to be an ON/OFF state, they are AKA:
+                            "INTEGER-VALUED" variables.
+'''
+
+'''
+                            The attributes, 6 of them are embedded into a Pts{{..}} dict, and processed by user input.
+                            The paper accomanying this application explains the details of the application, 
+                            including the quantum paradigm used, as well as the process in simple and detailed form.
+'''
 
 
 import dimod as dimod
@@ -27,12 +35,6 @@ from dwave.system import LeapHybridCQMSampler           #o
 # from dwave.system import LeapHybridCQMSampler         #o
 import re
 
-# solver has options. [See the solve-by sampling section toward the end ††]
-# For charges - $$$
-# Select a solver
-# sampler = LeapHybridSampler()
-# Submit for solution
-# answer = sampler.sample_qubo(Q)
 # Python 3.9.2
 
 print('This is DWaveSys quantum computing CQM solver prob on a simple mixed-integer linear-programming,')
@@ -52,8 +54,8 @@ print('All these T-helper cells (via heterogeneity) are what I\'ll refer to as \
 print('were discussed by Carbo et al. This of course is cited, and is the primary source of inspiration')
 print('for this thesis. Of course the thesis will explain in detail.')
 
-print('\n\tOSTENSIBLY - this application MUST BE BACKED UP BY LABORATORY verification and validation through')
-print('\tdocumented experimentation and results. This author is OPEN to suggestions amd comments.')
+print('\n\tOf course, this application MUST BE BACKED UP BY LABORATORY verification and validation through')
+print('\tdocumented experimentation and peer-reviewed results. This author is very open to suggestions and comments.')
 print('\n\n')
 
 # Self notes:
@@ -162,7 +164,7 @@ while flag:
     strattoamps = input('Enter an int > 0 for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)
     # match_val = re.match(r"[+,-]?[0-9]+", strattoamps)  # OK for letters and a la r4 but not 4r.
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -173,7 +175,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int > 0 for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -184,7 +186,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int > 0 for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -195,7 +197,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int > 0 for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -206,7 +208,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int > 0 for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -217,7 +219,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int > 0 for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -236,7 +238,7 @@ flag = True  # O
 while flag:
     strattoamps = input('Enter an int > 0 for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -247,7 +249,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int > 0 for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -258,7 +260,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int > 0 for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion ) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -269,7 +271,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int > 0 for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -280,7 +282,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int > 0 for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -291,7 +293,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int > 0 for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -308,9 +310,9 @@ print('\n--- Attributes for --- Th2')
 
 flag = True  # O
 while flag:
-    strattoamps = input('Enter a an int > 0 for Attoamps: ')
+    strattoamps = input('Enter an int > 0 for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -321,7 +323,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int > 0 for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -332,7 +334,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int > 0 for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -343,7 +345,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int > 0 for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -354,7 +356,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int > 0 for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -365,7 +367,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int > 0 for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -384,7 +386,7 @@ flag = True  # O
 while flag:
     strattoamps = input('Enter an int for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -395,7 +397,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -406,7 +408,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -417,7 +419,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -428,7 +430,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -439,7 +441,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -458,7 +460,7 @@ flag = True  # O
 while flag:
     strattoamps = input('Enter a an int for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -469,7 +471,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -480,7 +482,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -491,7 +493,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -502,7 +504,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -513,7 +515,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -526,13 +528,13 @@ print('You entered', Units5)  # ===========================|
 
 
 # SUBSET 6
-print('\n--- Attributes for --- Tr22')
+print('\n--- Attributes for --- Th22')
 
 flag = True  # O
 while flag:
     strattoamps = input('Enter an int for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -543,7 +545,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -554,7 +556,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -565,7 +567,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -576,7 +578,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -587,7 +589,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -606,7 +608,7 @@ flag = True  # O
 while flag:
     strattoamps = input('Enter an int for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -617,7 +619,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -628,7 +630,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -639,7 +641,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -650,7 +652,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -661,7 +663,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -680,7 +682,7 @@ flag = True  # O
 while flag:
     strattoamps = input('Enter an int for Attoamps: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
-    if match_val is None:
+    if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -691,7 +693,7 @@ flag = True
 while flag:
     strACTivation = input('Enter an int for ACTivation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strACTivation)
-    if match_val is None:
+    if match_val is None or int(strACTivation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -702,7 +704,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -713,7 +715,7 @@ flag = True
 while flag:
     strDIFFerentiation = input('Enter an int for DIFFerentiation: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strDIFFerentiation)
-    if match_val is None:
+    if match_val is None or int(strDIFFerentiation) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -724,7 +726,7 @@ flag = True
 while flag:
     strExpression = input('Enter an int for Expression: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strExpression)
-    if match_val is None:
+    if match_val is None or int(strExpression) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -735,7 +737,7 @@ flag = True
 while flag:
     strPlasticity = input('Enter an int for Plasticity: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strPlasticity)
-    if match_val is None:
+    if match_val is None or int(strPlasticity) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
