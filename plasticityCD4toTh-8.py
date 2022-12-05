@@ -4,11 +4,10 @@
                             # Thomas E. Perez       Chair: Professor K. Mkrtchyan
 
 '''
-                            This application is a mixed-integer linear-programming optimization app.
-                            It's a (constrained quadratic model CQM solver problem a simple mixed-integer
-                            linear-programming problem. The paper explains all the details. By the way,
-                            "Big-8" ::=  Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, and Th1. Like the paper
-                            explains, these may or may not evolve from the CD4+ t-cell, (heterogeneity).
+                            This application is a mixed-integer linear-programming optimization application.
+                            It's also a constrained quadratic model (CQM) solver problem.
+                            The paper that accompanies this application explains all the informatopm in details,
+                            as it is a thesis paper.
 
                             The optimization uses a linear objective and constraints.
                             The variables (cctually, objects) are "real-valued" and "integer" values. Eg.,
@@ -21,11 +20,26 @@
                              to be an ON/OFF state, they are AKA:
                             "INTEGER-VALUED" variables.
 '''
-
 '''
                             The attributes, 6 of them are embedded into a Pts{{..}} dict, and processed by user input.
                             The paper accomanying this application explains the details of the application, 
                             including the quantum paradigm used, as well as the process in simple and detailed form.
+                            
+                            I' name "Big-8" as (=::) {Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1}. Like the paper
+                            explains, these may or may not evolve from the CD4+ t-cell, (heterogeneity).
+'''
+'''
+As the paper also explains, it's highly encouraged for for me tp have the user or contributor to clone my 
+Github repo:
+    https://github.com/TomEphraimPerez/learnleap
+to acquire all components and dependencies in order to correct, comment, modify or critique my work. 
+'''
+'''
+This is a command-line driven application. Necessary and helpful commands are:
+$ python -m venv ocean
+$ . ocean/bin/activate
+$ dwave ping --client qpu
+$ dwave solvers --list --all
 '''
 
 
