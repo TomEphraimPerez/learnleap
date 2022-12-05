@@ -22,7 +22,7 @@
 '''
 '''
                             The attributes, 6 of them are embedded into a Pts{{..}} dict, and processed by user input.
-                            The paper accomanying this application explains the details of the application, 
+                            The paper accompanying this application explains the details of the application, 
                             including the quantum paradigm used, as well as the process in simple and detailed form.
                             
                             I' name "Big-8" as (=::) {Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1}. Like the paper
@@ -40,6 +40,11 @@ $ python -m venv ocean
 $ . ocean/bin/activate
 $ dwave ping --client qpu
 $ dwave solvers --list --all
+
+ Last application verion >>>
+ $ python plasticityCD4toTh-8.py
+ For testing/debugging   >>>
+ $ plasticityCD4toTh-TESTONLY.py   
 '''
 
 
@@ -50,29 +55,34 @@ from dwave.system import LeapHybridCQMSampler           #o
 import re
 
 # Python 3.9.2
+print('It\'s advised that reading the research paper that accompanies this application, is read.')
+print('This is a DWaveSys quantum computing CQM solver CD4+ T-help cell problem  on a simple mixed-integer'
+      ' linear-programming,')
+print('\n')
+print('Whether it\'s to test heterogeneity or optimize T-cell types, it\'s a mixed-integer linear-programming'
+       'optimization application optimization (MILP) prob.')
 
-print('This is DWaveSys quantum computing CQM solver prob on a simple mixed-integer linear-programming,')
-print('MILP) type of optimization prob.')
-print('\nThis is a flexible user i/p T-help optimization problem that can hopefully with some sound')
-print('logic and accuracy initially, be a useful application since it\'s somewhat of a nascent application.')
+print('\nThis uses flexible user i/p T-help optimizations that can hopefully, with some sound')
+print('logic and accuracy, be a useful application since it\'s a nascent application.')
+
+print('There is no such Related Work section in the research paper that accompanies this application.')
+
 print('Hopefully some GitHub forkers can contribute. The goal is to optimize CD4+ T-cell subsets as per')
 print('Carbo et al, derived from the following attributes of each heterogeneous subset of the CD4+ T-cell:')
-
 print('\n† attomaps, ACTivation, EXPansion, DIFFerentiation, Expression, and Plasticity.')
 print('Not all these have to be included in the user input. \'Attoamps\', (10^-18 a) is a theory.')
-print('Ie., I declare, with the aid of citations, a little experience, logic and heuristics, to be a valid')
-print('and necessary attribute. The candidate subsets are:')
 
+print('The candidate subsets are:')
 print('\nTfh, Th9, Th2, iTreg, Tr1, Tr22, Tr17 and Th1.')
 print('All these T-helper cells (via heterogeneity) are what I\'ll refer to as \'The big-8\', since these 8')
 print('were discussed by Carbo et al. This of course is cited, and is the primary source of inspiration')
-print('for this thesis. Of course the thesis will explain in detail.')
+print('for this thesis. Of course the thesis will explain in detail, most everything necessary.')
 
-print('\n\tOf course, this application MUST BE BACKED UP BY LABORATORY verification and validation through')
+print('\n\tOf course, this application MUST/SHOULD BE BACKED UP BY LABORATORY verification and validation through')
 print('\tdocumented experimentation and peer-reviewed results. This author is very open to suggestions and comments.')
 print('\n\n')
 
-# Self notes:
+# Self notes >>>
 # attribute = ['Attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation', 'Expression', 'Plasticity']
 # Pts dict of Pts' Pts.
 # Attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, Attoamps = 10^-18a.
