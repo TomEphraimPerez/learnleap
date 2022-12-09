@@ -16,7 +16,7 @@
                             "continuous", (0 < inf in this app). These are AKA:
                             "REAL-VALUED" variables.
 
-                            "Discrete" units (eg., ACTivation, DIFFerentiation, and Expression, can be cnstrued
+                            "Discrete" units (eg., ACTivation, DIFFerentiation, and Expression, can be construed
                              to be an ON/OFF state, they are AKA:
                             "INTEGER-VALUED" variables.
 '''
@@ -47,6 +47,23 @@ $ dwave solvers --list --all
  $ plasticityCD4toTh-TESTONLY.py   
 '''
 
+'''
+The Goal:
+Given nominal attribute values of;
+>>> min_attributes† = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY
+
+for each protein, we want to optimize the ACTivation at the cost of Plasticity, while maintaining the 
+† minimum attributes' requirements.    
+
+"(Total ACTivation of x.xx at Plasticity y.yy)" in the returned results of the Solver is the weight of 
+ACTivation against opposing PLasticity.
+
+>>> max_attoamps = 80 
+is here to demonstrate that a contributor to the Github repo (above) can arbitrarily change the open-source
+coding to reflect an attribute (and assign values to it as normal). In this code, 'attoamos' is my concept
+of what I believe is a valid attribute, albeit not standardized as of this writing. Signal Strength is a 
+topic in citation [3] in the accompanying paper for this application, however.
+'''
 
 import dimod as dimod
 from dwave.system import LeapHybridCQMSampler           #o
@@ -78,8 +95,12 @@ print('All these T-helper cells (via heterogeneity) are what I\'ll refer to as \
 print('were discussed by Carbo et al. This of course is cited, and is the primary source of inspiration')
 print('for this thesis. Of course the thesis will explain in detail, most everything necessary.')
 
+print('\nPlease see the end of the comments in the open-source code for \'attoamps.\'')
+
 print('\n\tOf course, this application MUST/SHOULD BE BACKED UP BY LABORATORY verification and validation through')
 print('\tdocumented experimentation and peer-reviewed results. This author is very open to suggestions and comments.')
+
+print('Instructions are easy-to-follow instructions upon launching the application via CLI.')
 print('\n\n')
 
 # Self notes >>>
@@ -811,13 +832,12 @@ print(Pts)  # ok
 print('\n')
 
 min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY ASMTs
-max_attoamps = 80  # for setting up bounds. See 12 lines below.
+max_attoamps = 80  # for setting up bounds. See line ~857 below. See end of comments above.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
 # inc higher-order non-quadratic models.
 # quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"       # O an f-string. '{Pt}'..
 quantities = [dimod.Real(f"{Pt}") if Pts[Pt]["Units"] == "continuous"
-              # ..will (have been) be replaced by a value.
               else dimod.Integer(f"{Pt}")
               for Pt in Pts.keys()]  # key = eg amps : value = 2
 
@@ -837,10 +857,10 @@ for ind, Pt in enumerate(Pts.keys()):
     quantities[ind].set_upper_bound(Pt, ub)
 
 qub = quantities[0].upper_bound("Tfh")  # quantity ub from Tfh=X, Th1=X, Th22=X, Th17=X,
-print('\nquantities[0].ub (upper bound TESTONLY.py) is: ', qub)
+print('\nquantities[0].ub (upper bound plasticityCD4toTh-x.py) is: ', qub)
 print('\n\n')
 
-# setup the OBJective Fn w a UTILity Fn             # OBJECTIVE Fn     <<<
+# setup the OBJective Fn w/ a UTILity Fn             # OBJECTIVE Fn     <<<
 cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
 
 
@@ -849,23 +869,23 @@ cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
 # such as ACTivation;
 def total_mix(quantity, category):
     return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for Pt in Pts.keys() )) )
-    # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
+# ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a={..}, b={..}
 
 
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
 # is multiplied by -1 and minimized.
 # cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 8 * total_mix(quantities, "Plasticity")) #'-'ok. 6->8
-cqm.set_objective(-total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity"))   # 8 Pt subsets
+cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity"))   # 8 Pt subsets
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 
 # TUNING/Constraints
-# Constrain the Thelp’s MAXIMUM current i.
+# Constrain the T-help’s MAXIMUM current i.
 cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Attoamps")  # rtn 'Attoamps'
 
 # Require that the nominal MINIMUM of each Th attribute is met or exceeded.
-# THIS SHOULD BE USER DEFINED AS WELL.
+# This can be user defined as well.
 for attribute, amount in min_attributes.items():    # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
@@ -903,8 +923,11 @@ CQM) solver on a simple mixed-integer linear-programming (MILP) type of optimiza
 sampleset = sampler.sample_cqm(cqm)  # SUBMIT THE PROBLEM to solver.
 feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)  # A num. 'Filter' is a dimod API/class.
 # 'filter' rtns a new sampleset with rows filtered by the given predicate. From dimod.
-# 'pred', a Fn th accepts a named tuple as returned by :meth:'.data', and rtns a :class:'bool'
-# lambda creates anonymous Fns -> function obj.
+# Parameters: 'pred', a Fn that accepts a named tuple as returned by :meth:'.data', and rtns a :class:'bool'
+# returns: A new sampleset with only the data rows for which 'pred' returns.
+# lambda (expressions or forms), creates anonymous Fns.
+#   The expression, (lambda args : expression), yields a function object (here, it's "row.is_feasible").
+
 
 print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
 
@@ -919,12 +942,13 @@ def print_Thelpers(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
         # rhs_energy is a dimod float attribute
 
-# The best solution found in this current execution was a T-help of Tr1 and bananas, with
-# Th22 completing the required DIFFerentiation and ACTivation portions
+# The best solution found in this current execution was a T-help of Tr1 and (__), with
+# Th22 completing the required DIFFerentiation and ACTivation portions -
+    # ASSUMING (ACTivation vs DIFFERENtiation),  as opposed to (ACTivation vs Plasticity).
 best = feasible_sampleset.first.sample
-print('\nprint_T-HELPERS <- CD4T+ (differentiated or via plasticity) (BEST): ')
+print('\nprint_T-HELPERS <- CD4T+ (Total ACTivation of x.xx at Plasticity y.yy) (BEST): ')
 print_Thelpers(best)
-''' >>>  a la:
+''' >>>  eg., :
 Thelp: {'Th22': 1.0, 'Th2': 6.0, 'Tr1': 4.1, 'iTreg': 0.3, 'Tfh': 0.0, 'Th9': 0.0}
 Total DIFFerentiation of 86.56 at Plasticity 9.46
 ACTivation (nominal: 2000): 5
@@ -933,20 +957,24 @@ ACTivation (nominal: 30): 42
 EXPansion (nominal: 130): 372
 DIFFerentiation (nominal: 30): 46
 >>>
-The result is the same : )
+The result is the same.
 
-In statistics, nominal data (also known as nominal scale) is a type of data that is used to label variables
+In statistics, 'nominal' data (AKA 'nominal scale') is a type of data that is used to label variables
     without providing any quantitative value. It is the simplest form of a scale of measure.
 '''
 
 '''
 # TUNING THE SOLUTION
+    # Still ASSUMING (ACTivation vs DIFFERENtiation),  as opposed to (ACTivation vs Plasticity).
 	# # TUNING THE SOLUTION !
-# RECALL; Objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing purchase Plasticity.
+# RECALL; Objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing Plasticity.
 	# So re min Plasticity, Plasticity_min  = min SUMMA_i (qty_i * Plasticity_i)
 	#	            DIFFerentiation_max  = max SUMMA_i (qty_i * DIFFerentiation_i)
 
-	# To optimize two different objectives, DIFFerentiation and Plasticity, requires weighing one AGAINST the other.
+
+
+
+	# To optimize two different objectives, ACTivation and Plasticity, requires weighing one AGAINST the other.
 
  	# A simple way to do this, is to set priority weights; for example,
         #	OBJective = alpha(obj_1) + beta(obj_1). eg alpha can = 2, beta can = 1,
@@ -956,9 +984,9 @@ In statistics, nominal data (also known as nominal scale) is a type of data that
 # Consider sampling each part of the combined objective ON ITS OWN (alpha=0, beta=1 and vv)
 # and comparing the best solutions.
 
-# Start with DIFFerentiation: -----------------------------------------------------------------------||
-cqm.set_objective(- total_mix(quantities, "ACTivation"))  # NOTE THE MINUS for least energy for eigenspectrum.
-sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
+# Start with ACTivation: -----------------------------------------------------------------------||
+cqm.set_objective(- total_mix(quantities, "ACTivation")) #NOTE THE MINUS for least energy; eigenspectrum.
+sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 10 - 20 lines down.
 feasible_sampleset_ACTivation = sampleset_ACTivation.filter(lambda row: row.is_feasible)
 best_ACTivation = feasible_sampleset_ACTivation.first
 print('best_ACTivation.ENERGY: ', round(best_ACTivation.energy))
@@ -1003,22 +1031,22 @@ It relies mainly on Tr1 and uses Th22 to add ACTivation and DIFFerentiation.
 '''
 Because of the differences in energy scale between the two parts of the combined objective,
 177 >> 3,  if you do not multiply the part representing Plasticity by some positive factor, optimal 
-solutions will maximize DIFFerentiation and neglect Plasticity. That is, if in 
+solutions will maximize ACTivation and neglect Plasticity. That is, if in 
 obj - alpha(obj1 + beta(obj2)), you set alpha=1=beta.
 solutions will likely be 
   close or 
   identical 
-to those found when optimizing for DIFFerentiation alone.
+to those found when optimizing for ACTivation alone.
 '''
 
-''' SEE GRAPH with y-axis=Energy, x-axis=Multiplier, variables are DIFFerentiation, Plasticity and total. 
+''' SEE GRAPH with y-axis=Energy, x-axis=Multiplier, variables are ACTivation, Plasticity and total. 
 # This quantum application is an adaptation from DWaveSys quantum code from:
 https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals
 '''
 
 '''
- ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize DIFFerentiation, 
-    DIFFerentiation is multiplied by -1 and minimized.)
+ ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize ACTivation, 
+    ACTivation is multiplied by -1 and minimized.)
 # This quantum application is an adaptation from DWaveSys quantum code from:
 # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-Thelp-reals ††
 '''
@@ -1027,8 +1055,8 @@ https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074550/
 The fact that it is possible to reprogram cells by either perturbing their environment or changing their 
 genomic output artificially, indicates that that the 
-plasticity of the differentiated state may not be restricted 
-to simple animals, and that programs for differentiation may be more prevalent and much more broadly distributed 
-among all animals (including humans) than most care to contemplate at the present time.
+plasticity of the activated state may not be restricted 
+to simple animals, and that programs for activation (or diff'n) may be more prevalent and much more 
+broadly distributed among all animals (including humans) than most care to contemplate at the present time.
 '''
 
