@@ -226,4 +226,3 @@ https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-
  ††† (Recall; Set the objective2. Because Ocean solvers minimize objectives, to maximize Expression, Expression is 
           multiplied by -1 and minimized.)
 '''
-
