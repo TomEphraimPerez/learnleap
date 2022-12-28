@@ -10,7 +10,7 @@
                             as it is a thesis paper.
 
                             The optimization uses a linear objective and constraints.
-                            The variables (cctually, objects) are "real-valued" and "integer" values. Eg.,
+                            The variables (actually, objects) are "real-valued" and "integer" values. Eg.,
                             this relates to the Big-8 proteins (Pts), ie., the subsets of the CD4 T-help
                             cell in which the "Units" will be;
                             "continuous", (0 < inf in this app). These are AKA:
@@ -833,7 +833,7 @@ print('Pts ------------------- > > > ')
 print(Pts)  # ok
 
 print('\n')
-
+# The '4' in DIFFerentiation: 4 REPEATS <-> Bug  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY ASMTs
 max_attoamps = 80  # for setting up bounds. See line ~859 below. See end of comments above.
 
@@ -878,7 +878,10 @@ def total_mix(quantity, category):
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
 # is multiplied by -1 and minimized!
 # cqm.set_objective( - total_mix(quantities, "DIFFerentiation") + 8 * total_mix(quantities, "Plasticity"))
-cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity"))  # 8 Pt subsets
+#cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity")) # Lambda=8
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 6 * total_mix(quantities, "Plasticity")) # Lambda=6
+cqm.set_objective( - total_mix(quantities, "ACTivation") + 15 * total_mix(quantities, "Plasticity")) # Lambda=15
+
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
@@ -892,7 +895,7 @@ cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Att
 for attribute, amount in min_attributes.items():  # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
-    # 'ACTivation'                                    # Already used in cqm.set_objective(- ...) above.
+#   'ACTivation' # Already used in cqm.set_objective(- ...) above. # UNcommenting only makes E-table 96% 56.0.
     'EXPansion'
     'DIFFerentiation'
 
@@ -996,13 +999,18 @@ In statistics, nominal data (also known as nominal scale) is a type of data that
 
 # Start with ACTivation: -----------------------------------------------------------------------||
 cqm.set_objective(- total_mix(quantities, "ACTivation")) #NOTE THE MINUS for least energy; eigenspectrum.
+# ~O >>>
+print('\n\n\t\t\t\tEnergy Table | Lowest Energy eigenvalues values wins')
+for sample, energy in sampleset.data(['sample', 'energy']):
+    print(sample, energy)
+
 sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
 feasible_sampleset_ACTivation = sampleset_ACTivation.filter(lambda row: row.is_feasible)
 best_ACTivation = feasible_sampleset_ACTivation.first
-print('best_ACTivation.ENERGY: ', round(best_ACTivation.energy))
+print('\n\nbest_ACTivation.ENERGY: ', round(best_ACTivation.energy))
 # >>> a la -177
 
-print('\nbest_ACTivation.SAMPLE: ')
+print('\n\nbest_ACTivation.SAMPLE: ')
 print_Thelpers(best_ACTivation.sample)
 # >>> a la;
 '''
@@ -1015,14 +1023,23 @@ Total ACTivation of 6 at Plasticity 3.1 rounded off:
 '''
 
 # NOW with Plasticity:  --------------------------------------------------------------------------||
-cqm.set_objective(total_mix(quantities, "Plasticity"))
+cqm.set_objective(total_mix(quantities, "Plasticity"))  # + total mix !
 sampleset_Plasticity = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines up.
 feasible_sampleset_Plasticity = sampleset_Plasticity.filter(lambda row: row.is_feasible)
 best_Plasticity = feasible_sampleset_Plasticity.first
 print(round(best_Plasticity.energy))
 
-print('\nbest_Plasticity.SAMPLE: ')
+print('\n\nbest_Plasticity.SAMPLE: ')
 print_Thelpers(best_Plasticity.sample)
+
+
+# ~O >>>
+# USE/ fr line 933
+  # sampleset = sampler.sample_cqm(cqm)  # SUBMIT THE PROBLEM to solver.
+'''  
+for sample, energy in sampleset.data(['sample', 'energy']):
+    print(sample, energy)
+'''
 
 print('\n\n\t\t\t\t\t\tEND')
 print('\n\n')

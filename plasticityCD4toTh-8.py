@@ -10,7 +10,7 @@
                             as it is a thesis paper.
 
                             The optimization uses a linear objective and constraints.
-                            The variables (cctually, objects) are "real-valued" and "integer" values. Eg.,
+                            The variables (actually, objects) are "real-valued" and "integer" values. Eg.,
                             this relates to the Big-8 proteins (Pts), ie., the subsets of the CD4 T-help
                             cell in which the "Units" will be;
                             "continuous", (0 < inf in this app). These are AKA:
@@ -830,7 +830,7 @@ print('Pts ------------------- > > > ')
 print(Pts)  # ok
 
 print('\n')
-
+# The '4' in DIFFerentiation: 4 REPEATS <-> Bug  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY ASMTs
 max_attoamps = 80  # for setting up bounds. See line ~857 below. See end of comments above.
 
@@ -889,7 +889,7 @@ cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Att
 for attribute, amount in min_attributes.items():    # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
-  # 'ACTivation'                                    # Already used in cqm.set_objective(- ...) above.
+  # 'ACTivation' # Already used in cqm.set_objective(- ...) above. # UNcommenting only makes E-table 96% 56.0.
     'EXPansion'
     'DIFFerentiation'
 
@@ -1013,6 +1013,8 @@ print(round(best_Plasticity.energy))
 
 print('\nbest_Plasticity.SAMPLE: ')
 print_Thelpers(best_Plasticity.sample)
+
+
 
 print('\n\n\t\t\t\t\t\tEND')
 print('\n\n')
