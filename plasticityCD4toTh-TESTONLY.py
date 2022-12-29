@@ -833,7 +833,7 @@ print('Pts ------------------- > > > ')
 print(Pts)  # ok
 
 print('\n')
-# The '4' in DIFFerentiation: 4 REPEATS <-> Bug  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# The '4' in DIFFerentiation: 4 REPEATS <-> Bug -   XXXXXXXXXXXXXXXXXX see notebook XXXXXXXXXXXXXXXXXXX
 min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY ASMTs
 max_attoamps = 80  # for setting up bounds. See line ~859 below. See end of comments above.
 
@@ -878,13 +878,15 @@ def total_mix(quantity, category):
 # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
 # is multiplied by -1 and minimized!
 # cqm.set_objective( - total_mix(quantities, "DIFFerentiation") + 8 * total_mix(quantities, "Plasticity"))
-#cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity")) # Lambda=8
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 1 * total_mix(quantities, "Plasticity")) # Lambda=15
+cqm.set_objective( - total_mix(quantities, "ACTivation") + 2 * total_mix(quantities, "Plasticity")) # Lambda=15
 # cqm.set_objective( - total_mix(quantities, "ACTivation") + 6 * total_mix(quantities, "Plasticity")) # Lambda=6
-cqm.set_objective( - total_mix(quantities, "ACTivation") + 15 * total_mix(quantities, "Plasticity")) # Lambda=15
-
-# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity")) # Lambda=8
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 15 * total_mix(quantities, "Plasticity")) # Lambda=15
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 30 * total_mix(quantities, "Plasticity")) # Lambda=15
+# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 
 # TUNING/Constraints
 # Constrain the T-help’s MAXIMUM current i.
@@ -895,7 +897,7 @@ cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Att
 for attribute, amount in min_attributes.items():  # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
-#   'ACTivation' # Already used in cqm.set_objective(- ...) above. # UNcommenting only makes E-table 96% 56.0.
+#   'ACTivation' # Already used in cqm.set_objective(-..) above. # UNcommenting makes a small chg in E-table.
     'EXPansion'
     'DIFFerentiation'
 
@@ -1037,11 +1039,14 @@ print_Thelpers(best_Plasticity.sample)
 # USE/ fr line 933
   # sampleset = sampler.sample_cqm(cqm)  # SUBMIT THE PROBLEM to solver.
 '''  
-for sample, energy in sampleset.data(['sample', 'energy']):
+for sample, energy in sampleset.data(['sample', 'energy']): # O
     print(sample, energy)
 '''
 
-print('\n\n\t\t\t\t\t\tEND')
+print('\n\n\t\t\t\t\t\t\t\tEND')
+print('\n\n\t\t\t\t\t\t\t\tCharge time >>>')
+ssi = sampleset.info                              # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+print(ssi)
 print('\n\n')
 '''>>> a la
 Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
