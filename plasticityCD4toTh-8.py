@@ -1,7 +1,7 @@
 #
 
-                            # PLASTICITY of CD4+T to "The Big-8"  Optimization - Using the D-WaveSys QPU.
-                            # Thomas E. Perez       Chair: Professor K. Mkrtchyan
+# PLASTICITY of CD4+T to "The Big-8"  Optimization - Using the D-WaveSys QPU.
+# Thomas E. Perez       Chair: Professor K. Mkrtchyan
 
 '''
                             This application is a mixed-integer linear-programming optimization application.
@@ -24,7 +24,7 @@
                             The attributes, 6 of them are embedded into a Pts{{..}} dict, and processed by user input.
                             The paper accompanying this application explains the details of the application, 
                             including the quantum paradigm used, as well as the process in simple and detailed form.
-                            
+
                             I' name "Big-8" as (=::) {Tfh, Th9, Th2, iTreg, Tr1, Th22, Th17, Th1}. Like the paper
                             explains, these may or may not evolve from the CD4+ t-cell, (heterogeneity).
 '''
@@ -33,6 +33,11 @@ As the paper also explains, it's highly encouraged for for me tp have the user o
 Github repo:
     https://github.com/TomEphraimPerez/learnleap
 to acquire all components and dependencies in order to correct, comment, modify or critique my work. 
+
+Both:
+>>> min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}
+>>> max_attoamps = 80  
+are hard-coded and may be changed at any time by the user or coder/author.
 '''
 '''
 This is a command-line driven application. Necessary and helpful commands are:
@@ -50,13 +55,12 @@ $ dwave solvers --list --all
 '''
 The Goal:
 Given nominal attribute values of;
->>> min_attributes† = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY
-
+  min_attributes † = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY
 for each protein, we want to optimize the ACTivation at the cost of Plasticity, while maintaining the 
 † minimum attributes' requirements.    
 
-"(Total ACTivation of x.xx at Plasticity y.yy)" in the returned results of the Solver is the weight of 
-ACTivation against opposing PLasticity.
+"(Total ACTivation of x.xx at Plasticity y.yy)"
+is the weight of ACTivation against opposing PLasticity.
 
 >>> max_attoamps = 80 
 is here to demonstrate that a contributor to the Github repo (above) can arbitrarily change the open-source
@@ -66,7 +70,7 @@ topic in citation [3] in the accompanying paper for this application, however.
 '''
 
 import dimod as dimod
-from dwave.system import LeapHybridCQMSampler           #o
+from dwave.system import LeapHybridCQMSampler  # o
 # from dimod.core import sampler
 # from dwave.system import LeapHybridCQMSampler         #o
 import re
@@ -77,7 +81,7 @@ print('This is a DWaveSys quantum computing CQM solver CD4+ T-help cell problem 
       ' linear-programming,')
 print('\n')
 print('Whether it\'s to test heterogeneity or optimize T-cell types, it\'s a mixed-integer linear-programming'
-       'optimization application optimization (MILP) prob.')
+      'optimization application optimization (MILP) prob.')
 
 print('\nThis uses flexible user i/p T-help optimizations that can hopefully, with some sound')
 print('logic and accuracy, be a useful application since it\'s a nascent application.')
@@ -89,18 +93,18 @@ print('Carbo et al, derived from the following attributes of each heterogeneous 
 print('\n† attomaps, ACTivation, EXPansion, DIFFerentiation, Expression, and Plasticity.')
 print('Not all these have to be included in the user input. \'Attoamps\', (10^-18 a) is a theory.')
 
+print('\nPlease see the end of the comments in the open-source code for \'attoamps.\'')
+
 print('The candidate subsets are:')
 print('\nTfh, Th9, Th2, iTreg, Tr1, Tr22, Tr17 and Th1.')
 print('All these T-helper cells (via heterogeneity) are what I\'ll refer to as \'The big-8\', since these 8')
 print('were discussed by Carbo et al. This of course is cited, and is the primary source of inspiration')
 print('for this thesis. Of course the thesis will explain in detail, most everything necessary.')
 
-print('\nPlease see the end of the comments in the open-source code for \'attoamps.\'')
-
 print('\n\tOf course, this application MUST/SHOULD BE BACKED UP BY LABORATORY verification and validation through')
 print('\tdocumented experimentation and peer-reviewed results. This author is very open to suggestions and comments.')
 
-print('Instructions are easy-to-follow instructions upon launching the application via CLI.')
+print('\n\tInstructions are easy-to-follow instructions upon launching the application via CLI.')
 print('\n\n')
 
 # Self notes >>>
@@ -109,7 +113,7 @@ print('\n\n')
 # Attoamps -> picoamp = 10^-12a, femtoamps =10^-15a, Attoamps = 10^-18a.
 
 
-#Declare 8 CD4+ T-help subset attributes for Proteins (Pts) nested dict on next block. There are 8 CD4+ T-help subsets
+# Declare 8 CD4+ T-help subset attributes for Proteins (Pts) nested dict on next block. There are 8 CD4+ T-help subsets
 strattoamps1 = 0
 strACTivation1 = 0
 strEXPansion1 = 0
@@ -305,7 +309,7 @@ flag = True
 while flag:
     strEXPansion = input('Enter an int > 0 for EXPansion: ')
     match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strEXPansion)
-    if match_val is None or int(strEXPansion ) < 0:
+    if match_val is None or int(strEXPansion) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
         flag = False
@@ -578,7 +582,7 @@ print('\n--- Attributes for --- Th22')
 flag = True  # O
 while flag:
     strattoamps = input('Enter an int for Attoamps: ')
-    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps) #ints & floats not preceded w letters, colon
+    match_val = re.match(r"(?<![a-zA-Z:])[-+]?\d*\.?\d+", strattoamps)  # ints & floats not preceded w letters, colon
     if match_val is None or int(strattoamps) < 0:
         print("\n\t\tPlease enter a vAliD number.")
     else:
@@ -819,7 +823,6 @@ Pts = {'Tfh': {'Attoamps': strattoamps1, 'ACTivation': strACTivation1, 'EXPansio
                'DIFFerentiation': strDIFFerentiation8, 'Expression': strExpression8, 'Plasticity': strPlasticity8,
                'Units': Units8}}
 
-
 for p_id, p_info in Pts.items():
     print("\nNEW VALUES: ", p_id)
     for key in p_info:
@@ -830,9 +833,9 @@ print('Pts ------------------- > > > ')
 print(Pts)  # ok
 
 print('\n')
-# The '4' in DIFFerentiation: 4 REPEATS <-> Bug  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# The '4' in DIFFerentiation: 4 REPEATS <-> Bug -   XXXXXXXXXXXXXXXXXX see notebook XXXXXXXXXXXXXXXXXXX
 min_attributes = {"Expression": 1, "ACTivation": 2, "EXPansion": 3, "DIFFerentiation": 4}  # ARBITRARY ASMTs
-max_attoamps = 80  # for setting up bounds. See line ~857 below. See end of comments above.
+max_attoamps = 80  # for setting up bounds. See line ~859 below. See end of comments above.
 
 # quantities list | dimod is a shared API for samplers and provides classes for eg., QM's
 # inc higher-order non-quadratic models.
@@ -853,14 +856,14 @@ print(2*quantities[0])                                  # Now dbl lin bias
 '''
 
 for ind, Pt in enumerate(Pts.keys()):
-    ub = max_attoamps / Pts[Pt]['Attoamps']         # O
+    ub = max_attoamps / Pts[Pt]['Attoamps']  # O
     quantities[ind].set_upper_bound(Pt, ub)
 
 qub = quantities[0].upper_bound("Tfh")  # quantity ub from Tfh=X, Th1=X, Th22=X, Th17=X,
-print('\nquantities[0].ub (upper bound plasticityCD4toTh-x.py) is: ', qub)
+print('\nquantities[0].ub (upper bound TESTONLY.py) is: ', qub)
 print('\n\n')
 
-# setup the OBJective Fn w/ a UTILity Fn             # OBJECTIVE Fn     <<<
+# setup the OBJective Fn w a UTILity Fn                 # OBJECTIVE Fn     <<<
 cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
 
 
@@ -868,28 +871,34 @@ cqm = dimod.ConstrainedQuadraticModel()  # NOT arbitrarily set alpha=2 beta=1;
 # You can define a utility function, TOTAL_MIX, to calculate the summations for any given CATEGORY
 # such as ACTivation;
 def total_mix(quantity, category):
-    return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for Pt in Pts.keys() )) )
-# ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a={..}, b={..}
+    return sum(q * c for q, c in zip(quantity, (Pts[Pt][category] for Pt in Pts.keys())))
+    # ZIP https://www.w3schools.com/python/ref_func_zip.asp -> ordered pairs (('',''),('','')) fr a=, b=
+
+    # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
+    # is multiplied by -1 and minimized!
+    # cqm.set_objective( - total_mix(quantities, "DIFFerentiation") + 8 * total_mix(quantities, "Plasticity"))
+    # cqm.set_objective( - total_mix(quantities, "ACTivation") + 1 * total_mix(quantities, "Plasticity")) # Lambda=15
 
 
-# Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
-# is multiplied by -1 and minimized.
-# cqm.set_objective(-total_mix(quantities, "DIFFerentiation") + 8 * total_mix(quantities, "Plasticity")) #'-'ok. 6->8
-cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity"))   # 8 Pt subsets
-# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+cqm.set_objective(- total_mix(quantities, "ACTivation") + 2 * total_mix(quantities, "Plasticity"))  # Lambda=15
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 6 * total_mix(quantities, "Plasticity")) # Lambda=6
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity")) # Lambda=8
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 15 * total_mix(quantities, "Plasticity")) # Lambda=15
+# cqm.set_objective( - total_mix(quantities, "ACTivation") + 30 * total_mix(quantities, "Plasticity")) # Lambda=15
+# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 
 # TUNING/Constraints
 # Constrain the T-help’s MAXIMUM current i.
 cqm.add_constraint(total_mix(quantities, "Attoamps") <= max_attoamps, label="Attoamps")  # rtn 'Attoamps'
 
 # Require that the nominal MINIMUM of each Th attribute is met or exceeded.
-# This can be user defined as well.
-for attribute, amount in min_attributes.items():    # Items() is a BI.  # Note: 'MIN-ATTRs'
+# THIS CAN BE USER DEFINED AS WELL.
+for attribute, amount in min_attributes.items():  # Items() is a BI.  # Note: 'MIN-ATTRs'
     cqm.add_constraint(total_mix(quantities, attribute) >= amount, label=attribute)
     'Expression'
-  # 'ACTivation' # Already used in cqm.set_objective(- ...) above. # UNcommenting only makes E-table 96% 56.0.
+    #   'ACTivation' # Already used in cqm.set_objective(-..) above. # UNcommenting makes a small chg in E-table.
     'EXPansion'
     'DIFFerentiation'
 
@@ -897,16 +906,19 @@ for attribute, amount in min_attributes.items():    # Items() is a BI.  # Note: 
 constraintsDictLabelsAsKeys = list(cqm.constraints.keys())  # @overld. __def__ init(self). @ is polymorph.
 # list(cqm.constraints.keys())                      # ['Attoamps', 'ACTivation', 'EXPansion', 'DIFFerentiation']
 print('\nConstraints Dict w/ labels as keys: ', constraintsDictLabelsAsKeys)
-print('Attoamps(has max) constraints (as polystr):', cqm.constraints['Attoamps'].to_polystring())  # hates Attoamps
-# 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv
+print('Attoamps(has max) constraints (as polystr):', cqm.constraints['Attoamps'].to_polystring())
+# Eg., 100*Tfh + 140*Th9 + 90*Th2 + 150*iTreg + 270*Tr1 + 300*Th22 <= 2000, what is gvn abv.
 print('cqm.constraints[Expression].to_polystring(): ', cqm.constraints['Expression'].to_polystring())
-# 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv
+# Eg., 3*Tfh + 17*Th9 + Th2 + 9*iTreg + 9*Tr1 + 4*Th22 >= 50  , what is gvn abv.
 
 '''
 Solve the Problem by Sampling
 Solve the Problem by Sampling
-D-Wave’s quantum cloud service provides cloud-based hybrid solvers you can submit arbitrary QMs to.
-These solvers, which implement state-of-the-art classical algorithms together with intelligent allocation
+D-Wave’s quantum cloud service provides cloud-based hybrid solvers we can submit arbitrary QMs to.
+These solvers, which implement state-of-the-art classical algorithms together with:
+
+    intelligent allocation
+
 of the quantum processing unit (QPU) to parts of the problem where it benefits most, are designed to
 accommodate even very large problems.
 Ocean software’s dwave-system LeapHybridCQMSampler class enables you to easily incorporate Leap’s hybrid
@@ -917,17 +929,20 @@ sampler = LeapHybridCQMSampler()
 
 '''
 Submit the CQM to the selected solver. For one particular execution, the CQM hybrid sampler returned 
-49 samples, out of which 25 were solutions that met all the constraints.
+"49 samples out of which 25 were solutions" 
+
+    ["FEASIBILITY"] 
+
+that met all the constraints eg.
 CQM) solver on a simple mixed-integer linear-programming (MILP) type of optimization problem.
 '''
 sampleset = sampler.sample_cqm(cqm)  # SUBMIT THE PROBLEM to solver.
 feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)  # A num. 'Filter' is a dimod API/class.
-# 'filter' rtns a new sampleset with rows filtered by the given predicate. From dimod.
-# Parameters: 'pred', a Fn that accepts a named tuple as returned by :meth:'.data', and rtns a :class:'bool'
+# 'filter' rtns a new sampleset with rows filtered by the given predicate.
+# 'pred', a Fn th accepts a named tuple as returned by :meth:'.data', and rtns a :class:'bool'
 # returns: A new sampleset with only the data rows for which 'pred' returns.
-# lambda (expressions or forms), creates anonymous Fns.
+# lambda creates anonymous Fns -> function objective.
 #   The expression, (lambda args : expression), yields a function object (here, it's "row.is_feasible").
-
 
 print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampleset), len(sampleset)))
 
@@ -942,13 +957,14 @@ def print_Thelpers(sample):
         print(f"{constraint.label} (nominal: {constraint.rhs_energy}): {round(constraint.lhs_energy)}")
         # rhs_energy is a dimod float attribute
 
-# The best solution found in this current execution was a T-help of Tr1 and (__), with
-# Th22 completing the required DIFFerentiation and ACTivation portions -
-    # ASSUMING (ACTivation vs DIFFERENtiation),  as opposed to (ACTivation vs Plasticity).
+
+# The best solution found in this current execution was a T-help of Tr1 and (_ _ _), with
+# Th22 completing the required DIFFerentiation and ACTivation portions
+# ASSUMING (ACTivation vs DIFFERENtiation),  as opposed to (ACTivation vs Plasticity).
 best = feasible_sampleset.first.sample
 print('\nprint_T-HELPERS <- CD4T+ (Total ACTivation of x.xx at Plasticity y.yy) (BEST): ')
 print_Thelpers(best)
-''' >>>  eg., :
+''' >>>  a la:
 Thelp: {'Th22': 1.0, 'Th2': 6.0, 'Tr1': 4.1, 'iTreg': 0.3, 'Tfh': 0.0, 'Th9': 0.0}
 Total DIFFerentiation of 86.56 at Plasticity 9.46
 ACTivation (nominal: 2000): 5
@@ -957,16 +973,16 @@ ACTivation (nominal: 30): 42
 EXPansion (nominal: 130): 372
 DIFFerentiation (nominal: 30): 46
 >>>
-The result is the same.
+The result is the same : )
 
-In statistics, 'nominal' data (AKA 'nominal scale') is a type of data that is used to label variables
+In statistics, nominal data (also known as nominal scale) is a type of data that is used to label variables
     without providing any quantitative value. It is the simplest form of a scale of measure.
 '''
 
 '''
 # TUNING THE SOLUTION
-    # Still ASSUMING (ACTivation vs DIFFERENtiation),  as opposed to (ACTivation vs Plasticity).
-	# # TUNING THE SOLUTION !
+    # # ASSUMING (ACTivation vs DIFFERENtiation),  as opposed to (ACTivation vs Plasticity).
+	# TUNING THE SOLUTION !
 # RECALL; Objective function must maximize DIFFerentiation of the Thelp’s Pts while minimizing Plasticity.
 	# So re min Plasticity, Plasticity_min  = min SUMMA_i (qty_i * Plasticity_i)
 	#	            DIFFerentiation_max  = max SUMMA_i (qty_i * DIFFerentiation_i)
@@ -985,14 +1001,19 @@ In statistics, 'nominal' data (AKA 'nominal scale') is a type of data that is us
 # and comparing the best solutions.
 
 # Start with ACTivation: -----------------------------------------------------------------------||
-cqm.set_objective(- total_mix(quantities, "ACTivation")) #NOTE THE MINUS for least energy; eigenspectrum.
-sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 10 - 20 lines down.
+cqm.set_objective(- total_mix(quantities, "ACTivation"))  # NOTE THE MINUS for least energy; eigenspectrum.
+# ~O >>>
+print('\n\n\t\t\t\tEnergy Table | Lowest Energy eigenvalues values wins')
+for sample, energy in sampleset.data(['sample', 'energy']):
+    print(sample, energy)
+
+sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
 feasible_sampleset_ACTivation = sampleset_ACTivation.filter(lambda row: row.is_feasible)
 best_ACTivation = feasible_sampleset_ACTivation.first
-print('best_ACTivation.ENERGY: ', round(best_ACTivation.energy))
+print('\n\nbest_ACTivation.ENERGY: ', round(best_ACTivation.energy))
 # >>> a la -177
 
-print('\nbest_ACTivation.SAMPLE: ')
+print('\n\nbest_ACTivation.SAMPLE: ')
 print_Thelpers(best_ACTivation.sample)
 # >>> a la;
 '''
@@ -1005,18 +1026,27 @@ Total ACTivation of 6 at Plasticity 3.1 rounded off:
 '''
 
 # NOW with Plasticity:  --------------------------------------------------------------------------||
-cqm.set_objective(total_mix(quantities, "Plasticity"))
+cqm.set_objective(total_mix(quantities, "Plasticity"))  # + total mix !
 sampleset_Plasticity = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines up.
 feasible_sampleset_Plasticity = sampleset_Plasticity.filter(lambda row: row.is_feasible)
 best_Plasticity = feasible_sampleset_Plasticity.first
 print(round(best_Plasticity.energy))
 
-print('\nbest_Plasticity.SAMPLE: ')
+print('\n\nbest_Plasticity.SAMPLE: ')
 print_Thelpers(best_Plasticity.sample)
 
+# ~O >>>
+# USE/ fr line 933
+# sampleset = sampler.sample_cqm(cqm)  # SUBMIT THE PROBLEM to solver.
+'''  
+for sample, energy in sampleset.data(['sample', 'energy']): # O
+    print(sample, energy)
+'''
 
-
-print('\n\n\t\t\t\t\t\tEND')
+print('\n\n\t\t\t\t\t\t\t\tEND')
+print('\n\n\t\t\t\t\t\t\t\tCharge time >>>')
+ssi = sampleset.info  # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+print(ssi)
 print('\n\n')
 '''>>> a la
 Thelp: {'Th22': 1.0, 'Th2': 0.0, 'Tr1': 5.3, 'iTreg': 0.0, 'Tfh': 0.0, 'Th9': 0.0}
@@ -1034,7 +1064,9 @@ It relies mainly on Tr1 and uses Th22 to add ACTivation and DIFFerentiation.
 Because of the differences in energy scale between the two parts of the combined objective,
 177 >> 3,  if you do not multiply the part representing Plasticity by some positive factor, optimal 
 solutions will maximize ACTivation and neglect Plasticity. That is, if in 
-obj - alpha(obj1 + beta(obj2)), you set alpha=1=beta.
+
+obj = alpha(obj1 + beta(obj2)), you set alpha=1=beta.
+
 solutions will likely be 
   close or 
   identical 
