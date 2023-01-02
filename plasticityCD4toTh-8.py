@@ -876,14 +876,12 @@ def total_mix(quantity, category):
 
     # Set the objective2. Because Ocean solvers MINIMIZE OBJECTIVES, to maximize DIFFn, DIFFn
     # is multiplied by -1 and minimized!
-    # cqm.set_objective( - total_mix(quantities, "DIFFerentiation") + 8 * total_mix(quantities, "Plasticity"))
-    # cqm.set_objective( - total_mix(quantities, "ACTivation") + 1 * total_mix(quantities, "Plasticity")) # Lambda=15
 
-
+#cqm.set_objective( - total_mix(quantities, "ACTivation") + 1 * total_mix(quantities, "Plasticity")) # Lambda=15
 cqm.set_objective(- total_mix(quantities, "ACTivation") + 2 * total_mix(quantities, "Plasticity"))  # Lambda=15
-# cqm.set_objective( - total_mix(quantities, "ACTivation") + 6 * total_mix(quantities, "Plasticity")) # Lambda=6
-# cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity")) # Lambda=8
-# cqm.set_objective( - total_mix(quantities, "ACTivation") + 15 * total_mix(quantities, "Plasticity")) # Lambda=15
+#cqm.set_objective( - total_mix(quantities, "ACTivation") + 6 * total_mix(quantities, "Plasticity")) # Lambda=6
+#cqm.set_objective( - total_mix(quantities, "ACTivation") + 8 * total_mix(quantities, "Plasticity")) # Lambda=8
+#cqm.set_objective( - total_mix(quantities, "ACTivation") + 15 * total_mix(quantities, "Plasticity")) # Lambda=15
 # cqm.set_objective( - total_mix(quantities, "ACTivation") + 30 * total_mix(quantities, "Plasticity")) # Lambda=15
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 # YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY K E Y YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
@@ -948,7 +946,7 @@ print("\nThere are {} feasible solutions OUT of {}.\n".format(len(feasible_sampl
 
 
 def print_Thelpers(sample):
-    Thelp = {Pt: round(quantity, 1) for Pt, quantity in sample.items()}  # 'Pt:' has 1 dec place?
+    Thelp = {Pt: round(quantity, 1) for Pt, quantity in sample.items()}
     print(f"Thelp----->: {Thelp}")
     ACTivation_total = sum(Pts[Pt]["ACTivation"] * amount for Pt, amount in sample.items())
     Plasticity_total = sum(Pts[Pt]["Plasticity"] * amount for Pt, amount in sample.items())
@@ -1003,10 +1001,11 @@ In statistics, nominal data (also known as nominal scale) is a type of data that
 # Start with ACTivation: -----------------------------------------------------------------------||
 cqm.set_objective(- total_mix(quantities, "ACTivation"))  # NOTE THE MINUS for least energy; eigenspectrum.
 # ~O >>>
-print('\n\n\t\t\t\tEnergy Table | Lowest Energy eigenvalues values wins')
-for sample, energy in sampleset.data(['sample', 'energy']):
+'''
+print('\n\n\t\t\tACTn Energy Table (may be commentedOut) | Lowest Energy eigenvalue wins')
+for sample, energy in sampleset.data(['sample', 'energy']):     # Fr class  # OK for test.
     print(sample, energy)
-
+'''
 sampleset_ACTivation = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines down.
 feasible_sampleset_ACTivation = sampleset_ACTivation.filter(lambda row: row.is_feasible)
 best_ACTivation = feasible_sampleset_ACTivation.first
@@ -1027,10 +1026,18 @@ Total ACTivation of 6 at Plasticity 3.1 rounded off:
 
 # NOW with Plasticity:  --------------------------------------------------------------------------||
 cqm.set_objective(total_mix(quantities, "Plasticity"))  # + total mix !
+# ~O >>>
+print('\n\n\n\t\t\t\t-----------------------------------------------------')
+'''
+print('\n\n\t\t\tPlastic Energy Table (may be commentedOut) | Lowest Energy eigenvalue wins')
+for sample, energy in sampleset.data(['sample', 'energy']):     # Fr class  # OK for test.
+    print(sample, energy)
+'''
 sampleset_Plasticity = sampler.sample_cqm(cqm)  # RHS SAME AS line that's 21 lines up.
 feasible_sampleset_Plasticity = sampleset_Plasticity.filter(lambda row: row.is_feasible)
 best_Plasticity = feasible_sampleset_Plasticity.first
-print(round(best_Plasticity.energy))
+print('\n\nbest_Plasticity.ENERGY: ', round(best_Plasticity.energy))
+# >>> a la xxx
 
 print('\n\nbest_Plasticity.SAMPLE: ')
 print_Thelpers(best_Plasticity.sample)
@@ -1045,7 +1052,7 @@ for sample, energy in sampleset.data(['sample', 'energy']): # O
 
 print('\n\n\t\t\t\t\t\t\t\tEND')
 print('\n\n\t\t\t\t\t\t\t\tCharge time >>>')
-ssi = sampleset.info  # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ssi = sampleset.info                        # fr Docs.
 print(ssi)
 print('\n\n')
 '''>>> a la
