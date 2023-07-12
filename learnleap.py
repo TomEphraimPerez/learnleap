@@ -1,6 +1,7 @@
                         # DIET PLANNING  optimization -
 # A CQM solver prob on a simple mixed-integer linear-programming, MILP, type of optimization problem.
- # https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html#example-cqm-diet-reals ††
+# https://docs.ocean.dwavesys.com/en/stable/examples/hybrid_cqm_diet.html 
+#example-cqm-diet-reals ††
 # imports
 import dimod as dimod       # thx red lightbulb
 from dwave.system import LeapHybridCQMSampler         #o
