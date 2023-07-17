@@ -30,7 +30,7 @@ By default, Ocean connects to North American (region na-west-1)
 
 $ dwave config --help
 
-s-API Token DEV-f9ddb8cab0753d171916abb2716aaaa0ea75e3f7
+s-API Token DEV-f9*
 
 $ dwave config create         	#     s-API Token DEV-f9ddb8cab0753d171916abb2716aaaa0ea75e3f7
 
